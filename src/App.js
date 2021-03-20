@@ -1,9 +1,16 @@
+import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import theme from "./styles/theme";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Comarev DashBoard</h1>
-    </div>
+    <StyledThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
+        <div className="App">
+          <h1>Comarev DashBoard</h1>
+        </div>
+      </ThemeProvider>
+    </StyledThemeProvider>
   );
 }
 
