@@ -7,8 +7,10 @@ import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { makeStyles } from '@material-ui/core/styles';
+import { signIn } from '../../service/auth';
 
 const INITIAL_STATE = {
   email: false,
@@ -40,16 +42,32 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formError, setError] = useState(INITIAL_STATE);
+  const [loginError, setLoginError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (event) => {
+  const onStart = () => setLoading(true);
+  const onEnd = () => setLoading(false);
+
+  const onError = (message) => {
+    setLoginError(message);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email || !password) setError({ email: !email, password: !password });
+    if (!email || !password) {
+      setError({ email: !email, password: !password });
+      return;
+    }
+
+    await signIn({ email, password, onError, onStart, onEnd });
   };
 
   useEffect(() => {
     if (email) setError((currentState) => ({ ...currentState, email: !email }));
     if (password)
       setError((currentState) => ({ ...currentState, password: !password }));
+
+    setLoginError('');
   }, [email, password]);
 
   return (
@@ -91,6 +109,9 @@ const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
             error={formError.password}
           />
+          {Boolean(loginError) && (
+            <Typography color='error'>{loginError}</Typography>
+          )}
           <Button
             type='submit'
             fullWidth
@@ -98,8 +119,9 @@ const SignIn = () => {
             color='primary'
             className={classes.submit}
             onClick={handleSubmit}
+            disabled={loading}
           >
-            Logar
+            {loading ? <CircularProgress size={25} /> : 'Logar'}
           </Button>
           <Grid container>
             <Grid item xs>
