@@ -9,8 +9,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import signIn from '../../service/auth';
 import { makeStyles } from '@material-ui/core/styles';
-import { signIn } from '../../service/auth';
 
 const INITIAL_STATE = {
   email: false,
@@ -47,6 +47,7 @@ const SignIn = () => {
 
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
+  const onSuccess = () => {};
 
   const onError = (message) => {
     setLoginError(message);
@@ -59,7 +60,9 @@ const SignIn = () => {
       return;
     }
 
-    await signIn({ email, password, onError, onStart, onEnd });
+    const payload = { email, password };
+
+    await signIn(payload, onSuccess, onError, onEnd, onStart);
   };
 
   useEffect(() => {

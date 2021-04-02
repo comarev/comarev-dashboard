@@ -1,22 +1,17 @@
 import client from './api';
 
-export const signIn = async ({
-  email,
-  password,
-  onSubmit,
-  onError,
-  onEnd,
-  onStart,
-}) => {
+const signIn = async (payload, onSuccess, onError, onEnd, onStart) => {
   try {
-    if (onStart) onStart();
-
+    onStart();
+    const { email, password } = payload;
     const result = await client.post('/login', { user: { email, password } });
 
-    // Redirect to dashboard
+    onSuccess(result.data);
   } catch (error) {
-    if (onError) onError(error.response.data);
+    onError(error.response.data);
   } finally {
-    if (onEnd) onEnd();
+    onEnd();
   }
 };
+
+export default signIn;
