@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import signIn from '../../service/auth';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 const INITIAL_STATE = {
   email: false,
@@ -44,10 +45,13 @@ const SignIn = () => {
   const [formError, setError] = useState(INITIAL_STATE);
   const [loginError, setLoginError] = useState('');
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
-  const onSuccess = () => {};
+  const onSuccess = () => {
+    history.push('/dashboard');
+  };
 
   const onError = (message) => {
     setLoginError(message);
@@ -123,8 +127,13 @@ const SignIn = () => {
             className={classes.submit}
             onClick={handleSubmit}
             disabled={loading}
+            aria-label='Logar'
           >
-            {loading ? <CircularProgress size={25} /> : 'Logar'}
+            {loading ? (
+              <CircularProgress testid='login-spinner' size={25} />
+            ) : (
+              'Logar'
+            )}
           </Button>
           <Grid container>
             <Grid item xs>
