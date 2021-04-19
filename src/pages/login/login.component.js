@@ -12,6 +12,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import signIn from '../../service/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 const INITIAL_STATE = {
   email: false,
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = () => {
+const SignIn = ({ dispatch }) => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,7 +50,12 @@ const SignIn = () => {
 
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
-  const onSuccess = () => {
+  const onSuccess = (data) => {
+    dispatch({
+      type: '@user/SIGN_IN',
+      data,
+    });
+
     history.push('/dashboard');
   };
 
@@ -148,4 +154,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default connect()(SignIn);
