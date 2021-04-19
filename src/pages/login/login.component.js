@@ -52,7 +52,7 @@ const SignIn = ({ dispatch }) => {
   const onEnd = () => setLoading(false);
   const onSuccess = (data) => {
     dispatch({
-      type: '@user/SIGN_IN',
+      type: '@currentUser/SIGN_IN',
       data,
     });
 
