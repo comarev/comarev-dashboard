@@ -13,6 +13,7 @@ import signIn from '../../service/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { USER_SIGN_IN } from '../../store/modules/user/actions';
 
 const FORM_ERROR_INITIAL_STATE = {
   email: false,
@@ -54,7 +55,7 @@ const SignIn = () => {
   const onEnd = () => setLoading(false);
   const onSuccess = (data) => {
     dispatch({
-      type: '@currentUser/SIGN_IN',
+      type: USER_SIGN_IN,
       data,
     });
 
