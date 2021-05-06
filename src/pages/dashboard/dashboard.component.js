@@ -1,25 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-const Dashboard = ({ currentUser, dispatch }) => {
+const Dashboard = () => {
+  const currentUser = useSelector((state) => state.currentUser);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const handleSignOut = () => {
-    dispatch({ type: '@currentUser/SIGN_OUT' });
-
-    history.push('/');
+    dispatch({
+      type: '@currentUser/SIGN_OUT',
+    });
   };
 
   if (!Object.entries(currentUser || {}).length) {
-    return (
-      <>
-        <h1>Hello from Dashboard, you are not logged in...</h1>
-        <Link to='/'>
-          <button type='button'>Login</button>
-        </Link>
-      </>
-    );
+    history.push('/');
   }
 
   return (
@@ -30,13 +25,9 @@ const Dashboard = ({ currentUser, dispatch }) => {
           <li>{`${arr[0]}: ${arr[1]}`}</li>
         ))}
       </ul>
-      <button type='button' onClick={handleSignOut}>
-        Logout
-      </button>
+      <button onClick={handleSignOut}>Sign Out</button>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({ currentUser: state.currentUser });
-
-export default connect(mapStateToProps)(Dashboard);
+export default Dashboard;
