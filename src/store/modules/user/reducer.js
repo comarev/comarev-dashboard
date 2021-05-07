@@ -12,14 +12,15 @@ const INITIAL_STATE = {
   active: false,
   created_at: '',
   updated_at: '',
+  logged: false,
 };
 
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_SIGN_IN:
-      return action.data;
+      return { ...action.data, logged: true };
     case USER_SIGN_OUT:
-      return {};
+      return { ...action.data, logged: false };
     default:
       return state;
   }
