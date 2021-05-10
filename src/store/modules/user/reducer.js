@@ -1,4 +1,4 @@
-import { USER_SIGN_IN, USER_SIGN_OUT } from './actions';
+import { USER_SIGN_IN, USER_SIGN_OUT } from './types';
 
 const INITIAL_STATE = {
   id: 0,
@@ -18,9 +18,9 @@ const INITIAL_STATE = {
 const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_SIGN_IN:
-      return { ...action.data, logged: true };
+      return { ...action.payload, logged: true };
     case USER_SIGN_OUT:
-      return { ...action.data, logged: false };
+      return { ...action.payload, logged: false };
     default:
       return state;
   }

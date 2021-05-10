@@ -1,15 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { USER_SIGN_OUT } from '../../store/modules/user/actions';
+import { logoutUser } from '../../store/modules/user/actions';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
-    dispatch({
-      type: USER_SIGN_OUT,
-    });
+    dispatch(logoutUser());
   };
 
   return (
