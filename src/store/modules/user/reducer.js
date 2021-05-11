@@ -1,6 +1,6 @@
 import { USER_SIGN_IN, USER_SIGN_OUT } from './types';
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   id: 0,
   full_name: '',
   email: '',
@@ -15,15 +15,15 @@ const INITIAL_STATE = {
   logged: false,
 };
 
-const user = (state = INITIAL_STATE, action) => {
+const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_SIGN_IN:
       return { ...action.payload, logged: true };
     case USER_SIGN_OUT:
-      return { ...action.payload, logged: false };
+      return { ...INITIAL_STATE, logged: false };
     default:
       return state;
   }
 };
 
-export default user;
+export default userReducer;
