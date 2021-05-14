@@ -56,6 +56,8 @@ const SignIn = () => {
   const onSuccess = (data) => {
     dispatch(loginUser(data));
 
+    localStorage.setItem('user', JSON.stringify(data));
+
     history.push('/dashboard');
   };
 
@@ -82,6 +84,15 @@ const SignIn = () => {
 
     setLoginError('');
   }, [email, password]);
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+
+    if (user) {
+      dispatch(loginUser(JSON.parse(user)));
+      history.push('/dashboard');
+    }
+  });
 
   return (
     <Container component='main' maxWidth='xs'>

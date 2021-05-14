@@ -70,6 +70,17 @@ describe('Login Component', () => {
 
       expect(mockHistoryPush).toHaveBeenCalledWith('/dashboard');
     });
+
+    it('persist user data into localStorage', async () => {
+      const { queryByTestId, findByText } = setup();
+
+      queryByTestId('login-spinner');
+      await findByText('Logar');
+
+      const result = window.localStorage.getItem('user');
+
+      expect(JSON.parse(result)).toEqual(userData);
+    });
   });
 
   describe('when failure', () => {

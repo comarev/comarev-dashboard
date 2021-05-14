@@ -8,6 +8,7 @@ const Dashboard = () => {
 
   const handleSignOut = () => {
     dispatch(logoutUser());
+    localStorage.removeItem('user');
   };
 
   return (
