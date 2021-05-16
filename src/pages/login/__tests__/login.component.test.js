@@ -3,6 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
 import { fireEvent } from '@testing-library/react';
 import wrapper from '../../../test/test-utils';
+import { userData } from '../../../test/mocks/user';
 
 const mockHistoryPush = jest.fn();
 
@@ -32,7 +33,7 @@ const setup = () => {
 
 describe('Login Component', () => {
   beforeEach(() => {
-    mock.onPost('/login').reply(200);
+    mock.onPost('/login').reply(200, userData);
   });
 
   describe('when the request happens', () => {
@@ -68,6 +69,17 @@ describe('Login Component', () => {
       await findByText('Logar');
 
       expect(mockHistoryPush).toHaveBeenCalledWith('/dashboard');
+    });
+
+    it('persist user data into localStorage', async () => {
+      const { queryByTestId, findByText } = setup();
+
+      queryByTestId('login-spinner');
+      await findByText('Logar');
+
+      const result = window.localStorage.getItem('user');
+
+      expect(JSON.parse(result)).toEqual(userData);
     });
   });
 
