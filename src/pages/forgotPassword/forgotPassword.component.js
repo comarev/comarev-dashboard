@@ -3,16 +3,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { useStyles } from './forgotPassword.styles';
 
-const FORM_ERROR_INITIAL_STATE = {
-  email: false,
-};
+const FORM_ERROR_INITIAL_STATE = { email: false };
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -64,9 +60,10 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
             error={formError.email}
           />
-          {Boolean(warnMessage) && (
-            <Typography color='error'>{warnMessage}</Typography>
-          )}
+          {Boolean(warnMessage.length) &&
+            warnMessage.map((message) => (
+              <Typography color='error'>{message}</Typography>
+            ))}
           <Button
             type='submit'
             fullWidth
@@ -77,13 +74,6 @@ const ForgotPassword = () => {
           >
             Recuperar
           </Button>
-          <Grid container>
-            <Grid item>
-              <Link href='#' variant='body2'>
-                {"Don't have an account? Sign Up. Will we have this feature?"}
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>
