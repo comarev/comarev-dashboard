@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SecureRoute from './secure-route.component';
 import LoginPage from '../pages/login/login.component';
 import Dashboard from '../pages/dashboard/dashboard.component';
-import ForgotPassword from '../pages/forgotPassword/forgotPassord.component';
+import ForgotPassword from '../pages/forgotPassword/forgotPassword.component';
 
 const Routes = () => {
   return (
