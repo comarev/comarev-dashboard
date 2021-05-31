@@ -1,26 +1,71 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../store/modules/user/actions';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import { useSelector } from 'react-redux';
+import { useStyles } from './styles';
+import { useHeader } from './dashboard.hooks';
 
 const Dashboard = () => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
-  const handleSignOut = () => {
-    dispatch(logoutUser());
-    localStorage.removeItem('user');
-  };
+  const classes = useStyles();
+
+  const { handleMenu, anchorEl, open, handleClose, handleSignOut } =
+    useHeader();
 
   return (
-    <>
-      <h1>Hello {user.full_name}, you are in Dashboard page!</h1>
-      <ul>
-        {Object.entries(user).map((arr) => (
-          <li key={user.id}>{`${arr[0]}: ${arr[1]}`}</li>
-        ))}
-      </ul>
-      <button onClick={handleSignOut}>Sign Out</button>
-    </>
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Toolbar>
+          <IconButton
+            edge='start'
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='menu'
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant='h6' className={classes.title}>
+            Olá, {user.full_name}
+          </Typography>
+          <div>
+            <IconButton
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
+              onClick={handleMenu}
+              color='inherit'
+            >
+              <AccountCircle />
+            </IconButton>
+            <Menu
+              id='menu-appbar'
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>Meu perfil</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sair</MenuItem>
+            </Menu>
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
