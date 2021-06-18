@@ -13,18 +13,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
-import StoreIcon from '@material-ui/icons/Store';
-import ReceiptIcon from '@material-ui/icons/Receipt';
 import { useSelector } from 'react-redux';
 import { useStyles } from './styles';
 import { useHeader } from './dashboard.hooks';
-
-const menu = [
-  { label: 'Usuários', icon: PeopleAltIcon },
-  { label: 'Parceiros', icon: StoreIcon },
-  { label: 'Faturas', icon: ReceiptIcon },
-];
+import { menu } from '../../menu';
 
 const Dashboard = () => {
   const [state, setState] = useState({
@@ -59,18 +51,20 @@ const Dashboard = () => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {menu.map((item) => {
-          const Icon = item.icon;
+        {menu
+          .filter((item) => user.admin || !item.admin)
+          .map((item) => {
+            const Icon = item.icon;
 
-          return (
-            <ListItem button key={item.label}>
-              <ListItemIcon>
-                <Icon />
-              </ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItem>
-          );
-        })}
+            return (
+              <ListItem button key={item.label}>
+                <ListItemIcon>
+                  <Icon />
+                </ListItemIcon>
+                <ListItemText primary={item.label} />
+              </ListItem>
+            );
+          })}
       </List>
     </div>
   );
