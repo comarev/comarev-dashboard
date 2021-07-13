@@ -74,15 +74,17 @@ const Dashboard = () => {
       <div className={classes.root}>
         <AppBar position='static'>
           <Toolbar>
-            <IconButton
-              edge='start'
-              className={classes.menuButton}
-              color='inherit'
-              aria-label='menu'
-              onClick={toggleDrawer('left', true)}
-            >
-              <MenuIcon />
-            </IconButton>
+            <div data-testid='hamburger-menu'>
+              <IconButton
+                edge='start'
+                className={classes.menuButton}
+                color='inherit'
+                aria-label='menu'
+                onClick={toggleDrawer('left', true)}
+              >
+                <MenuIcon />
+              </IconButton>
+            </div>
             <Typography variant='h6' className={classes.title}>
               Olá, {user.full_name}
             </Typography>
