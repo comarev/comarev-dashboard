@@ -11,9 +11,9 @@ jest.mock('react-redux', () => ({
 
 const setup = () => {
   const rendered = wrapper(Dashboard);
-  const { getByTestId } = rendered;
+  const { getByLabelText } = rendered;
 
-  const menuButton = getByTestId('hamburger-menu');
+  const menuButton = getByLabelText('menu');
 
   fireEvent.click(menuButton);
 
@@ -29,9 +29,9 @@ describe('Dashboard Sidebar', () => {
     it('show the sidebar with all links', () => {
       const { queryByText } = setup();
 
-      queryByText('Usuários');
-      queryByText('Parceiros');
-      queryByText('Faturas');
+      expect(queryByText('Usuários')).toBeInTheDocument();
+      expect(queryByText('Parceiros')).toBeInTheDocument();
+      expect(queryByText('Faturas')).toBeInTheDocument();
     });
   });
 
@@ -44,7 +44,7 @@ describe('Dashboard Sidebar', () => {
       const { queryByText } = setup();
       const userMenu = queryByText('Usuários');
 
-      queryByText('Faturas');
+      expect(queryByText('Faturas')).toBeInTheDocument();
       expect(userMenu).toBeNull();
     });
   });
