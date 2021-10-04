@@ -4,6 +4,6 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 
 export const menu = [
   { path: '/users', label: 'Usuários', icon: PeopleAltIcon, admin: true },
-  { label: 'Parceiros', icon: StoreIcon, admin: true },
+  { path: '/create-company', label: 'Parceiros', icon: StoreIcon, admin: true },
   { label: 'Faturas', icon: ReceiptIcon, admin: false },
 ];

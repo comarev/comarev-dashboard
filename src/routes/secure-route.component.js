@@ -11,15 +11,25 @@ const SecureRoute = ({ component: Component, admin, ...rest }) => {
     if (forbidden) toast.error('Permissões insuficientes!');
   }, [forbidden]);
 
-  if (forbidden) return <Redirect to='/dashboard' />;
-
   return (
     <Route
       // spreading
       {...rest}
-      render={(props) =>
-        user.logged ? <Component {...props} /> : <Redirect to='/' />
-      }
+      render={(props) => {
+        if (!user.logged)
+          return (
+            <Redirect
+              to={{
+                pathname: '/',
+                state: { from: props.location },
+              }}
+            />
+          );
+
+        if (forbidden) return <Redirect to='/dashboard' />;
+
+        return <Component {...props} />;
+      }}
     />
   );
 };

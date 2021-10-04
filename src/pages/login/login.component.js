@@ -11,8 +11,8 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import signIn from '../../service/auth';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useHistory, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../../store/modules/user/actions';
 
 const FORM_ERROR_INITIAL_STATE = {
@@ -50,6 +50,7 @@ const SignIn = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
@@ -85,14 +86,7 @@ const SignIn = () => {
     setLoginError('');
   }, [email, password]);
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-
-    if (user) {
-      dispatch(loginUser(JSON.parse(user)));
-      history.push('/dashboard');
-    }
-  });
+  if (user.logged) return <Redirect to='/dashboard' />;
 
   return (
     <Container component='main' maxWidth='xs'>
