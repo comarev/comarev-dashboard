@@ -6,7 +6,7 @@ const signIn = async (payload, onSuccess, onError, onEnd, onStart) => {
     const { email, password } = payload;
     const result = await client.post('/login', { user: { email, password } });
 
-    onSuccess(result.data);
+    onSuccess({ ...result.data, userToken: result.headers.authorization });
   } catch (error) {
     onError(error.response.data);
   } finally {
