@@ -4,7 +4,7 @@ import instance from '../../service/api';
 import Template from '../../components/template/template.component';
 import { useSelector } from 'react-redux';
 
-const ListCompany = () => {
+const CompaniesList = () => {
   // eslint-disable-next-line
   const user = useSelector((state) => state.user);
   const [companies, setCompanies] = useState([]);
@@ -18,7 +18,6 @@ const ListCompany = () => {
     <Template>
       <CompaniesListing data={companies} />
     </Template>
-  );
-  };
+  )};
 
-export default ListCompany;
+export default CompaniesList;

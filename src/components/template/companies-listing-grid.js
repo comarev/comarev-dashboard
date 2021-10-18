@@ -17,38 +17,42 @@ const useStyles = makeStyles({
 export default function CompaniesListing({ data }) {
   const classes = useStyles();
   return (
-   <>
-    <h1>Empresas</h1>
-    <TableContainer component={Paper}>
-      <Table className={classes.table} size='small' aria-label='a dense table'>
-        <TableHead>
-          <TableRow>
-            <TableCell>Nome</TableCell>
-            <TableCell align='right'>Telefone</TableCell>
-            <TableCell align='right'>Desconto&nbsp;</TableCell>
-            <TableCell align='right'>CNPJ</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((company) => (
-            <TableRow key={company.name}>
-              <TableCell component='th' scope='row'>
-                {company.name}
-              </TableCell>
-              <TableCell align='right'>
-                {company.phone}
-                </TableCell>
-                <TableCell align='right'>
-                {company.discount}
-                </TableCell>
-                <TableCell align='right'>
-                {company.cnpj}
-                </TableCell>
+    <>
+      <h1>Empresas</h1>
+      <TableContainer component={Paper}>
+        <Table
+          className={classes.table}
+          size='small'
+          aria-label='a dense table'
+        >
+          <TableHead>
+            <TableRow>
+              <TableCell>Nome</TableCell>
+              <TableCell align='right'>Telefone</TableCell>
+              <TableCell align='right'>Desconto&nbsp;</TableCell>
+              <TableCell align='right'>CNPJ</TableCell>
             </TableRow>
-        ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.map((company) => (
+              <TableRow key={company.name}>
+                <TableCell component='th' scope='row'>
+                  {company.name}
+                </TableCell>
+                <TableCell align='right'>
+                  {company.phone}
+                </TableCell>
+                <TableCell align='right'>
+                  {company.discount}
+                </TableCell>
+                <TableCell align='right'>
+                  {company.cnpj}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>
   );
 }
