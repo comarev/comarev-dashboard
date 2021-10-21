@@ -18,7 +18,7 @@ export default function CompaniesListing({ data }) {
   const classes = useStyles();
   return (
     <>
-      <h1>Empresas</h1>
+    <h2>Empresas</h2>
       <TableContainer component={Paper}>
         <Table
           className={classes.table}
@@ -31,6 +31,7 @@ export default function CompaniesListing({ data }) {
               <TableCell align='right'>Telefone</TableCell>
               <TableCell align='right'>Desconto&nbsp;</TableCell>
               <TableCell align='right'>CNPJ</TableCell>
+              <TableCell align='right'>Ativo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -39,14 +40,11 @@ export default function CompaniesListing({ data }) {
                 <TableCell component='th' scope='row'>
                   {company.name}
                 </TableCell>
+                <TableCell align='right'>{company.phone}</TableCell>
+                <TableCell align='right'>{company.discount}</TableCell>
+                <TableCell align='right'>{company.cnpj}</TableCell>
                 <TableCell align='right'>
-                  {company.phone}
-                </TableCell>
-                <TableCell align='right'>
-                  {company.discount}
-                </TableCell>
-                <TableCell align='right'>
-                  {company.cnpj}
+                  {company.active ? 'Sim' : 'Não'}
                 </TableCell>
               </TableRow>
             ))}
