@@ -18,6 +18,9 @@ import { useStyles, Wrapper } from './template.styles';
 import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 
 const Template = ({ children }) => {
   const [state, setState] = useState({
@@ -78,19 +81,8 @@ const Template = ({ children }) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position='static'>
+        <AppBar className={classes.appBar} position='static'>
           <Toolbar>
-            <div data-testid='hamburger-menu'>
-              <IconButton
-                edge='start'
-                className={classes.menuButton}
-                color='inherit'
-                aria-label='menu'
-                onClick={toggleDrawer('left', true)}
-              >
-                <MenuIcon />
-              </IconButton>
-            </div>
             <Typography variant='h6' className={classes.title}>
               Olá, {user.full_name}
             </Typography>
@@ -125,16 +117,23 @@ const Template = ({ children }) => {
             </div>
           </Toolbar>
         </AppBar>
-      </div>
-      <Wrapper>{children}</Wrapper>
-      <div>
         <Drawer
-          anchor={'left'}
-          open={state['left']}
-          onClose={toggleDrawer('left', false)}
+          className={classes.drawer}
+          variant='permanent'
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor='left'
         >
+          <div className={classes.toolbar} />
+          <Divider />
           {list('left')}
+          <Divider />
         </Drawer>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
     </>
   );
