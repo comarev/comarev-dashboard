@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     width: 'auto',
   },
   appBar: {
-    width: `calc(100% - ${240}px)`,
+    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
   },
   drawer: {
@@ -33,7 +33,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   // necessary for content to be below app bar
   content: {
-    width: `calc(100% - ${240}px)`,
+    width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: '246px',
     padding: '10px'
   }

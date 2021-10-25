@@ -1,7 +1,7 @@
 import React from 'react';
 import Template from '../../components/template/template.component';
 
-const userList = () => {
+const UserList = () => {
   return (
     <Template>
       <h1>Usuários</h1>
@@ -9,4 +9,4 @@ const userList = () => {
   );
 };
 
-export default userList;
+export default UserList;
