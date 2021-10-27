@@ -17,16 +17,13 @@ import { StyledMenuIcon, useStyles } from './template.styles';
 import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
-import { Divider, useTheme } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 
 const Template = ({ children }) => {
   const [state, setState] = useState({
     left: false,
     open: true,
   });
-
-  const theme = useTheme();
-  console.log(theme)
 
   const history = useHistory();
 
@@ -74,11 +71,14 @@ const Template = ({ children }) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar className={state.open ? classes.appBar : classes.appBarShift} position='static'>
+        <AppBar
+          className={state.open ? classes.appBar : classes.appBarShift}
+          position='static'
+        >
           <Toolbar>
-          <IconButton color='inherit' onClick={toggleDrawer}>
-            <StyledMenuIcon />
-          </IconButton>
+            <IconButton color='inherit' onClick={toggleDrawer}>
+              <StyledMenuIcon />
+            </IconButton>
             <Typography variant='h6' className={classes.title}>
               Olá, {user.full_name}
             </Typography>
@@ -114,7 +114,7 @@ const Template = ({ children }) => {
           </Toolbar>
         </AppBar>
         <Drawer
-          className={classes.drawer }
+          className={classes.drawer}
           variant='persistent'
           classes={{
             paper: classes.drawerPaper,
