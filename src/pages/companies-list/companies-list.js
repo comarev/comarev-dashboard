@@ -10,7 +10,6 @@ const CompaniesList = () => {
 
   useEffect(() => {
     service.get('/companies').then((res) => setCompanies(res.data));
-    console.log(companies)
     return () => {};
   }, [companies]);
 
