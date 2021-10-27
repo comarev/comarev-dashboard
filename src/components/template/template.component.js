@@ -13,17 +13,21 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useSelector } from 'react-redux';
-import { useStyles } from './template.styles';
+import { StyledMenuIcon, useStyles } from './template.styles';
 import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
-import { Divider } from '@material-ui/core';
-
+import { Divider, useTheme } from '@material-ui/core';
 
 const Template = ({ children }) => {
   const [state, setState] = useState({
     left: false,
+    open: true,
   });
+
+  const theme = useTheme();
+  console.log(theme)
+
   const history = useHistory();
 
   const user = useSelector((state) => state.user);
@@ -33,15 +37,8 @@ const Template = ({ children }) => {
   const { handleMenu, anchorEl, open, handleClose, handleSignOut } =
     useHeader();
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
+  const toggleDrawer = () => {
+    setState({ ...state, open: !state.open });
   };
 
   const list = (anchor) => (
@@ -50,8 +47,6 @@ const Template = ({ children }) => {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role='presentation'
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {menu
@@ -79,8 +74,11 @@ const Template = ({ children }) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar className={classes.appBar} position='static'>
+        <AppBar className={state.open ? classes.appBar : classes.appBarShift} position='static'>
           <Toolbar>
+          <IconButton color='inherit' onClick={toggleDrawer}>
+            <StyledMenuIcon />
+          </IconButton>
             <Typography variant='h6' className={classes.title}>
               Olá, {user.full_name}
             </Typography>
@@ -116,19 +114,20 @@ const Template = ({ children }) => {
           </Toolbar>
         </AppBar>
         <Drawer
-          className={classes.drawer}
-          variant='permanent'
+          className={classes.drawer }
+          variant='persistent'
           classes={{
             paper: classes.drawerPaper,
           }}
           anchor='left'
+          open={state.open}
         >
           <div className={classes.toolbar} />
           <Divider />
           {list('left')}
           <Divider />
         </Drawer>
-        <main className={classes.content}>
+        <main className={state.open ? classes.content : classes.contentShift}>
           <div className={classes.toolbar} />
           {children}
         </main>

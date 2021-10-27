@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 550,
   },
 });
 
@@ -22,7 +21,6 @@ export default function CompaniesListing({ data }) {
       <TableContainer component={Paper}>
         <Table
           className={classes.table}
-          size='small'
           aria-label='a dense table'
         >
           <TableHead>
