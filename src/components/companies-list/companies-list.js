@@ -12,9 +12,7 @@ export default function CompaniesListing({ data }) {
     <>
       <h2>Empresas</h2>
       <TableContainer component={Paper}>
-        <Table
-          aria-label='a dense table'
-        >
+        <Table aria-label='Companies list'>
           <TableHead>
             <TableRow>
               <TableCell>Nome</TableCell>
