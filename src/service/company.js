@@ -12,4 +12,23 @@ const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   }
 };
 
-export { getCompanies };
+const registerCompany = async ({
+  payload,
+  onStart,
+  onSuccess,
+  onError,
+  onCompleted,
+}) => {
+  try {
+    onStart();
+    await service.post('/companies', { company: payload });
+
+    onSuccess();
+  } catch (error) {
+    onError(error.response.data);
+  } finally {
+    onCompleted();
+  }
+};
+
+export { getCompanies, registerCompany };
