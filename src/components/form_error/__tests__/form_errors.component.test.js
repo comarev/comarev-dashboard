@@ -4,10 +4,11 @@ import FormErrors from '../form_errors.component';
 describe('FormErros Component', () => {
   describe('when just one error', () => {
     it('renders the error', () => {
-      const error = ['SomeField cannot be blank'];
+      const errors = ['SomeField cannot be blank'];
 
-      const rendered = render(<FormErrors errors={error} action='Create' />);
-      const { getByText } = rendered;
+      const { getByText } = render(
+        <FormErrors errors={errors} action='Create' />
+      );
 
       expect(
         getByText('Houve um erro que impediu o(a) Create:')
@@ -23,8 +24,9 @@ describe('FormErros Component', () => {
         'OtherField has already been used',
       ];
 
-      const rendered = render(<FormErrors errors={errors} action='Create' />);
-      const { getByText } = rendered;
+      const { getByText } = render(
+        <FormErrors errors={errors} action='Create' />
+      );
 
       expect(
         getByText('Alguns erros impediram o(a) Create:')
