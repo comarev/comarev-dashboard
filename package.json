@@ -54,6 +54,7 @@
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^1.6.2",
-    "axios-mock-adapter": "^1.19.0"
+    "axios-mock-adapter": "^1.19.0",
+    "prettier": "^2.4.1"
   }
 }

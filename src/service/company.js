@@ -4,7 +4,8 @@ const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   try {
     onStart();
     const { data } = await service.get('/companies');
-    onSuccess(data.data);
+
+    onSuccess(data);
   } catch (error) {
     onFailure();
   } finally {

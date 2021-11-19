@@ -14,8 +14,7 @@ const Routes = () => {
         <Route path='/' exact component={LoginPage} />
         <SecureRoute path='/dashboard' component={Dashboard} />
         <SecureRoute path='/users' component={userList} admin />
-        <SecureRoute path='/companies' component={CompaniesList} admin />
-        <SecureRoute path='/companies' exact component={Dashboard} admin />
+        <SecureRoute path='/companies' exact component={CompaniesList} admin />
         <SecureRoute
           path='/companies/new'
           exact
