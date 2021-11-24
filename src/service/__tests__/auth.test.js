@@ -16,18 +16,25 @@ const setup = () => {
 
 describe('AuthService', () => {
   describe('#signIn', () => {
-    describe('when successfully', () => {
+    describe('when the request succeds', () => {
       const userMock = { user: { full_name: 'John', email: 'john@email.com' } };
 
+      const token = '123-bla-3h76';
+
       beforeEach(() => {
-        mock.onPost('/login').reply(200, userMock);
+        mock.onPost('/login').reply(200, userMock, {
+          authorization: token,
+        });
       });
 
       it('calls onSuccess', async () => {
         const { onEnd, onError, payload, onStart, onSuccess } = setup();
         await signIn(payload, onSuccess, onError, onEnd, onStart);
 
-        expect(onSuccess).toHaveBeenCalledWith(userMock);
+        expect(onSuccess).toHaveBeenCalledWith({
+          ...userMock,
+          userToken: token,
+        });
       });
     });
 

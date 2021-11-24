@@ -141,7 +141,7 @@ const SignIn = () => {
             aria-label='Logar'
           >
             {loading ? (
-              <CircularProgress testid='login-spinner' size={25} />
+              <CircularProgress data-testid='login-spinner' size={25} />
             ) : (
               'Logar'
             )}

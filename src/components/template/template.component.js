@@ -3,7 +3,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
@@ -14,15 +13,18 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { useSelector } from 'react-redux';
-import { useStyles, Wrapper } from './template.styles';
+import { StyledMenuIcon, useStyles } from './template.styles';
 import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 
 const Template = ({ children }) => {
   const [state, setState] = useState({
     left: false,
+    open: true,
   });
+
   const history = useHistory();
 
   const user = useSelector((state) => state.user);
@@ -32,15 +34,8 @@ const Template = ({ children }) => {
   const { handleMenu, anchorEl, open, handleClose, handleSignOut } =
     useHeader();
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
+  const toggleDrawer = () => {
+    setState({ ...state, open: !state.open });
   };
 
   const list = (anchor) => (
@@ -49,8 +44,6 @@ const Template = ({ children }) => {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
       })}
       role='presentation'
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
         {menu
@@ -78,19 +71,18 @@ const Template = ({ children }) => {
   return (
     <>
       <div className={classes.root}>
-        <AppBar position='static'>
+        <AppBar
+          className={state.open ? classes.appBar : classes.appBarShift}
+          position='static'
+        >
           <Toolbar>
-            <div data-testid='hamburger-menu'>
-              <IconButton
-                edge='start'
-                className={classes.menuButton}
-                color='inherit'
-                aria-label='menu'
-                onClick={toggleDrawer('left', true)}
-              >
-                <MenuIcon />
-              </IconButton>
-            </div>
+            <IconButton
+              color='inherit'
+              onClick={toggleDrawer}
+              aria-label='menu'
+            >
+              <StyledMenuIcon />
+            </IconButton>
             <Typography variant='h6' className={classes.title}>
               Olá, {user.full_name}
             </Typography>
@@ -125,16 +117,24 @@ const Template = ({ children }) => {
             </div>
           </Toolbar>
         </AppBar>
-      </div>
-      <Wrapper>{children}</Wrapper>
-      <div>
         <Drawer
-          anchor={'left'}
-          open={state['left']}
-          onClose={toggleDrawer('left', false)}
+          className={classes.drawer}
+          variant='persistent'
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          anchor='left'
+          open={state.open}
         >
+          <div className={classes.toolbar} />
+          <Divider />
           {list('left')}
+          <Divider />
         </Drawer>
+        <main className={state.open ? classes.content : classes.contentShift}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
     </>
   );
