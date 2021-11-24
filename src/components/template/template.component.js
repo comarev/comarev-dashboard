@@ -76,7 +76,11 @@ const Template = ({ children }) => {
           position='static'
         >
           <Toolbar>
-            <IconButton color='inherit' onClick={toggleDrawer}>
+            <IconButton
+              color='inherit'
+              onClick={toggleDrawer}
+              aria-label='menu'
+            >
               <StyledMenuIcon />
             </IconButton>
             <Typography variant='h6' className={classes.title}>

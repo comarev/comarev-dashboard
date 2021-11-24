@@ -30,7 +30,7 @@ describe('Dashboard Sidebar', () => {
       const { queryByText } = setup();
 
       expect(queryByText('Usuários')).toBeInTheDocument();
-      expect(queryByText('Parceiros')).toBeInTheDocument();
+      expect(queryByText('Empresas')).toBeInTheDocument();
       expect(queryByText('Faturas')).toBeInTheDocument();
     });
   });

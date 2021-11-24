@@ -1,7 +1,7 @@
 import SignIn from '../login.component';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, act } from '@testing-library/react';
 import wrapper from '../../../test/test-utils';
 import { userData } from '../../../test/mocks/user';
 
@@ -11,6 +11,11 @@ jest.mock('react-router-dom', () => ({
   useHistory: () => ({
     push: mockHistoryPush,
   }),
+  Redirect: () => (
+    <>
+      <p>redirect</p>
+    </>
+  ),
 }));
 
 const mock = new MockAdapter(axios);
@@ -26,38 +31,36 @@ const setup = () => {
 
   fireEvent.change(emailField, { target: { value: 'email@email.com' } });
   fireEvent.change(passwordField, { target: { value: 'senha_errada' } });
-  fireEvent.click(submitButton);
+
+  act(() => {
+    fireEvent.click(submitButton);
+  });
 
   return rendered;
 };
 
 describe('Login Component', () => {
+  const token = 'random-token';
+
   beforeEach(() => {
-    mock.onPost('/login').reply(200, userData);
+    mock.onPost('/login').reply(200, userData, {
+      authorization: token,
+    });
   });
 
   describe('when the request happens', () => {
-    it('disable submit button and shows spinner', async () => {
-      const { queryByTestId, findByText } = setup();
+    it('disables submit button and shows spinner', async () => {
+      const { getByTestId, findByText } = setup();
 
-      queryByTestId('login-spinner');
-      await findByText('Logar');
-      /* temos que informar pro React que a ação de voltar
-      o estado para false é proposital, senão será lançado
-      um warning no terminal
-
-      https://kentcdodds.com/blog/fix-the-not-wrapped-in-act-warning*/
+      expect(getByTestId('login-spinner')).toBeInTheDocument();
+      await findByText('redirect');
     });
 
-    it('disable the submit button', async () => {
+    it('disables the submit button', async () => {
       const { findByText, getByLabelText } = setup();
 
-      /* não é necessário testar se está disabled, pois teoricamente
-      a responsabilidade é do MaterialUI
-      Este teste foi realizado para estudos
-      */
       expect(getByLabelText('Logar')).toBeDisabled();
-      await findByText('Logar');
+      await findByText('redirect');
     });
   });
 
@@ -66,7 +69,7 @@ describe('Login Component', () => {
       const { queryByTestId, findByText } = setup();
 
       queryByTestId('login-spinner');
-      await findByText('Logar');
+      await findByText('redirect');
 
       expect(mockHistoryPush).toHaveBeenCalledWith('/dashboard');
     });
@@ -75,11 +78,11 @@ describe('Login Component', () => {
       const { queryByTestId, findByText } = setup();
 
       queryByTestId('login-spinner');
-      await findByText('Logar');
+      await findByText('redirect');
 
       const result = window.localStorage.getItem('user');
 
-      expect(JSON.parse(result)).toEqual(userData);
+      expect(JSON.parse(result)).toEqual({ ...userData, userToken: token });
     });
   });
 
@@ -91,11 +94,12 @@ describe('Login Component', () => {
     it('renders error message', async () => {
       const { findByText } = setup();
 
-      await findByText('Email ou senha inválida.');
+      const error = await findByText('Email ou senha inválida.');
+      expect(error).toBeInTheDocument();
     });
   });
 
-  describe('when user does not fill fields', () => {
+  describe('when user does not fill out the fields', () => {
     it('highlight border fields', () => {
       const { getByText } = wrapper(SignIn);
 

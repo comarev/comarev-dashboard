@@ -8,9 +8,15 @@ describe('User reducer', () => {
   });
 
   it('handles USER_SIGN_IN', () => {
-    expect(userReducer(undefined, loginUser(userData))).toStrictEqual({
+    expect(
+      userReducer(
+        undefined,
+        loginUser({ ...userData, userToken: 'random-token' })
+      )
+    ).toStrictEqual({
       ...userData,
       logged: true,
+      userToken: 'random-token',
     });
   });
 
