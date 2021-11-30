@@ -13,6 +13,21 @@ const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   }
 };
 
+const parseCompany = (payload) => {
+  const { name, email, cnpj, phone, address, code, discount, active } = payload;
+
+  return {
+    name,
+    email,
+    phone,
+    address,
+    cnpj,
+    code: parseInt(code),
+    discount: parseFloat(discount),
+    active: active ? JSON.parse(active) : false,
+  };
+};
+
 const registerCompany = async ({
   payload,
   onStart,
@@ -22,7 +37,7 @@ const registerCompany = async ({
 }) => {
   try {
     onStart();
-    await service.post('/companies', { company: payload });
+    await service.post('/companies', { company: parseCompany(payload) });
 
     onSuccess();
   } catch (error) {

@@ -1,8 +1,10 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import RHFInput from '../../../components/rhf-input/rhf-input.component';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { CircularProgress } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 import { Container } from './styles';
@@ -12,19 +14,18 @@ const statusOptions = [
   { value: false, label: 'Desativada' },
 ];
 
-const propsToInput = {
-  name: { 'data-testid': 'company-name-input' },
-  cnpj: { 'data-testid': 'company-cnpj-input' },
-  code: { 'data-testid': 'company-code-input' },
-};
+const schema = yup.object().shape({
+  name: yup.string().required('Campo obrigatório'),
+  cnpj: yup.string().required('Campo obrigatório'),
+  code: yup.string().required('Campo obrigatório'),
+  address: yup.string(),
+  phone: yup.string(),
+  discount: yup.string(),
+  active: yup.string().required('Campo obrigatório'),
+});
 
 const CompanyForm = ({ onSubmit, loading }) => {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm();
+  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
   return (
     <Container>
@@ -37,95 +38,53 @@ const CompanyForm = ({ onSubmit, loading }) => {
           justifycontent='center'
         >
           <Grid item xs={5}>
-            <TextField
-              {...register('name', { required: true })}
-              label='Razão Social'
-              variant='outlined'
-              margin='normal'
+            <RHFInput
               name='name'
-              autoComplete='name'
-              required
+              label='Razão Social'
               autoFocus
-              inputProps={propsToInput.name}
-              fullWidth
+              dataTestId='company-name-input'
+              control={control}
             />
-            {errors.name && <span>Este campo deve ser preenchido</span>}
           </Grid>
           <Grid item xs={3}>
-            <TextField
-              {...register('cnpj', { required: true })}
-              label='CNPJ'
+            <RHFInput
               name='cnpj'
-              variant='outlined'
-              margin='normal'
-              autoComplete='cnpj'
-              required
-              inputProps={propsToInput.cnpj}
-              fullWidth
+              label='CNPJ'
+              dataTestId='company-cnpj-input'
+              control={control}
             />
-            {errors.cnpj && <span>Este campo deve ser preenchido</span>}
           </Grid>
           <Grid item xs={3}>
-            <TextField
-              {...register('code', { required: true })}
-              label='Código'
+            <RHFInput
               name='code'
-              variant='outlined'
-              margin='normal'
-              autoComplete='code'
-              required
-              inputProps={propsToInput.code}
-              fullWidth
+              label='Código'
+              dataTestId='company-code-input'
+              control={control}
             />
-            {errors.code && <span>Este campo deve ser preenchido</span>}
           </Grid>
           <Grid item xs={5}>
-            <TextField
-              {...register('address')}
-              label='Endereço'
-              name='address'
-              variant='outlined'
-              margin='normal'
-              autoComplete='address'
-              fullWidth
-            />
+            <RHFInput name='address' label='Endereço' control={control} />
           </Grid>
           <Grid item xs={3}>
-            <TextField
-              {...register('phone')}
-              label='Phone'
-              name='phone'
-              variant='outlined'
-              margin='normal'
-              autoComplete='phone'
-              fullWidth
-            />
+            <RHFInput name='phone' label='Phone' control={control} />
           </Grid>
           <Grid item xs={3}>
-            <TextField
-              {...register('discount')}
-              label='Desconto (%)'
-              name='discount'
-              variant='outlined'
-              margin='normal'
-              autoComplete='discount'
-              fullWidth
-            />
+            <RHFInput name='discount' label='Desconto (%)' control={control} />
           </Grid>
           <Grid item xs={4} style={{ marginTop: '15px' }}>
-            <TextField
-              {...register('active')}
+            <RHFInput
+              name='active'
               label='Status'
               select
-              variant='outlined'
-              value={watch('active', true)}
+              control={control}
+              defaultValue={true}
             >
               {statusOptions.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </RHFInput>
           </Grid>
           <Grid item xs={12} style={{ marginTop: '15px' }}>
             <Button
