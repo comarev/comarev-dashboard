@@ -5,6 +5,11 @@ import 'react-toastify/dist/ReactToastify.css';
 const theme = createMuiTheme({
   palette: {
     primary: blue,
+    warning: {
+      light: '#F5A299',
+      main: '#EA351F',
+      dark: '#611B17'
+    }
   },
 });
 

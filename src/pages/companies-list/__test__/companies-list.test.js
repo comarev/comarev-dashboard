@@ -1,19 +1,17 @@
 import React from 'react';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
-import CompaniesList from './companies-list';
+import CompaniesList from '../companies-list';
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../../service/api';
-import mockedCompanies from '../../test/fixtures/companies';
-import wrapper from '../../test/test-utils';
+import axios from '../../../service/api';
+import mockedCompanies from '../../../test/fixtures/companies';
+import wrapper from '../../../test/test-utils';
 
 const mock = new MockAdapter(axios);
 
 describe('Companies List page', () => {
   describe('when successfully', () => {
     beforeEach(() => {
-      mock.onGet('/companies').reply(200, {
-        data: mockedCompanies,
-      });
+      mock.onGet('/companies').reply(200, mockedCompanies);
     });
 
     it('render companies in the table', async () => {
