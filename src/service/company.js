@@ -47,4 +47,14 @@ const registerCompany = async ({
   }
 };
 
-export { getCompanies, registerCompany };
+const getCompany = async (id) => {
+  return await service.get(`/companies/${id}`);
+};
+
+const updateCompany = async (company) => {
+  return await service.patch(`/companies/${company.id}`, {
+    company: parseCompany(company),
+  });
+};
+
+export { getCompanies, registerCompany, getCompany, updateCompany };

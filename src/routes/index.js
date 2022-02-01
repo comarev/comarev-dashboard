@@ -6,6 +6,7 @@ import Dashboard from '../pages/dashboard/dashboard.component';
 import UserList from '../pages/users/user-list.component';
 import CompaniesList from '../pages/companies/company-list.component';
 import CompanyRegister from '../pages/companies/company-register.component';
+import CompanyEdit from '../pages/companies/company-edit.component';
 
 const Routes = () => {
   return (
@@ -19,6 +20,12 @@ const Routes = () => {
           path='/companies/new'
           exact
           component={CompanyRegister}
+          admin
+        />
+        <SecureRoute
+          path='/companies/:id'
+          exact
+          component={CompanyEdit}
           admin
         />
       </Switch>
