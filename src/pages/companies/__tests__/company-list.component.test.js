@@ -1,6 +1,5 @@
-import React from 'react';
 import { screen, waitForElementToBeRemoved } from '@testing-library/react';
-import CompaniesList from '../companies-list';
+import CompaniesList from '../company-list.component';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
 import mockedCompanies from '../../../test/fixtures/companies';

@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import RHFInput from '../../../components/rhf-input/rhf-input.component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress, Paper, Box } from '@material-ui/core';
+import { CircularProgress, Box } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
 
 const statusOptions = [

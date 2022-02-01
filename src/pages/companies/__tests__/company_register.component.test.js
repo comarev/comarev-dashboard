@@ -2,7 +2,7 @@ import wrapper from '../../../test/test-utils';
 import { screen, fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
-import CompanyRegister from '../company_register.component';
+import CompanyRegister from '../company-register.component';
 
 const mockedApi = new MockAdapter(axios);
 const mockHistoryPush = jest.fn();

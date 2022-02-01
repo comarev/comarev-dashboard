@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import Template from '../../components/template/template.component';
-import CompanyForm from './form/company_form.component';
-import FormErrors from '../../components/form_error/form_errors.component';
+import CompanyForm from './form/company-form.component';
+import FormErrors from '../../components/form-error/form-errors.component';
 import { registerCompany } from '../../service/company';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Box, Paper, Typography } from '@material-ui/core';
 
 const CompanyRegister = () => {
   const [loading, setLoading] = useState(false);
