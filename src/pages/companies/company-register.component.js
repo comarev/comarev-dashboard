@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Template from '../../components/template/template.component';
-import CompanyForm from './form/company_form.component';
-import FormErrors from '../../components/form_error/form_errors.component';
+import CompanyForm from './form/company-form.component';
+import FormErrors from '../../components/form-error/form-errors.component';
 import { registerCompany } from '../../service/company';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -26,8 +26,7 @@ const CompanyRegister = () => {
   };
 
   return (
-    <Template>
-      <h2>Cadastrar empresa</h2>
+    <Template title='Nova empresa'>
       {!!formErrors.length && !loading && (
         <FormErrors action='registro' errors={formErrors} />
       )}
