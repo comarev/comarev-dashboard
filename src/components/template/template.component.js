@@ -17,9 +17,9 @@ import { StyledMenuIcon, useStyles } from './template.styles';
 import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
-import { Divider } from '@material-ui/core';
+import { Divider, Box, Paper } from '@material-ui/core';
 
-const Template = ({ children }) => {
+const Template = ({ children, title = '', rightActions = null }) => {
   const [state, setState] = useState({
     left: false,
     open: true,
@@ -133,7 +133,22 @@ const Template = ({ children }) => {
         </Drawer>
         <main className={state.open ? classes.content : classes.contentShift}>
           <div className={classes.toolbar} />
-          {children}
+          <Paper>
+            <Box padding={3}>
+              {(title || rightActions) && (
+                <Box
+                  display='flex'
+                  justifyContent='space-between'
+                  alignItems='center'
+                  marginBottom={3}
+                >
+                  <Typography variant='h5'>{title}</Typography>
+                  {rightActions || null}
+                </Box>
+              )}
+              {children}
+            </Box>
+          </Paper>
         </main>
       </div>
     </>

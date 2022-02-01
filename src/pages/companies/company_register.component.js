@@ -5,6 +5,7 @@ import FormErrors from '../../components/form_error/form_errors.component';
 import { registerCompany } from '../../service/company';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Box, Paper, Typography } from '@material-ui/core';
 
 const CompanyRegister = () => {
   const [loading, setLoading] = useState(false);
@@ -26,8 +27,7 @@ const CompanyRegister = () => {
   };
 
   return (
-    <Template>
-      <h2>Cadastrar empresa</h2>
+    <Template title='Nova empresa'>
       {!!formErrors.length && !loading && (
         <FormErrors action='registro' errors={formErrors} />
       )}

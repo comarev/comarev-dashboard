@@ -3,7 +3,13 @@ import CompaniesListing from '../../components/companies-list/companies-list';
 import Template from '../../components/template/template.component';
 import { getCompanies } from '../../service/company';
 import { toast } from 'react-toastify';
-import { CircularProgress, Box, Button } from '@material-ui/core';
+import {
+  CircularProgress,
+  Box,
+  Button,
+  Typography,
+  Paper,
+} from '@material-ui/core';
 
 const CompaniesList = () => {
   const [companies, setCompanies] = useState([]);
@@ -33,30 +39,30 @@ const CompaniesList = () => {
   const render = () => {
     if (loading)
       return (
-        <Box display='flex' justifyContent='center'>
-          <div data-testid='companies-loading'>
-            <CircularProgress />
-          </div>
-        </Box>
+        <Template>
+          <Box display='flex' justifyContent='center'>
+            <div data-testid='companies-loading'>
+              <CircularProgress />
+            </div>
+          </Box>
+        </Template>
       );
 
     return (
-      <>
-        <h2>Empresas</h2>
-        <Button
-          variant='contained'
-          color='primary'
-          href='/companies/new'
-          style={{ marginBottom: '20px' }}
-        >
-          Cadastrar Empresa
-        </Button>
+      <Template
+        title='Empresas'
+        rightActions={
+          <Button variant='contained' color='primary' href='/companies/new'>
+            Cadastrar Empresa
+          </Button>
+        }
+      >
         <CompaniesListing data={companies} />
-      </>
+      </Template>
     );
   };
 
-  return <Template>{render()}</Template>;
+  return render();
 };
 
 export default CompaniesList;

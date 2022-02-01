@@ -5,9 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import RHFInput from '../../../components/rhf-input/rhf-input.component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Paper, Box } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { Container } from './styles';
 
 const statusOptions = [
   { value: true, label: 'Ativa' },
@@ -28,65 +27,65 @@ const CompanyForm = ({ onSubmit, loading }) => {
   const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
   return (
-    <Container>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Grid
-          container
-          spacing={1}
-          alignItems='center'
-          direction='row'
-          justifycontent='center'
-        >
-          <Grid item xs={5}>
-            <RHFInput
-              name='name'
-              label='Razão Social'
-              autoFocus
-              dataTestId='company-name-input'
-              control={control}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <RHFInput
-              name='cnpj'
-              label='CNPJ'
-              dataTestId='company-cnpj-input'
-              control={control}
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <RHFInput
-              name='code'
-              label='Código'
-              dataTestId='company-code-input'
-              control={control}
-            />
-          </Grid>
-          <Grid item xs={5}>
-            <RHFInput name='address' label='Endereço' control={control} />
-          </Grid>
-          <Grid item xs={3}>
-            <RHFInput name='phone' label='Phone' control={control} />
-          </Grid>
-          <Grid item xs={3}>
-            <RHFInput name='discount' label='Desconto (%)' control={control} />
-          </Grid>
-          <Grid item xs={4} style={{ marginTop: '15px' }}>
-            <RHFInput
-              name='active'
-              label='Status'
-              select
-              control={control}
-              defaultValue={true}
-            >
-              {statusOptions.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </RHFInput>
-          </Grid>
-          <Grid item xs={12} style={{ marginTop: '15px' }}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Grid
+        container
+        spacing={1}
+        alignItems='center'
+        direction='row'
+        justifycontent='center'
+      >
+        <Grid item xs={12} md={5}>
+          <RHFInput
+            name='name'
+            label='Razão Social'
+            autoFocus
+            dataTestId='company-name-input'
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <RHFInput
+            name='cnpj'
+            label='CNPJ'
+            dataTestId='company-cnpj-input'
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <RHFInput
+            name='code'
+            label='Código'
+            dataTestId='company-code-input'
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={12} md={5}>
+          <RHFInput name='address' label='Endereço' control={control} />
+        </Grid>
+        <Grid item xs={12} md={3}>
+          <RHFInput name='phone' label='Phone' control={control} />
+        </Grid>
+        <Grid item xs={12} md={2}>
+          <RHFInput name='discount' label='Desconto (%)' control={control} />
+        </Grid>
+        <Grid item xs={12} md={2}>
+          <RHFInput
+            name='active'
+            label='Status'
+            select
+            control={control}
+            defaultValue={true}
+          >
+            {statusOptions.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </RHFInput>
+        </Grid>
+        <Grid item xs={12}>
+          <Box display='flex' justifyContent='flex-end'>
             <Button
               type='submit'
               variant='contained'
@@ -100,10 +99,10 @@ const CompanyForm = ({ onSubmit, loading }) => {
                 'Cadastrar Empresa'
               )}
             </Button>
-          </Grid>
+          </Box>
         </Grid>
-      </form>
-    </Container>
+      </Grid>
+    </form>
   );
 };
 
