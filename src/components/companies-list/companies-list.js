@@ -18,10 +18,10 @@ export default function CompaniesListing({ data }) {
         <TableHead>
           <TableRow>
             <TableCell>Nome</TableCell>
-            <TableCell align='right'>Telefone</TableCell>
-            <TableCell align='right'>Desconto&nbsp;</TableCell>
-            <TableCell align='right'>CNPJ</TableCell>
-            <TableCell align='right'>Ativo</TableCell>
+            <TableCell align='left'>Telefone</TableCell>
+            <TableCell align='left'>Desconto&nbsp;</TableCell>
+            <TableCell align='left'>CNPJ</TableCell>
+            <TableCell align='left'>Ativo</TableCell>
             <TableCell align='right'>Ações</TableCell>
           </TableRow>
         </TableHead>
@@ -31,10 +31,10 @@ export default function CompaniesListing({ data }) {
               <TableCell component='th' scope='row'>
                 {company.name}
               </TableCell>
-              <TableCell align='right'>{company.phone}</TableCell>
-              <TableCell align='right'>{company.discount}</TableCell>
-              <TableCell align='right'>{company.cnpj}</TableCell>
-              <TableCell align='right'>
+              <TableCell align='left'>{company.phone}</TableCell>
+              <TableCell align='left'>{company.discount}</TableCell>
+              <TableCell align='left'>{company.cnpj}</TableCell>
+              <TableCell align='left'>
                 {company.active ? 'Sim' : 'Não'}
               </TableCell>
               <TableCell align='right'>
