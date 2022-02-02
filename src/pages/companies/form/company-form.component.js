@@ -23,8 +23,14 @@ const schema = yup.object().shape({
   active: yup.string().required('Campo obrigatório'),
 });
 
-const CompanyForm = ({ onSubmit, loading }) => {
-  const { control, handleSubmit } = useForm({ resolver: yupResolver(schema) });
+const CompanyForm = ({ onSubmit, loading, company }) => {
+  const { control, handleSubmit } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: company,
+  });
+
+  const editing = !!company;
+  const buttonValue = editing ? 'Atualizar Empresa' : 'Cadastrar Empresa';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -64,7 +70,7 @@ const CompanyForm = ({ onSubmit, loading }) => {
           <RHFInput name='address' label='Endereço' control={control} />
         </Grid>
         <Grid item xs={12} md={3}>
-          <RHFInput name='phone' label='Phone' control={control} />
+          <RHFInput name='phone' label='Telefone' control={control} />
         </Grid>
         <Grid item xs={12} md={2}>
           <RHFInput name='discount' label='Desconto (%)' control={control} />
@@ -96,7 +102,7 @@ const CompanyForm = ({ onSubmit, loading }) => {
               {loading ? (
                 <CircularProgress testid='company-register-spinner' size={25} />
               ) : (
-                'Cadastrar Empresa'
+                buttonValue
               )}
             </Button>
           </Box>
