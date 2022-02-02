@@ -8,6 +8,7 @@ import CompaniesList from '../pages/companies/company-list.component';
 import CompanyRegister from '../pages/companies/company-register.component';
 import CompanyEdit from '../pages/companies/company-edit.component';
 import UserRegister from '../pages/users/user-register.component';
+import UserEdit from '../pages/users/user-edit.component';
 
 const Routes = () => {
   return (
@@ -30,6 +31,7 @@ const Routes = () => {
         />
         <SecureRoute path='/users' exact component={UserList} admin />
         <SecureRoute path='/users/new' exact component={UserRegister} admin />
+        <SecureRoute path='/users/:id' exact component={UserEdit} admin />
       </Switch>
     </Router>
   );

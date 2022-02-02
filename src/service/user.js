@@ -1,9 +1,21 @@
 import service from '../service/api';
 
-export const getUsers = async () => {
+const getUsers = async () => {
   return await service.get('/users');
 };
 
-export const registerUser = async (user) => {
+const registerUser = async (user) => {
   return await service.post('/users', { user: user });
 };
+
+const getUser = async (id) => {
+  return await service.get(`/users/${id}`);
+};
+
+const updateUser = async (user) => {
+  return await service.patch(`/users/${user.id}`, {
+    user,
+  });
+};
+
+export { getUsers, registerUser, getUser, updateUser };
