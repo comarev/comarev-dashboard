@@ -30,7 +30,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
   });
 
   const editing = !!company;
-  const buttonValue = editing ? 'Atualizar empresa' : 'Cadastrar empresa';
+  const buttonValue = editing ? 'Atualizar Empresa' : 'Cadastrar Empresa';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
