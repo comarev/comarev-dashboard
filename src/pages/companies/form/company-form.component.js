@@ -5,8 +5,11 @@ import Grid from '@material-ui/core/Grid';
 import RHFInput from '../../../components/rhf-input/rhf-input.component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { CircularProgress, Box } from '@material-ui/core';
+import { CircularProgress, Box, TextField } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useForm } from 'react-hook-form';
+import { useQuery } from 'react-query';
+import { getUsers } from '../../../service/user';
 
 const statusOptions = [
   { value: true, label: 'Ativa' },
@@ -16,7 +19,6 @@ const statusOptions = [
 const schema = yup.object().shape({
   name: yup.string().required('Campo obrigatório'),
   cnpj: yup.string().required('Campo obrigatório'),
-  code: yup.string().required('Campo obrigatório'),
   address: yup.string(),
   phone: yup.string(),
   discount: yup.string(),
@@ -24,13 +26,22 @@ const schema = yup.object().shape({
 });
 
 const CompanyForm = ({ onSubmit, loading, company }) => {
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: company,
+    defaultValues: {
+      ...company,
+      managers: company?.managers,
+      regulars: company?.regulars,
+    },
   });
 
   const editing = !!company;
   const buttonValue = editing ? 'Atualizar Empresa' : 'Cadastrar Empresa';
+
+  const { data } = useQuery('users', getUsers);
+
+  const managerIds = watch('managers')?.map((manager) => manager.id) || [];
+  const employeeIds = watch('regulars')?.map((employee) => employee.id) || [];
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -41,7 +52,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
         direction='row'
         justifycontent='center'
       >
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6} lg={5}>
           <RHFInput
             name='name'
             label='Razão Social'
@@ -50,7 +61,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
             control={control}
           />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={12} md={6} lg={4}>
           <RHFInput
             name='cnpj'
             label='CNPJ'
@@ -58,24 +69,27 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
             control={control}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
-          <RHFInput
-            name='code'
-            label='Código'
-            dataTestId='company-code-input'
-            control={control}
-          />
-        </Grid>
-        <Grid item xs={12} md={5}>
+        {editing && (
+          <Grid item xs={12} md={6} lg={3}>
+            <RHFInput
+              name='code'
+              label='Código'
+              dataTestId='company-code-input'
+              control={control}
+              disabled
+            />
+          </Grid>
+        )}
+        <Grid item xs={12} md={6}>
           <RHFInput name='address' label='Endereço' control={control} />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={6}>
           <RHFInput name='phone' label='Telefone' control={control} />
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3} lg={2}>
           <RHFInput name='discount' label='Desconto (%)' control={control} />
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3} lg={2}>
           <RHFInput
             name='active'
             label='Status'
@@ -89,6 +103,49 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               </MenuItem>
             ))}
           </RHFInput>
+        </Grid>
+        <Grid item xs={12} lg={8}></Grid>
+        <Grid item xs={12} md={6}>
+          <Autocomplete
+            multiple
+            id='company-managers'
+            options={data?.data || []}
+            getOptionLabel={(option) => option.full_name}
+            getOptionSelected={(option, value) => option.id === value.id}
+            defaultValue={company?.managers}
+            filterSelectedOptions
+            onChange={(e, values) => setValue('managers', values)}
+            getOptionDisabled={(option) => employeeIds.includes(option.id)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='standard'
+                label='Gerentes'
+                placeholder='Selecione os gerentes da empresa'
+              />
+            )}
+          />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Autocomplete
+            multiple
+            id='company-employees'
+            options={data?.data || []}
+            getOptionLabel={(option) => option.full_name}
+            getOptionSelected={(option, value) => option.id === value.id}
+            defaultValue={company?.regulars}
+            filterSelectedOptions
+            onChange={(e, values) => setValue('regulars', values)}
+            getOptionDisabled={(option) => managerIds.includes(option.id)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='standard'
+                label='Funcionários'
+                placeholder='Selecione os funcionários da empresa'
+              />
+            )}
+          />
         </Grid>
         <Grid item xs={12}>
           <Box display='flex' justifyContent='flex-end'>

@@ -14,7 +14,17 @@ const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
 };
 
 const parseCompany = (payload) => {
-  const { name, email, cnpj, phone, address, code, discount, active } = payload;
+  const {
+    name,
+    email,
+    cnpj,
+    phone,
+    address,
+    discount,
+    active,
+    managers,
+    regulars,
+  } = payload;
 
   return {
     name,
@@ -22,9 +32,10 @@ const parseCompany = (payload) => {
     phone,
     address,
     cnpj,
-    code: parseInt(code),
     discount: parseFloat(discount),
     active: active ? JSON.parse(active) : false,
+    manager_ids: managers?.map((manager) => manager.id) || [],
+    regular_ids: regulars?.map((regular) => regular.id) || [],
   };
 };
 
