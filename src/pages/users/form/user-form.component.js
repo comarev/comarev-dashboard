@@ -46,7 +46,7 @@ const UserForm = ({ onSubmit, loading, user }) => {
         direction='row'
         justifycontent='center'
       >
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={6}>
           <RHFInput
             name='full_name'
             label='Nome completo'
@@ -54,19 +54,27 @@ const UserForm = ({ onSubmit, loading, user }) => {
             control={control}
           />
         </Grid>
-        <Grid item xs={12} md={3}>
-          <RHFInput name='cpf' label='CPF' control={control} />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <RHFInput name='email' label='Email' control={control} />
-        </Grid>
-        <Grid item xs={12} md={5}>
-          <RHFInput name='address' label='Endereço' control={control} />
-        </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={6} lg={3}>
           <RHFInput name='cellphone' label='Celular' control={control} />
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={6} lg={3}>
+          <RHFInput name='cpf' label='CPF' control={control} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={5}>
+          <RHFInput name='address' label='Endereço' control={control} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={4}>
+          <RHFInput name='email' label='Email' control={control} />
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <RHFInput
+            name='password'
+            label='Senha'
+            type='password'
+            control={control}
+          />
+        </Grid>
+        <Grid item xs={12} md={3} lg={2}>
           <RHFInput
             name='active'
             label='Status'
@@ -81,7 +89,7 @@ const UserForm = ({ onSubmit, loading, user }) => {
             ))}
           </RHFInput>
         </Grid>
-        <Grid item xs={12} md={2}>
+        <Grid item xs={12} md={3} lg={2}>
           <RHFInput
             name='admin'
             label='Super Admin'

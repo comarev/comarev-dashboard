@@ -16,22 +16,42 @@ const Routes = () => {
       <Switch>
         <Route path='/' exact component={LoginPage} />
         <SecureRoute path='/dashboard' component={Dashboard} />
-        <SecureRoute path='/companies' exact component={CompaniesList} admin />
+        <SecureRoute
+          path='/companies'
+          exact
+          component={CompaniesList}
+          roles={['admin', 'manager']}
+        />
         <SecureRoute
           path='/companies/new'
           exact
           component={CompanyRegister}
-          admin
+          roles={['admin']}
         />
         <SecureRoute
           path='/companies/:id'
           exact
           component={CompanyEdit}
-          admin
+          roles={['admin', 'manager']}
         />
-        <SecureRoute path='/users' exact component={UserList} admin />
-        <SecureRoute path='/users/new' exact component={UserRegister} admin />
-        <SecureRoute path='/users/:id' exact component={UserEdit} admin />
+        <SecureRoute
+          path='/users'
+          exact
+          component={UserList}
+          roles={['admin']}
+        />
+        <SecureRoute
+          path='/users/new'
+          exact
+          component={UserRegister}
+          roles={['admin']}
+        />
+        <SecureRoute
+          path='/users/:id'
+          exact
+          component={UserEdit}
+          roles={['admin']}
+        />
       </Switch>
     </Router>
   );

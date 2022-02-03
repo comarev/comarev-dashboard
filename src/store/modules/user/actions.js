@@ -14,6 +14,7 @@ export const loginUser = ({
   created_at,
   updated_at,
   userToken,
+  companies,
 }) => ({
   type: USER_SIGN_IN,
   payload: {
@@ -29,5 +30,6 @@ export const loginUser = ({
     created_at,
     updated_at,
     userToken,
+    companies,
   },
 });
