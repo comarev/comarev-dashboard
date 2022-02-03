@@ -10,6 +10,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
 import { getUsers } from '../../../service/user';
+import { useSelector } from 'react-redux';
 
 const statusOptions = [
   { value: true, label: 'Ativa' },
@@ -34,11 +35,12 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
       regulars: company?.regulars,
     },
   });
+  const user = useSelector((state) => state.user);
 
   const editing = !!company;
   const buttonValue = editing ? 'Atualizar Empresa' : 'Cadastrar Empresa';
 
-  const { data } = useQuery('users', getUsers);
+  const { data } = useQuery('users', getUsers, { enabled: user.admin });
 
   const managerIds = watch('managers')?.map((manager) => manager.id) || [];
   const employeeIds = watch('regulars')?.map((employee) => employee.id) || [];
@@ -107,6 +109,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
         <Grid item xs={12} lg={8}></Grid>
         <Grid item xs={12} md={6}>
           <Autocomplete
+            disabled={!user.admin}
             multiple
             id='company-managers'
             options={data?.data || []}
@@ -128,6 +131,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
         </Grid>
         <Grid item xs={12} md={6}>
           <Autocomplete
+            disabled={!user.admin}
             multiple
             id='company-employees'
             options={data?.data || []}
