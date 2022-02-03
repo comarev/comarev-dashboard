@@ -5,6 +5,7 @@ import { getCompanies } from '../../service/company';
 import { toast } from 'react-toastify';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import RoleFilter from '../../components/role-filter/role-filter.component';
 
 const CompaniesList = () => {
   const [companies, setCompanies] = useState([]);
@@ -48,13 +49,15 @@ const CompaniesList = () => {
       <Template
         title='Empresas'
         rightActions={
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={() => history.push('/companies/new')}
-          >
-            Cadastrar Empresa
-          </Button>
+          <RoleFilter>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={() => history.push('/companies/new')}
+            >
+              Cadastrar Empresa
+            </Button>
+          </RoleFilter>
         }
       >
         <CompaniesListing data={companies} />

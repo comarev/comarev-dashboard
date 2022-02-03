@@ -18,6 +18,7 @@ import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
 import { Divider, Box, Paper } from '@material-ui/core';
+import { USER_ROLES } from '../../utils/constants';
 
 const Template = ({ children, title = '', rightActions = null }) => {
   const [state, setState] = useState({
@@ -28,6 +29,7 @@ const Template = ({ children, title = '', rightActions = null }) => {
   const history = useHistory();
 
   const user = useSelector((state) => state.user);
+  const userRoles = USER_ROLES.filter((role) => user[role]);
 
   const classes = useStyles();
 
@@ -47,7 +49,14 @@ const Template = ({ children, title = '', rightActions = null }) => {
     >
       <List>
         {menu
-          .filter((item) => user.admin || !item.admin)
+          .filter((item) => {
+            const roles = item.roles;
+            const hasPermission =
+              roles.length === 0 ||
+              roles.some((role) => userRoles.includes(role));
+
+            return hasPermission;
+          })
           .map((item) => {
             const Icon = item.icon;
 
