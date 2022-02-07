@@ -15,5 +15,10 @@ export const menu = [
     icon: SupervisorAccountOutlinedIcon,
     roles: ['admin', 'manager'],
   },
-  { label: 'Faturas', icon: ReceiptIcon, roles: ['admin', 'customer'] },
+  {
+    label: 'Faturas',
+    path: '/invoices',
+    icon: ReceiptIcon,
+    roles: ['admin', 'customer'],
+  },
 ];

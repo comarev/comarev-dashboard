@@ -9,6 +9,10 @@ import CompanyRegister from '../pages/companies/company-register.component';
 import CompanyEdit from '../pages/companies/company-edit.component';
 import UserRegister from '../pages/users/user-register.component';
 import UserEdit from '../pages/users/user-edit.component';
+import InvoiceList from '../pages/invoices/invoice-list.component';
+import InvoiceRegister from '../pages/invoices/invoice-register.component';
+import InvoiceView from '../pages/invoices/invoices-view.component';
+import InvoiceEdit from '../pages/invoices/invoice-edit.component';
 
 const Routes = () => {
   return (
@@ -51,6 +55,30 @@ const Routes = () => {
           exact
           component={UserEdit}
           roles={['admin']}
+        />
+        <SecureRoute
+          path='/invoices'
+          exact
+          component={InvoiceList}
+          roles={['admin', 'customer']}
+        />
+        <SecureRoute
+          path='/invoices/new'
+          exact
+          component={InvoiceRegister}
+          roles={['admin']}
+        />
+        <SecureRoute
+          path='/invoices/:id'
+          exact
+          component={InvoiceEdit}
+          roles={['admin']}
+        />
+        <SecureRoute
+          path='/invoices/show/:id'
+          exact
+          component={InvoiceView}
+          roles={['admin', 'customer']}
         />
       </Switch>
     </Router>

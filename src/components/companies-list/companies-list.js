@@ -40,7 +40,7 @@ export default function CompaniesListing({ data }) {
               <TableCell align='right'>
                 <IconButton
                   aria-label='edit'
-                  color='primary'
+                  color='default'
                   onClick={() => history.push(`/companies/${company.id}`)}
                 >
                   <EditIcon />
