@@ -69,6 +69,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
             label='CNPJ'
             dataTestId='company-cnpj-input'
             control={control}
+            mask='99.999.999/9999-99'
           />
         </Grid>
         {editing && (
@@ -86,10 +87,21 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
           <RHFInput name='address' label='Endereço' control={control} />
         </Grid>
         <Grid item xs={12} md={6}>
-          <RHFInput name='phone' label='Telefone' control={control} />
+          <RHFInput
+            name='phone'
+            label='Telefone'
+            control={control}
+            mask='(99) 9999-9999'
+          />
         </Grid>
         <Grid item xs={12} md={3} lg={2}>
-          <RHFInput name='discount' label='Desconto (%)' control={control} />
+          <RHFInput
+            name='discount'
+            label='Desconto (%)'
+            type='number'
+            control={control}
+            inputProps={{ min: 0, max: 100 }}
+          />
         </Grid>
         <Grid item xs={12} md={3} lg={2}>
           <RHFInput

@@ -55,10 +55,20 @@ const UserForm = ({ onSubmit, loading, user }) => {
           />
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <RHFInput name='cellphone' label='Celular' control={control} />
+          <RHFInput
+            name='cellphone'
+            label='Celular'
+            mask='(99) 999999999'
+            control={control}
+          />
         </Grid>
         <Grid item xs={12} md={6} lg={3}>
-          <RHFInput name='cpf' label='CPF' control={control} />
+          <RHFInput
+            name='cpf'
+            label='CPF'
+            mask='999.999.999-99'
+            control={control}
+          />
         </Grid>
         <Grid item xs={12} md={6} lg={5}>
           <RHFInput name='address' label='Endereço' control={control} />

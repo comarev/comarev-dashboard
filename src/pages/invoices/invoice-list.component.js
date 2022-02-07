@@ -18,6 +18,7 @@ import { getInvoices } from '../../service/invoice';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Visibility';
 import RoleFilter from '../../components/role-filter/role-filter.component';
+import { format } from 'date-fns';
 
 const InvoiceList = () => {
   const history = useHistory();
@@ -71,12 +72,21 @@ const InvoiceList = () => {
                 <TableCell component='th' scope='row'>
                   {invoice?.user?.full_name}
                 </TableCell>
-                <TableCell align='left'>{invoice.amount}</TableCell>
+                <TableCell align='left'>
+                  {invoice.amount.toLocaleString('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  })}
+                </TableCell>
                 <TableCell align='left'>
                   {invoice.paid ? 'Sim' : 'Não'}
                 </TableCell>
-                <TableCell align='left'>{invoice.created_at}</TableCell>
-                <TableCell align='left'>{invoice.updated_at}</TableCell>
+                <TableCell align='left'>
+                  {format(new Date(invoice.created_at), 'dd/MM/yyyy')}
+                </TableCell>
+                <TableCell align='left'>
+                  {format(new Date(invoice.updated_at), 'dd/MM/yyyy')}
+                </TableCell>
                 <TableCell align='right'>
                   <RoleFilter>
                     <IconButton
