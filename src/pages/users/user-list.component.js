@@ -16,6 +16,7 @@ import {
 import { useQuery } from 'react-query';
 import { getUsers } from '../../service/user';
 import EditIcon from '@material-ui/icons/Edit';
+import { formatCellphone, formatCpfCnpj } from '../../utils/formatters/general';
 
 const UserList = () => {
   const history = useHistory();
@@ -53,7 +54,7 @@ const UserList = () => {
             <TableRow>
               <TableCell>Nome</TableCell>
               <TableCell align='left'>Email</TableCell>
-              <TableCell align='left'>CNPJ</TableCell>
+              <TableCell align='left'>CPF</TableCell>
               <TableCell align='left'>Celular</TableCell>
               <TableCell align='left'>Ativo</TableCell>
               <TableCell align='right'>Ações</TableCell>
@@ -66,8 +67,10 @@ const UserList = () => {
                   {user.full_name}
                 </TableCell>
                 <TableCell align='left'>{user.email}</TableCell>
-                <TableCell align='left'>{user.cpf}</TableCell>
-                <TableCell align='left'>{user.cellphone}</TableCell>
+                <TableCell align='left'>{formatCpfCnpj(user.cpf)}</TableCell>
+                <TableCell align='left'>
+                  {formatCellphone(user.cellphone)}
+                </TableCell>
                 <TableCell align='left'>
                   {user.active ? 'Sim' : 'Não'}
                 </TableCell>

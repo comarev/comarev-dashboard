@@ -53,7 +53,7 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
             options={filterCustomers(data?.data) || []}
             getOptionLabel={(option) => option.full_name}
             getOptionSelected={(option, value) => option.id === value.id}
-            defaultValue={invoice.user}
+            defaultValue={invoice?.user}
             filterSelectedOptions
             onChange={(e, value) => setValue('user_id', value.id)}
             renderInput={(params) => (
@@ -67,7 +67,12 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
           />
         </Grid>
         <Grid item xs={12} md={6} lg={4}>
-          <RHFInput name='amount' label='Valor' control={control} />
+          <RHFInput
+            name='amount'
+            label='Valor'
+            control={control}
+            currencyInput
+          />
         </Grid>
         <Grid item xs={12} md={3} lg={4}>
           <RHFInput

@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
+import { formatCpfCnpj } from '../../utils/formatters/general';
 
 export default function CompaniesListing({ data }) {
   const history = useHistory();
@@ -32,8 +33,8 @@ export default function CompaniesListing({ data }) {
                 {company.name}
               </TableCell>
               <TableCell align='left'>{company.phone}</TableCell>
-              <TableCell align='left'>{company.discount}</TableCell>
-              <TableCell align='left'>{company.cnpj}</TableCell>
+              <TableCell align='left'>{company.discount}%</TableCell>
+              <TableCell align='left'>{formatCpfCnpj(company.cnpj)}</TableCell>
               <TableCell align='left'>
                 {company.active ? 'Sim' : 'Não'}
               </TableCell>
