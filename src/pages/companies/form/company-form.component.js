@@ -137,6 +137,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 variant='standard'
                 label='Gerentes'
                 placeholder='Selecione os gerentes da empresa'
+                margin='normal'
               />
             )}
           />
@@ -159,6 +160,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 variant='standard'
                 label='Funcionários'
                 placeholder='Selecione os funcionários da empresa'
+                margin='normal'
               />
             )}
           />

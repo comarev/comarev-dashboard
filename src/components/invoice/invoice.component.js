@@ -11,6 +11,7 @@ import {
 } from './invoice-styles';
 import LogoComarev from '../../assets/images/logo-comarev.png';
 import { Typography } from '@material-ui/core';
+import { format } from 'date-fns';
 
 function Invoice({ invoice }) {
   return (
@@ -25,10 +26,10 @@ function Invoice({ invoice }) {
           </Paid>
           <Typography component='span'>Fatura #{invoice.id}</Typography>
           <Typography component='span'>
-            Emitida em: {invoice.created_at}
+            Emitida em: {format(new Date(invoice.created_at), 'dd/MM/yyyy')}
           </Typography>
           <Typography component='span'>
-            Vence em: {invoice.updated_at}
+            Vence em: {format(new Date(invoice.due_date), 'dd/MM/yyyy')}
           </Typography>
         </DateDetails>
       </Header>
@@ -59,11 +60,22 @@ function Invoice({ invoice }) {
         <tbody>
           <tr>
             <td>Contribuição COMAREV</td>
-            <td align='right'>{invoice.amount}</td>
+            <td align='right'>
+              {invoice.amount.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </td>
           </tr>
           <tr>
             <td></td>
-            <Total>Total: {invoice.amount}</Total>
+            <Total>
+              Total:{' '}
+              {invoice.amount.toLocaleString('pt-br', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </Total>
           </tr>
         </tbody>
       </table>

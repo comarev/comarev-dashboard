@@ -48,7 +48,13 @@ const InvoiceEdit = () => {
         <InvoiceForm
           onSubmit={mutateAsync}
           loading={isLoading}
-          invoice={data?.data}
+          invoice={{
+            ...data?.data,
+            amount: data?.data.amount.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }),
+          }}
         />
       </Template>
     );

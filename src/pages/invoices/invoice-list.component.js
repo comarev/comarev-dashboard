@@ -13,18 +13,29 @@ import {
   CircularProgress,
   Box,
 } from '@material-ui/core';
-import { useQuery } from 'react-query';
-import { getInvoices } from '../../service/invoice';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { getInvoices, updateInvoice } from '../../service/invoice';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Visibility';
+import CheckIcon from '@material-ui/icons/Check';
+import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import RoleFilter from '../../components/role-filter/role-filter.component';
 import { format } from 'date-fns';
 
 const InvoiceList = () => {
   const history = useHistory();
-  const { data, status } = useQuery('invoices', getInvoices);
+  const { data, status, refetch } = useQuery('invoices', getInvoices);
+  const { mutateAsync: payInvoice, isLoading: payingLoading } =
+    useMutation(updateInvoice);
+  const queryClient = useQueryClient();
 
   const loading = ['loading', 'iddle'].includes(status);
+
+  const handlePay = async (invoice) => {
+    await payInvoice({ ...invoice, paid: !invoice.paid });
+    queryClient.invalidateQueries('invoices');
+    refetch();
+  };
 
   if (loading)
     return (
@@ -61,7 +72,7 @@ const InvoiceList = () => {
               <TableCell align='left'>Valor</TableCell>
               <TableCell align='left'>Paga</TableCell>
               <TableCell align='left'>Criada em</TableCell>
-              <TableCell align='left'>Atualizada em</TableCell>
+              <TableCell align='left'>Vencimento</TableCell>
               <TableCell align='right'>Ações</TableCell>
             </TableRow>
           </TableHead>
@@ -85,7 +96,7 @@ const InvoiceList = () => {
                   {format(new Date(invoice.created_at), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell align='left'>
-                  {format(new Date(invoice.updated_at), 'dd/MM/yyyy')}
+                  {format(new Date(invoice.due_date), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell align='right'>
                   <RoleFilter>
@@ -104,6 +115,27 @@ const InvoiceList = () => {
                   >
                     <ViewIcon />
                   </IconButton>
+                  <RoleFilter>
+                    {invoice.paid ? (
+                      <IconButton
+                        aria-label='undo payment'
+                        color='default'
+                        onClick={() => handlePay(invoice)}
+                        disabled={payingLoading}
+                      >
+                        <MoneyOffIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        aria-label='pay'
+                        color='default'
+                        onClick={() => handlePay(invoice)}
+                        disabled={payingLoading}
+                      >
+                        <CheckIcon />
+                      </IconButton>
+                    )}
+                  </RoleFilter>
                 </TableCell>
               </TableRow>
             ))}
