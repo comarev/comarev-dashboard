@@ -12,11 +12,26 @@ import {
   IconButton,
   CircularProgress,
   Box,
+  Chip,
 } from '@material-ui/core';
 import { useQuery } from 'react-query';
 import { getUsers } from '../../service/user';
 import EditIcon from '@material-ui/icons/Edit';
 import { formatCellphone, formatCpfCnpj } from '../../utils/formatters/general';
+
+const getLabel = (user) => {
+  if (user.admin) return 'Admin';
+  if (user.companies.length !== 0) return 'Gerente';
+
+  return 'Contribuinte';
+};
+
+const getLabelColor = (user) => {
+  if (user.admin) return 'primary';
+  if (user.companies.length !== 0) return 'primary';
+
+  return 'default';
+};
 
 const UserList = () => {
   const history = useHistory();
@@ -65,6 +80,12 @@ const UserList = () => {
               <TableRow key={user.id}>
                 <TableCell component='th' scope='row'>
                   {user.full_name}
+                  <Chip
+                    label={getLabel(user)}
+                    color={getLabelColor(user)}
+                    size='small'
+                    style={{ marginLeft: 10 }}
+                  />
                 </TableCell>
                 <TableCell align='left'>{user.email}</TableCell>
                 <TableCell align='left'>{formatCpfCnpj(user.cpf)}</TableCell>

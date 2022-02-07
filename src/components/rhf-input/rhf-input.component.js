@@ -1,5 +1,5 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import { TextField } from '@material-ui/core';
 import { useController } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import MaskedInput from 'react-text-mask';
@@ -68,9 +68,9 @@ const RHFInput = ({
         }}
         error={!!error}
         helperText={error?.message || ''}
-        variant='outlined'
-        margin='normal'
+        variant='standard'
         fullWidth
+        margin='normal'
       >
         {children}
       </TextField>
@@ -97,9 +97,9 @@ const RHFInput = ({
             }}
             error={!!error}
             helperText={error?.message || ''}
-            variant='outlined'
-            margin='normal'
+            variant='standard'
             fullWidth
+            margin='normal'
           >
             {children}
           </TextField>
@@ -117,9 +117,9 @@ const RHFInput = ({
       inputProps={{ ...textFieldProps.inputProps, 'data-testid': dataTestId }}
       error={!!error}
       helperText={error?.message || ''}
-      variant='outlined'
-      margin='normal'
+      variant='standard'
       fullWidth
+      margin='normal'
     >
       {children}
     </TextField>

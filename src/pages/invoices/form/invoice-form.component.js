@@ -11,6 +11,7 @@ import { useQuery } from 'react-query';
 import { getUsers } from '../../../service/user';
 import { useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { DatePicker } from '@material-ui/pickers';
 
 const paidOptions = [
   { value: true, label: 'Sim' },
@@ -21,13 +22,14 @@ const schema = yup.object().shape({
   user_id: yup.string().required('Campo obrigatório'),
   amount: yup.string().required('Campo obrigatório'),
   paid: yup.string().required('Campo obrigatório'),
+  due_date: yup.string().required('Campo obrigatório'),
 });
 
 const filterCustomers = (users) =>
   users?.filter((user) => user.companies.length === 0);
 
 const InvoiceForm = ({ onSubmit, loading, invoice }) => {
-  const { control, handleSubmit, setValue } = useForm({
+  const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
     defaultValues: invoice,
   });
@@ -36,6 +38,8 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
 
   const editing = !!invoice;
   const buttonValue = editing ? 'Atualizar Fatura' : 'Cadastrar Fatura';
+
+  const dueDateValue = watch('due_date');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -62,11 +66,12 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
                 variant='standard'
                 label='Cliente'
                 placeholder='Selecione o cliente'
+                margin='normal'
               />
             )}
           />
         </Grid>
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6} lg={3}>
           <RHFInput
             name='amount'
             label='Valor'
@@ -74,7 +79,7 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
             currencyInput
           />
         </Grid>
-        <Grid item xs={12} md={3} lg={4}>
+        <Grid item xs={12} md={6} lg={2}>
           <RHFInput
             name='paid'
             label='Pago'
@@ -88,6 +93,20 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
               </MenuItem>
             ))}
           </RHFInput>
+        </Grid>
+        <Grid item xs={12} md={6} lg={3}>
+          <Box display='flex' justifyContent='flex-end'>
+            <DatePicker
+              label='Data de vencimento'
+              value={dueDateValue || new Date()}
+              onChange={(date) => setValue('due_date', date)}
+              animateYearScrolling
+              format='dd/MM/yyyy'
+              disablePast
+              fullWidth
+              margin='normal'
+            />
+          </Box>
         </Grid>
         <Grid item xs={12}>
           <Box display='flex' justifyContent='flex-end'>
