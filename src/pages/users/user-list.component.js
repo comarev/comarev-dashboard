@@ -74,7 +74,7 @@ const UserList = () => {
                 <TableCell align='right'>
                   <IconButton
                     aria-label='edit'
-                    color='primary'
+                    color='default'
                     onClick={() => history.push(`/users/${user.id}`)}
                   >
                     <EditIcon />
