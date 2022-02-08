@@ -29,9 +29,8 @@ const CompaniesList = () => {
   };
 
   useEffect(() => {
-    if (!companies.length)
-      getCompanies({ onSuccess, onStart, onFailure, onCompleted });
-  }, [companies]);
+    getCompanies({ onSuccess, onStart, onFailure, onCompleted });
+  }, []);
 
   const render = () => {
     if (loading)
