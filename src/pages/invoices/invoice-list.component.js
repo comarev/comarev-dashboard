@@ -52,7 +52,7 @@ const InvoiceList = () => {
     <Template
       title='Faturas'
       rightActions={
-        <RoleFilter>
+        <RoleFilter roles={['admin']}>
           <Button
             variant='contained'
             color='primary'
@@ -99,7 +99,7 @@ const InvoiceList = () => {
                   {format(new Date(invoice.due_date), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell align='right'>
-                  <RoleFilter>
+                  <RoleFilter roles={['admin']}>
                     <IconButton
                       aria-label='edit'
                       color='default'
@@ -115,7 +115,7 @@ const InvoiceList = () => {
                   >
                     <ViewIcon />
                   </IconButton>
-                  <RoleFilter>
+                  <RoleFilter roles={['admin']}>
                     {invoice.paid ? (
                       <IconButton
                         aria-label='undo payment'

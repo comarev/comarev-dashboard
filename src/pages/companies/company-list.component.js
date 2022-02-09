@@ -48,7 +48,7 @@ const CompaniesList = () => {
       <Template
         title='Empresas'
         rightActions={
-          <RoleFilter>
+          <RoleFilter roles={['admin']}>
             <Button
               variant='contained'
               color='primary'

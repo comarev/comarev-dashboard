@@ -31,8 +31,9 @@ const filterCustomers = (users) =>
 const InvoiceForm = ({ onSubmit, loading, invoice }) => {
   const { control, handleSubmit, setValue, watch } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: invoice,
+    defaultValues: { ...invoice, due_date: invoice?.due_date || new Date() },
   });
+
   const user = useSelector((state) => state.user);
   const { data } = useQuery('users', getUsers, { enabled: user.admin });
 
@@ -42,7 +43,7 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
   const dueDateValue = watch('due_date');
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
       <Grid
         container
         spacing={1}

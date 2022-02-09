@@ -30,7 +30,7 @@ const InvoiceRegister = () => {
       {!!formErrors.length && !loading && (
         <FormErrors action='registro' errors={formErrors} />
       )}
-      <InvoiceForm onSubmit={mutateAsync} loading={loading} />
+      <InvoiceForm onSubmit={(data) => mutateAsync(data)} loading={loading} />
     </Template>
   );
 };

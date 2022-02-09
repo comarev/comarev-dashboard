@@ -5,8 +5,7 @@ function RoleFilter({ roles = [], children }) {
   const user = useSelector((state) => state.user);
   const userRoles = USER_ROLES.filter((role) => user[role]);
 
-  const hasPermission =
-    user.admin || roles.some((role) => userRoles.includes(role));
+  const hasPermission = roles.some((role) => userRoles.includes(role));
 
   if (!hasPermission) return null;
 

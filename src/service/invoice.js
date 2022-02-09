@@ -3,7 +3,7 @@ import { parseCurrency } from '../utils/parsers/general';
 
 const parseInvoice = (invoice) => ({
   ...invoice,
-  amount: parseCurrency(invoice.amount),
+  amount: parseCurrency(invoice.amount).trim(),
 });
 
 const getInvoices = async () => {
@@ -24,4 +24,14 @@ const updateInvoice = async (invoice) => {
   });
 };
 
-export { getInvoices, registerInvoice, getInvoice, updateInvoice };
+const checkInvoices = async (code) => {
+  return await service.post(`/check_invoices?code=${code}`);
+};
+
+export {
+  getInvoices,
+  registerInvoice,
+  getInvoice,
+  updateInvoice,
+  checkInvoices,
+};
