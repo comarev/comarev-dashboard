@@ -22,11 +22,13 @@ import { Divider, Box, Paper } from '@material-ui/core';
 import { USER_ROLES } from '../../utils/constants';
 import { Fab } from '@material-ui/core';
 import RoleFilter from '../role-filter/role-filter.component';
+import { useMediaQuery } from 'react-responsive';
 
 const Template = ({ children, title = '', rightActions = null }) => {
+  const matches = useMediaQuery({ query: '(max-width: 600px)' });
   const [state, setState] = useState({
     left: false,
-    open: true,
+    open: matches ? false : true,
   });
 
   const history = useHistory();

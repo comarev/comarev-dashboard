@@ -8,8 +8,8 @@ const theme = createMuiTheme({
     warning: {
       light: '#F5A299',
       main: '#EA351F',
-      dark: '#611B17'
-    }
+      dark: '#611B17',
+    },
   },
 });
 

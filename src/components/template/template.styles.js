@@ -7,7 +7,8 @@ const drawerWidth = 240;
 export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    overflow: 'hidden',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -15,19 +16,19 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-  list: {
-  },
+  list: {},
   fullList: {
     width: 'auto',
   },
   appBar: {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
+    minWidth: 320,
   },
   appBarShift: {
     width: '100%',
     marginLeft: 0,
-    },
+  },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
@@ -45,6 +46,7 @@ export const useStyles = makeStyles((theme) => ({
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
     padding: theme.spacing(2),
+    minWidth: 320,
   },
 }));
 
@@ -53,7 +55,9 @@ export const Wrapper = styled.div`
 `;
 
 export const StyledMenuIcon = styled(MenuIcon)`
- && {
-  .MuiIconButton-root {color: ${({theme}) => theme.palette.primaryContext}}
-}
-`
+  && {
+    .MuiIconButton-root {
+      color: ${({ theme }) => theme.palette.primaryContext};
+    }
+  }
+`;

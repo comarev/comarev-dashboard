@@ -4,10 +4,11 @@ import {
   Reader,
   BackButtonContainer,
   LoadingContainer,
-  Container,
+  Wrapper,
   SuccessText,
   MarkContainer,
   ErrorText,
+  Container,
 } from './scanner-styles';
 import { Button, CircularProgress, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -89,15 +90,17 @@ function Scanner() {
 
     return (
       <Container>
-        <MarkContainer>
-          <SuccessCheck />
-          <SuccessText variant='h6'>
-            {discount}% de desconto na {name}!
-          </SuccessText>
-        </MarkContainer>
-        <Button variant='outlined' onClick={() => history.push('/')}>
-          Voltar
-        </Button>
+        <Wrapper>
+          <MarkContainer>
+            <SuccessCheck />
+            <SuccessText variant='h6'>
+              {discount}% de desconto no(a) {name}!
+            </SuccessText>
+          </MarkContainer>
+          <Button variant='outlined' onClick={() => history.push('/')}>
+            Voltar
+          </Button>
+        </Wrapper>
       </Container>
     );
   }
@@ -105,13 +108,15 @@ function Scanner() {
   if (view === Views.Error)
     return (
       <Container>
-        <MarkContainer>
-          <ErrorCheck />
-          <ErrorText variant='h6'>Contate a COMAREV!</ErrorText>
-        </MarkContainer>
-        <Button variant='outlined' onClick={() => history.push('/')}>
-          Voltar
-        </Button>
+        <Wrapper>
+          <MarkContainer>
+            <ErrorCheck />
+            <ErrorText variant='h6'>Contate a COMAREV!</ErrorText>
+          </MarkContainer>
+          <Button variant='outlined' onClick={() => history.push('/')}>
+            Voltar
+          </Button>
+        </Wrapper>
       </Container>
     );
 
