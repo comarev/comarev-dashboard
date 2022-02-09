@@ -3,7 +3,7 @@ import { parseCurrency } from '../utils/parsers/general';
 
 const parseInvoice = (invoice) => ({
   ...invoice,
-  amount: parseCurrency(invoice.amount).trim(),
+  amount: parseCurrency(invoice.amount),
 });
 
 const getInvoices = async () => {
