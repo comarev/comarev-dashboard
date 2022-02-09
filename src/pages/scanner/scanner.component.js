@@ -29,29 +29,34 @@ const Views = {
   Error: 3,
 };
 
+const Loading = () => (
+  <LoadingContainer>
+    <CircularProgress />
+    <Typography variant='overline'>Por favor aguarde...</Typography>
+  </LoadingContainer>
+);
+
 function Scanner() {
   const history = useHistory();
   const html5QrCodeRef = useRef();
   const [view, setView] = useState(Views.Scanner);
 
   const onSuccess = () => {
-    html5QrCodeRef.current.stop();
     setView(Views.Success);
   };
 
   const onError = () => {
-    html5QrCodeRef.current.stop();
     setView(Views.Error);
   };
 
-  const {
-    mutateAsync,
-    data,
-    isLoading: processingCode,
-  } = useMutation('check_invoices', checkInvoices, {
-    onSuccess,
-    onError,
-  });
+  const { mutateAsync, data, isLoading } = useMutation(
+    'check_invoices',
+    checkInvoices,
+    {
+      onSuccess,
+      onError,
+    }
+  );
 
   const handleBack = () => {
     html5QrCodeRef.current.stop();
@@ -66,8 +71,13 @@ function Scanner() {
       .then((devices) => {
         if (devices && devices.length) {
           // const cameraId = devices[0].id;
-          html5QrCode.start({ facingMode: 'environment' }, config, (code) =>
-            mutateAsync(code)
+          html5QrCode.start(
+            { facingMode: 'environment' },
+            config,
+            async (code) => {
+              html5QrCode.stop();
+              mutateAsync(code);
+            }
           );
         }
       })
@@ -76,16 +86,9 @@ function Scanner() {
       });
   }, [mutateAsync]);
 
-  const Loading = () => (
-    <LoadingContainer>
-      <CircularProgress />
-      <Typography variant='overline'>Por favor aguarde...</Typography>
-    </LoadingContainer>
-  );
+  if (isLoading) return <Loading />;
 
   if (view === Views.Success) {
-    if (processingCode) return <Loading />;
-
     const { name, discount } = data.data;
 
     return (
@@ -129,7 +132,7 @@ function Scanner() {
             Sair da câmera
           </Button>
         </BackButtonContainer>
-        {processingCode && <Loading />}
+        {isLoading && <Loading />}
       </Reader>
     </>
   );
