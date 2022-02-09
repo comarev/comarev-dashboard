@@ -13,6 +13,7 @@ import InvoiceList from '../pages/invoices/invoice-list.component';
 import InvoiceRegister from '../pages/invoices/invoice-register.component';
 import InvoiceView from '../pages/invoices/invoices-view.component';
 import InvoiceEdit from '../pages/invoices/invoice-edit.component';
+import Scanner from '../pages/scanner/scanner.component';
 
 const Routes = () => {
   return (
@@ -79,6 +80,12 @@ const Routes = () => {
           exact
           component={InvoiceView}
           roles={['admin', 'customer']}
+        />
+        <SecureRoute
+          path='/scanner'
+          exact
+          component={Scanner}
+          roles={['customer']}
         />
       </Switch>
     </Router>

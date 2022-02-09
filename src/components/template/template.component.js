@@ -12,6 +12,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import CameraIcon from '@material-ui/icons/PhotoCamera';
 import { useSelector } from 'react-redux';
 import { StyledMenuIcon, useStyles } from './template.styles';
 import { useHeader } from './use-header';
@@ -19,6 +20,8 @@ import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
 import { Divider, Box, Paper } from '@material-ui/core';
 import { USER_ROLES } from '../../utils/constants';
+import { Fab } from '@material-ui/core';
+import RoleFilter from '../role-filter/role-filter.component';
 
 const Template = ({ children, title = '', rightActions = null }) => {
   const [state, setState] = useState({
@@ -158,6 +161,16 @@ const Template = ({ children, title = '', rightActions = null }) => {
               {children}
             </Box>
           </Paper>
+          <RoleFilter roles={['customer']}>
+            <Fab
+              style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}
+              color='primary'
+              aria-label='scan'
+              onClick={() => history.push('/scanner')}
+            >
+              <CameraIcon />
+            </Fab>
+          </RoleFilter>
         </main>
       </div>
     </>

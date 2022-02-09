@@ -21,7 +21,7 @@ export const INITIAL_STATE = {
 const isManager = (user) =>
   user.companies.some((company) => company.role === 'manager');
 
-const isCustomer = (user) => user.companies.length === 0;
+const isCustomer = (user) => !user.admin && user.companies.length === 0;
 
 const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
