@@ -1,4 +1,5 @@
 import service from '../service/api';
+import { buildFormData } from '../utils/parsers/jsonToFormData';
 
 const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   try {
@@ -24,6 +25,7 @@ const parseCompany = (payload) => {
     active,
     managers,
     regulars,
+    avatar,
   } = payload;
 
   return {
@@ -36,6 +38,7 @@ const parseCompany = (payload) => {
     active: active ? JSON.parse(active) : false,
     manager_ids: managers?.map((manager) => manager.id) || [],
     regular_ids: regulars?.map((regular) => regular.id) || [],
+    avatar,
   };
 };
 
@@ -48,7 +51,11 @@ const registerCompany = async ({
 }) => {
   try {
     onStart();
-    await service.post('/companies', { company: parseCompany(payload) });
+    const formData = new FormData();
+    buildFormData(formData, parseCompany(payload), 'company');
+    await service.post('/companies', formData, {
+      'Content-Type': 'multipart/form-data',
+    });
 
     onSuccess();
   } catch (error) {
@@ -63,9 +70,20 @@ const getCompany = async (id) => {
 };
 
 const updateCompany = async (company) => {
-  return await service.patch(`/companies/${company.id}`, {
-    company: parseCompany(company),
+  const formData = new FormData();
+  buildFormData(formData, parseCompany(company), 'company');
+
+  return await service.patch(`/companies/${company.id}`, formData, {
+    'Content-Type': 'multipart/form-data',
   });
 };
 
-export { getCompanies, registerCompany, getCompany, updateCompany };
+const getShowcase = async () => await service.get('/showcase');
+
+export {
+  getCompanies,
+  registerCompany,
+  getCompany,
+  updateCompany,
+  getShowcase,
+};
