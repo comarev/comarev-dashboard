@@ -12,7 +12,6 @@ export const ShowCase = styled.div`
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  margin-top: 2rem;
   justify-content: center;
 `;
 
@@ -21,20 +20,15 @@ export const CompanyCard = styled.div`
   flex-direction: column;
   align-items: center;
   width: 120px;
-  height: 120px;
+  height: 150px;
   overflow: hidden;
   transition: 0.2s;
-  border-radius: 1rem;
-  -webkit-filter: grayscale(100%);
   cursor: pointer;
 
   img {
     margin: auto;
     width: 100%;
-  }
-
-  &:hover {
-    -webkit-filter: grayscale(0%);
+    border-radius: 1rem;
   }
 `;
 
@@ -43,4 +37,13 @@ export const Title = styled(Typography)`
     font-size: 1rem;
     text-align: center;
   }
+`;
+
+export const Discount = styled(Typography)`
+  color: ${({ theme }) => theme.palette.success.dark};
+`;
+
+export const CompanyCardWithouImage = styled.div`
+  display: flex;
+  gap: 0.2rem;
 `;

@@ -2,7 +2,14 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import { getShowcase } from '../../service/company';
 import { Box, CircularProgress, Typography } from '@material-ui/core';
-import { ShowCase, Container, CompanyCard, Title } from './dashboard.styles';
+import {
+  ShowCase,
+  Container,
+  CompanyCard,
+  Title,
+  Discount,
+  CompanyCardWithouImage,
+} from './dashboard.styles';
 
 function CustomerDashboard() {
   const { data, isLoading } = useQuery('companies', getShowcase);
@@ -39,6 +46,7 @@ function CustomerDashboard() {
             {withPhoto.map((company) => (
               <CompanyCard key={company.id}>
                 <img src={company.picture_url} alt={company.name} />
+                <Discount>{company.discount}%</Discount>
               </CompanyCard>
             ))}
           </ShowCase>
@@ -53,9 +61,12 @@ function CustomerDashboard() {
             </Title>
             <ShowCase>
               {withoutPhoto.map((company) => (
-                <Typography component='span' variant='body1' key={company.id}>
-                  {company.name}
-                </Typography>
+                <CompanyCardWithouImage>
+                  <Typography component='span' variant='body1' key={company.id}>
+                    {company.name}
+                  </Typography>
+                  <Discount>({company.discount}%)</Discount>
+                </CompanyCardWithouImage>
               ))}
             </ShowCase>
           </>
