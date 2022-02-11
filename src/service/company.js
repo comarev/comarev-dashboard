@@ -14,6 +14,8 @@ const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   }
 };
 
+export const newGetCompanies = async () => await service.get('/companies');
+
 const parseCompany = (payload) => {
   const {
     name,

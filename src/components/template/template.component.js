@@ -23,6 +23,8 @@ import { USER_ROLES } from '../../utils/constants';
 import { Fab } from '@material-ui/core';
 import RoleFilter from '../role-filter/role-filter.component';
 import { useMediaQuery } from 'react-responsive';
+import AppProvider from '../../providers/app-provider';
+import ModalProvider from '../../providers/custom-modal-provider';
 
 const Template = ({ children, title = '', rightActions = null }) => {
   const matches = useMediaQuery({ query: '(max-width: 600px)' });
@@ -83,99 +85,101 @@ const Template = ({ children, title = '', rightActions = null }) => {
   );
 
   return (
-    <>
-      <div className={classes.root}>
-        <AppBar
-          className={state.open ? classes.appBar : classes.appBarShift}
-          position='static'
-        >
-          <Toolbar>
-            <IconButton
-              color='inherit'
-              onClick={toggleDrawer}
-              aria-label='menu'
-            >
-              <StyledMenuIcon />
-            </IconButton>
-            <Typography variant='h6' className={classes.title}>
-              Olá, {user.full_name}
-            </Typography>
-            <div>
+    <ModalProvider>
+      <AppProvider>
+        <div className={classes.root}>
+          <AppBar
+            className={state.open ? classes.appBar : classes.appBarShift}
+            position='static'
+          >
+            <Toolbar>
               <IconButton
-                aria-label='account of current user'
-                aria-controls='menu-appbar'
-                aria-haspopup='true'
-                onClick={handleMenu}
                 color='inherit'
+                onClick={toggleDrawer}
+                aria-label='menu'
               >
-                <AccountCircle />
+                <StyledMenuIcon />
               </IconButton>
-              <Menu
-                id='menu-appbar'
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Meu perfil</MenuItem>
-                <MenuItem onClick={handleSignOut}>Sair</MenuItem>
-              </Menu>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant='persistent'
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-          anchor='left'
-          open={state.open}
-        >
-          <div className={classes.toolbar} />
-          <Divider />
-          {list('left')}
-          <Divider />
-        </Drawer>
-        <main className={state.open ? classes.content : classes.contentShift}>
-          <div className={classes.toolbar} />
-          <Paper>
-            <Box padding={3}>
-              {(title || rightActions) && (
-                <Box
-                  display='flex'
-                  justifyContent='space-between'
-                  alignItems='center'
-                  marginBottom={3}
+              <Typography variant='h6' className={classes.title}>
+                Olá, {user.full_name}
+              </Typography>
+              <div>
+                <IconButton
+                  aria-label='account of current user'
+                  aria-controls='menu-appbar'
+                  aria-haspopup='true'
+                  onClick={handleMenu}
+                  color='inherit'
                 >
-                  <Typography variant='h5'>{title}</Typography>
-                  {rightActions || null}
-                </Box>
-              )}
-              {children}
-            </Box>
-          </Paper>
-          <RoleFilter roles={['customer']}>
-            <Fab
-              style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}
-              color='primary'
-              aria-label='scan'
-              onClick={() => history.push('/scanner')}
-            >
-              <CameraIcon />
-            </Fab>
-          </RoleFilter>
-        </main>
-      </div>
-    </>
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id='menu-appbar'
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Meu perfil</MenuItem>
+                  <MenuItem onClick={handleSignOut}>Sair</MenuItem>
+                </Menu>
+              </div>
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant='persistent'
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor='left'
+            open={state.open}
+          >
+            <div className={classes.toolbar} />
+            <Divider />
+            {list('left')}
+            <Divider />
+          </Drawer>
+          <main className={state.open ? classes.content : classes.contentShift}>
+            <div className={classes.toolbar} />
+            <Paper>
+              <Box padding={3}>
+                {(title || rightActions) && (
+                  <Box
+                    display='flex'
+                    justifyContent='space-between'
+                    alignItems='center'
+                    marginBottom={3}
+                  >
+                    <Typography variant='h5'>{title}</Typography>
+                    {rightActions || null}
+                  </Box>
+                )}
+                {children}
+              </Box>
+            </Paper>
+            <RoleFilter roles={['customer']}>
+              <Fab
+                style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}
+                color='primary'
+                aria-label='scan'
+                onClick={() => history.push('/scanner')}
+              >
+                <CameraIcon />
+              </Fab>
+            </RoleFilter>
+          </main>
+        </div>
+      </AppProvider>
+    </ModalProvider>
   );
 };
 

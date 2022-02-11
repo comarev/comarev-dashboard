@@ -1,6 +1,21 @@
 export function buildFormData(formData, data, parentKey) {
+  const isArray = Array.isArray(data);
+
+  if (isArray) {
+    if (data.length === 0) {
+      buildFormData(formData, '', `${parentKey}[]`);
+    } else {
+      data.forEach((value) => {
+        buildFormData(formData, value, `${parentKey}[]`);
+      });
+    }
+
+    return;
+  }
+
   if (
     data &&
+    !isArray &&
     typeof data === 'object' &&
     !(data instanceof Date) &&
     !(data instanceof File)
@@ -12,9 +27,11 @@ export function buildFormData(formData, data, parentKey) {
         parentKey ? `${parentKey}[${key}]` : key
       );
     });
-  } else {
-    const value = data == null ? '' : data;
 
-    formData.append(parentKey, value);
+    return;
   }
+
+  const value = data == null ? '' : data;
+
+  formData.append(parentKey, value);
 }
