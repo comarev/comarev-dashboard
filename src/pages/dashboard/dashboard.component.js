@@ -6,9 +6,9 @@ import CustomerDashboard from './customer-dashboard.component';
 const Dashboard = () => {
   return (
     <Template>
-      <RoleFilter roles={['customer']}>
+      <FilterComponent roles={['customer']}>
         <CustomerDashboard />
-      </RoleFilter>
+      </FilterComponent>
     </Template>
   );
 };

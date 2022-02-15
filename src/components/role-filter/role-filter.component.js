@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { USER_ROLES } from '../../utils/constants';
 
-function RoleFilter({ roles = [], children }) {
+function FilterComponent({ roles = [], children }) {
   const user = useSelector((state) => state.user);
   const userRoles = USER_ROLES.filter((role) => user[role]);
 
@@ -12,4 +12,4 @@ function RoleFilter({ roles = [], children }) {
   return children;
 }
 
-export default RoleFilter;
+export default FilterComponent;

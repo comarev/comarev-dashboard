@@ -166,7 +166,7 @@ const Template = ({ children, title = '', rightActions = null }) => {
                 {children}
               </Box>
             </Paper>
-            <RoleFilter roles={['customer']}>
+            <FilterComponent roles={['customer']}>
               <Fab
                 style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}
                 color='primary'
@@ -175,7 +175,7 @@ const Template = ({ children, title = '', rightActions = null }) => {
               >
                 <CameraIcon />
               </Fab>
-            </RoleFilter>
+            </FilterComponent>
           </main>
         </div>
       </AppProvider>

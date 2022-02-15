@@ -52,7 +52,7 @@ const InvoiceList = () => {
     <Template
       title='Faturas'
       rightActions={
-        <RoleFilter roles={['admin']}>
+        <FilterComponent roles={['admin']}>
           <Button
             variant='contained'
             color='primary'
@@ -60,7 +60,7 @@ const InvoiceList = () => {
           >
             Gerar fatura
           </Button>
-        </RoleFilter>
+        </FilterComponent>
       }
     >
       <TableContainer>
@@ -99,7 +99,7 @@ const InvoiceList = () => {
                   {format(new Date(invoice.due_date), 'dd/MM/yyyy')}
                 </TableCell>
                 <TableCell align='right'>
-                  <RoleFilter roles={['admin']}>
+                  <FilterComponent roles={['admin']}>
                     <IconButton
                       aria-label='edit'
                       color='default'
@@ -107,7 +107,7 @@ const InvoiceList = () => {
                     >
                       <EditIcon />
                     </IconButton>
-                  </RoleFilter>
+                  </FilterComponent>
                   <IconButton
                     aria-label='view'
                     color='default'
@@ -115,7 +115,7 @@ const InvoiceList = () => {
                   >
                     <ViewIcon />
                   </IconButton>
-                  <RoleFilter roles={['admin']}>
+                  <FilterComponent roles={['admin']}>
                     {invoice.paid ? (
                       <IconButton
                         aria-label='undo payment'
@@ -135,7 +135,7 @@ const InvoiceList = () => {
                         <CheckIcon />
                       </IconButton>
                     )}
-                  </RoleFilter>
+                  </FilterComponent>
                 </TableCell>
               </TableRow>
             ))}

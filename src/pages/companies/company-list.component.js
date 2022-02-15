@@ -48,7 +48,7 @@ const CompaniesList = () => {
       <Template
         title='Empresas'
         rightActions={
-          <RoleFilter roles={['admin']}>
+          <FilterComponent roles={['admin']}>
             <Button
               variant='contained'
               color='primary'
@@ -56,7 +56,7 @@ const CompaniesList = () => {
             >
               Cadastrar Empresa
             </Button>
-          </RoleFilter>
+          </FilterComponent>
         }
       >
         <CompaniesListing data={companies} />
