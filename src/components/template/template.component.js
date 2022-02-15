@@ -168,7 +168,7 @@ const Template = ({ children, title = '', rightActions = null }) => {
             </Paper>
             <RoleFilter roles={['customer']}>
               <Fab
-                style={{ position: 'absolute', right: '1rem', bottom: '1rem' }}
+                style={{ position: 'fixed', right: '1rem', bottom: '1rem' }}
                 color='primary'
                 aria-label='scan'
                 onClick={() => history.push('/scanner')}
