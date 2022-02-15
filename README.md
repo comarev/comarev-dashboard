@@ -1,70 +1,85 @@
-# Getting Started with Create React App
+# Comarev - Front End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome Contributors!
 
-## Available Scripts
+If you are new here, there are some things you need to know:
+- This is a 100% volunteer-supported project, please be patient with your correspondence.
+- Check the Development section before starting to contribute.
+- This is the front end part of the Comarev project. Check the backend side by clicking [here](https://github.com/comarev/comarev).
+- This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+The core teams leads are: @belgamo @m-pereira
 
-### `yarn start`
+## README
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Origins
+First of all, let's introduce what Comarev is. Comarev is a social project based in Batatais - São Paulo, Brazil. Their goal is to offer an opportunity and a new life for drug addicts by giving them full support through sports, work out and psychological treatment FOR FREE. You can get more information [here](http://comarev.com.br/). During the COVID-19 pandemic in 2020, they lost some financial support from the government and had to come up with new ideas to raise money for the project because they have a lot of costs and serious professionals working there.
+Monthly, the institution used to get some money from contributors, so they wanted to expand the number of contributors by offering some benefits such as discounts in local stores, supermarkets and so on. To make this possible, they needed a system to control everything. Immediatelly, we opened up a group on discord and started meeting weekly to study and develop the code to release a MVP as soon as possible. And we got it!
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## About
+This application is a partner management system. Basically, the Comarev admins register the interested companies that want to give a discount on their products/services to the Comarev contributors who are also registered in the system. Then, when the contributor buys something at the company (Comarev partner), they just have to scan a QR Code emmited in our dashboard and the system will return if they are ok with the payment (contribution), or not. If so, the contributor can get a discount.
 
-### `yarn test`
+## Roadmap
+Check [our board](https://github.com/comarev/comarev-dashboard/projects/2) for more details about what we're building.
+- [x] Comarev dashboard MVP
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The core of this system is ready and running on production. But there are lot of improvements we can do and we need your help!
 
-### `yarn build`
+## Development
+### Tech Stack
+Some of the most famous libraries that we're using:
+- react
+- redux
+- axios
+- styled-components
+- react-hook-form + yup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Pre-requisites
+- Node `v12.19.0` or higher
+- Yarn `v1.22.10` or higher
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Getting started
+First of all, make sure you have your [backend](https://github.com/comarev/comarev) running.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Clone the project from Github:
+```
+git@github.com:comarev/comarev-dashboard.git
+cd comarev-dashboard
+```
 
-### `yarn eject`
+Install dependencies:
+```
+yarn
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Create a __.env__ file by copying the existing one:
+```
+cp .env.sample .env
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Set the value of `REACT_APP_BASE_URL` pointing to your backend address and then run:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+yarn start
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Application Concepts
 
-## Learn More
+### Users
+A user can be an `admin`, `manager`, `emplyoee` or a `customer`.
+ - Admins are the Comarev employees and can constrol the entire system. They are able to create the other kind of users. To become an admin, the user need the `admin` attibute `true`.
+ - Managers are the company managers. They can emmit their QR Code and also check if a user is able to get discount. To become a manager, the user needs to be assigned to a company.
+ - Employees do the same as managers, but they can't invite other employees or manage the company config.
+ - Customers are the Comarev contributors. They are supposed to pay invoices and get discounts. If the user is neither an admin nor a manager, he's a customer.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Companies
+A company is a comarev partner. They offer discounts to the Comarev contributors.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Invoices
+A invoice is created for a user. When all invoices are paid, the user is able to get a discount. Invoices can only be created and mark as paid by an admin user, but customers can visualize them.
 
-### Code Splitting
+### 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thanks!
