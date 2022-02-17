@@ -4,6 +4,13 @@
   ],
   "imageSize": 100,
   "commit": false,
+  "contributorsPerLine": 7,
+  "projectName": "comarev",
+  "projectOwner": "comarev",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true,
+  "commitConvention": "none",
   "contributors": [
     {
       "login": "m-pereira",
@@ -14,12 +21,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "belgamo",
+      "name": "Gabriel Belgamo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19699724?v=4",
+      "profile": "https://github.com/belgamo",
+      "contributions": [
+        "code"
+      ]
     }
-  ],
-  "contributorsPerLine": 7,
-  "projectName": "comarev-dashboard",
-  "projectOwner": "comarev",
-  "repoType": "github",
-  "repoHost": "https://github.com",
-  "skipCi": true
+  ]
 }
