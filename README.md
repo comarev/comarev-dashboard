@@ -83,7 +83,8 @@ A invoice is created for a user. When all invoices are paid, the user is able to
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/m-pereira"><img src="https://avatars.githubusercontent.com/u/47258878?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauricio Lima</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Code">💻</a> <a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/m-pereira"><img src="https://avatars.githubusercontent.com/u/47258878?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauricio Lima</b></sub></a><br /><a href="https://github.com/comarev/comarev/commits?author=m-pereira" title="Code">💻</a> <a href="https://github.com/comarev/comarev/commits?author=m-pereira" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/belgamo"><img src="https://avatars.githubusercontent.com/u/19699724?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Belgamo</b></sub></a><br /><a href="https://github.com/comarev/comarev/commits?author=belgamo" title="Code">💻</a></td>
   </tr>
 </table>
 
