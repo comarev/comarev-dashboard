@@ -3,7 +3,7 @@
 ![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This application is a partner management system. Basically, the Comarev admins register the interested companies that want to give a discount on their products/services to the Comarev contributors who are also registered in the system. Then, when the contributor buys something at the company (Comarev partner), they just have to scan a QR Code emitted in our dashboard and the system will return if they are ok with the payment (contribution), or not. If so, the contributor can get a discount.
@@ -84,6 +84,7 @@ A invoice is created for a user. When all invoices are paid, the user is able to
     <td align="center"><a href="https://github.com/m-pereira"><img src="https://avatars.githubusercontent.com/u/47258878?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauricio Lima</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Code">💻</a> <a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/belgamo"><img src="https://avatars.githubusercontent.com/u/19699724?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Belgamo</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=belgamo" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/RenanRSilva"><img src="https://avatars.githubusercontent.com/u/77541655?v=4?s=100" width="100px;" alt=""/><br /><sub><b>RenanRambul</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=RenanRSilva" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/joseaugustoaquino"><img src="https://avatars.githubusercontent.com/u/60511182?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JOSE AUGUSTO DE AQUINO</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=joseaugustoaquino" title="Code">💻</a></td>
   </tr>
 </table>
 
