@@ -56,7 +56,7 @@ yarn start
 
 ```
 After application boot, you will see the login screen
-and you can is sign in with one of these following accounts:
+and you can sign in using one of the credentials below:
 
 ```
   email: admin@example.com
