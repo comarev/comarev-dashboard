@@ -5,9 +5,22 @@ export const userData = {
   cpf: '12345678912',
   address: 'Rua do limao, 324',
   cellphone: '16999999999',
+  companies: [
+    {
+      name: 'Lucy Brooks LTDA',
+      cnpj: '97632841935950',
+      address: 'Rua do abacaxi, 648',
+      phone: '99 99988281',
+      active: true,
+      discount: 10,
+    },
+  ],
   picture_url: 's3://foto-feia',
-  admin: false,
   active: true,
+  logged: true,
+  admin: false,
+  manager: false,
+  customer: false,
   created_at: '2021-05-10 17:23:50.0',
   updated_at: '2021-05-10 17:23:50.0',
 };
