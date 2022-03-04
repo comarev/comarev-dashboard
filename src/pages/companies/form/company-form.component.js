@@ -111,7 +111,11 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               </Grid>
             )}
             <Grid item xs={12} md={6}>
-              <RHFInput name='address' label='Endereço' control={control} />
+              <RHFInput 
+                name='address' 
+                label='Endereço' 
+                control={control} 
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFInput
@@ -125,6 +129,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='discount'
                 label='Desconto (%)'
+                dataTestId='company-discount-input'
                 type='number'
                 control={control}
                 inputProps={{ min: 0, max: 100 }}
@@ -134,6 +139,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='active'
                 label='Status'
+                dataTestId='company-active-input'
                 select
                 control={control}
                 defaultValue={true}
