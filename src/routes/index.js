@@ -14,6 +14,7 @@ import InvoiceRegister from '../pages/invoices/invoice-register.component';
 import InvoiceView from '../pages/invoices/invoices-view.component';
 import InvoiceEdit from '../pages/invoices/invoice-edit.component';
 import Scanner from '../pages/scanner/scanner.component';
+import CheckPayment from '../pages/check-payment/check-payment';
 
 const Routes = () => {
   return (
@@ -86,6 +87,12 @@ const Routes = () => {
           exact
           component={Scanner}
           roles={['customer']}
+        />
+        <SecureRoute
+          path='/check-invoices'
+          exact
+          component={CheckPayment}
+          roles={['manager']}
         />
       </Switch>
     </Router>

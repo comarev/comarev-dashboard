@@ -82,10 +82,14 @@ const updateCompany = async (company) => {
 
 const getShowcase = async () => await service.get('/showcase');
 
+const getQRCodeRequests = async (id) =>
+  await service.get(`/companies/${id}/discount_requests`);
+
 export {
   getCompanies,
   registerCompany,
   getCompany,
   updateCompany,
   getShowcase,
+  getQRCodeRequests,
 };

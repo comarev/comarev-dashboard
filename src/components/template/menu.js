@@ -1,6 +1,7 @@
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import QrCode2 from '@mui/icons-material/QrCode2';
+import PaymentIcon from '@mui/icons-material/Payment';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import HomeIcon from '@material-ui/icons/Home';
 
@@ -29,5 +30,11 @@ export const menu = [
     path: '?qrcode',
     icon: QrCode2,
     roles: ['manager', 'admin'],
+  },
+  {
+    label: 'Conferir pagamento',
+    path: '/check-invoices',
+    icon: PaymentIcon,
+    roles: ['manager'],
   },
 ];
