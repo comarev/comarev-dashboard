@@ -3,7 +3,7 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
 import { fireEvent, act } from '@testing-library/react';
 import wrapper from '../../../test/test-utils';
-import { userData } from '../../../test/mocks/user';
+import { createUser } from '../../../test/mocks/user';
 
 const mockHistoryPush = jest.fn();
 
@@ -43,7 +43,7 @@ describe('Login Component', () => {
   const token = 'random-token';
 
   beforeEach(() => {
-    mock.onPost('/login').reply(200, userData, {
+    mock.onPost('/login').reply(200, createUser(), {
       authorization: token,
     });
   });
@@ -82,7 +82,7 @@ describe('Login Component', () => {
 
       const result = window.localStorage.getItem('user');
 
-      expect(JSON.parse(result)).toEqual({ ...userData, userToken: token });
+      expect(JSON.parse(result)).toEqual({ ...createUser(), userToken: token });
     });
   });
 
