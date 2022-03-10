@@ -53,6 +53,21 @@ Set the value of `REACT_APP_BASE_URL` pointing to your backend address and then 
 
 ```
 yarn start
+
+```
+After application boot, you will see the login screen
+and you can sign in using one of the credentials below:
+
+```
+  email: admin@example.com
+  password: 123456
+
+  email: manager@example.com
+  password: 123456
+
+  email: regular@example.com
+  password: 123456
+
 ```
 
 ### E2E Tests
