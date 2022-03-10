@@ -114,6 +114,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput 
                 name='address' 
                 label='Endereço' 
+                dataTestId='company-address-input'
                 control={control} 
               />
             </Grid>

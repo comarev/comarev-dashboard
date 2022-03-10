@@ -55,6 +55,16 @@ Set the value of `REACT_APP_BASE_URL` pointing to your backend address and then 
 yarn start
 ```
 
+### E2E Tests
+
+For now, make sure you have your backend and frontend running.
+
+Set the value of `baseUrl` on `cypress.json` pointing to your frontend address and then run:
+
+```
+yarn test:e2e
+```
+
 ## Application Concepts
 
 ### Users
