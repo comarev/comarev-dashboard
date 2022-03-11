@@ -72,7 +72,7 @@ and you can sign in using one of the credentials below:
 
 ### E2E Tests
 
-For now, make sure you have your backend and frontend running.
+Make sure you have your frontend running.
 
 Set the value of `baseUrl` on `cypress.json` pointing to your frontend address and then run:
 
