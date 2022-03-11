@@ -1,18 +1,3 @@
-
-// interface Company {
-//   id: number;
-//   active: boolean;
-//   address?: string;
-//   avatar: { url?: string };
-//   cnpj: string;
-//   code: string;
-//   created_at: string;
-//   discount?: number;
-//   name: string;
-//   phone?: string;
-//   updated_at: string;
-// }
-
 export const createCompany = (active = true, discount = 10) => {
   const companyData = {
     id: 1,

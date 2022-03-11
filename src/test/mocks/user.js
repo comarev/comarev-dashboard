@@ -1,22 +1,3 @@
-// interface User {
-//   id: number;
-//   full_name: string;
-//   email: string;
-//   cpf: string;
-//   address: string;
-//   cellphone: string;
-//   companies: Company[];
-//   picture_url?: string;
-//   active: boolean;
-//   logged: boolean;
-//   admin: boolean;
-//   manager: boolean;
-//   customer: boolean;
-//   created_at: string;
-//   updated_at: string;
-//   userToken?: string;
-// }
-
 export const createUser = (role = 'admin') => {
   const userData = {
     id: 1,

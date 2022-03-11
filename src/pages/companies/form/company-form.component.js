@@ -86,7 +86,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 name='name'
                 label='Razão Social'
                 autoFocus
-                dataTestId='company-name-input'
                 control={control}
               />
             </Grid>
@@ -94,7 +93,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='cnpj'
                 label='CNPJ'
-                dataTestId='company-cnpj-input'
                 control={control}
                 mask='99.999.999/9999-99'
               />
@@ -104,7 +102,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 <RHFInput
                   name='code'
                   label='Código'
-                  dataTestId='company-code-input'
                   control={control}
                   disabled
                 />
@@ -114,7 +111,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput 
                 name='address' 
                 label='Endereço' 
-                dataTestId='company-address-input'
                 control={control} 
               />
             </Grid>
@@ -130,7 +126,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='discount'
                 label='Desconto (%)'
-                dataTestId='company-discount-input'
                 type='number'
                 control={control}
                 inputProps={{ min: 0, max: 100 }}
@@ -140,7 +135,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='active'
                 label='Status'
-                dataTestId='company-active-input'
                 select
                 control={control}
                 defaultValue={true}
