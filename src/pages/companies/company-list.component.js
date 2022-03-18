@@ -1,39 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CompaniesListing from '../../components/companies-list/companies-list';
 import Template from '../../components/template/template.component';
-import { getCompanies } from '../../service/company';
-import { toast } from 'react-toastify';
+import { newGetCompanies } from '../../service/company';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import RoleFilter from '../../components/role-filter/role-filter.component';
+import { Query, useQuery } from 'react-query';
+import { toast } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const CompaniesList = () => {
-  const [companies, setCompanies] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const client = new QueryClient();
+
   const history = useHistory();
 
-  const onStart = () => {
-    setLoading(true);
-  };
-
-  const onSuccess = (data) => {
-    setCompanies(data);
-  };
-
-  const onFailure = () => {
-    toast.error('Erro ao carregar empresas!');
-  };
-
-  const onCompleted = () => {
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getCompanies({ onSuccess, onStart, onFailure, onCompleted });
-  }, []);
-
+  const { data, isLoading, isError } = useQuery('companies', newGetCompanies);
   const render = () => {
-    if (loading)
+    if (isError) return toast.error('Erro ao carregar empresas!');
+
+    if (isLoading)
       return (
         <Template>
           <Box display='flex' justifyContent='center'>
@@ -59,7 +44,7 @@ const CompaniesList = () => {
           </RoleFilter>
         }
       >
-        <CompaniesListing data={companies} />
+        <CompaniesListing data={data.data} />
       </Template>
     );
   };
