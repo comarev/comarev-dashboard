@@ -77,7 +77,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
           <Grid
             container
             spacing={1}
-            alignItems='center'
             direction='row'
             justifycontent='center'
           >
