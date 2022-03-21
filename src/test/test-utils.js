@@ -7,10 +7,12 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import theme from '../styles/theme';
 import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const ReduxProvider = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
+const client = new QueryClient();
 
 const wrapper = (
   children,
@@ -23,12 +25,14 @@ const wrapper = (
 
   return render(
     <ReduxProvider store={store}>
-      <StyledThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <ToastContainer />
-          <Children />
-        </ThemeProvider>
-      </StyledThemeProvider>
+      <QueryClientProvider client={client}>
+        <StyledThemeProvider theme={theme}>
+          <ThemeProvider theme={theme}>
+            <ToastContainer />
+            <Children />
+          </ThemeProvider>
+        </StyledThemeProvider>
+      </QueryClientProvider>
     </ReduxProvider>,
     { wrapper: BrowserRouter }
   );

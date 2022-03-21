@@ -5,30 +5,34 @@ import { newGetCompanies } from '../../service/company';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import RoleFilter from '../../components/role-filter/role-filter.component';
-import { Query, useQuery } from 'react-query';
-import { toast } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { useQuery } from 'react-query';
 
 const CompaniesList = () => {
-  const client = new QueryClient();
-
   const history = useHistory();
 
-  const { data, isLoading, isError } = useQuery('companies', newGetCompanies);
+  const { data, isLoading, isError, isIdle } = useQuery(
+    '/companies',
+    newGetCompanies,
+    {
+      retry: false,
+    }
+  );
+  console.log(data);
   const render = () => {
-    if (isError) return toast.error('Erro ao carregar empresas!');
+    if (isError) return <p>Erro ao carregar empresas!</p>;
 
-    if (isLoading)
+    console.log(isLoading, isError, data, isIdle);
+    if (isLoading) {
       return (
-        <Template>
-          <Box display='flex' justifyContent='center'>
-            <div data-testid='companies-loading'>
-              <CircularProgress />
-            </div>
-          </Box>
-        </Template>
+        // <Template>
+        <Box display='flex' justifyContent='center'>
+          <div data-testid='companies-loading'>
+            <CircularProgress />
+          </div>
+        </Box>
+        // </Template>
       );
-
+    }
     return (
       <Template
         title='Empresas'
@@ -44,7 +48,7 @@ const CompaniesList = () => {
           </RoleFilter>
         }
       >
-        <CompaniesListing data={data.data} />
+        <CompaniesListing data={data?.data} />
       </Template>
     );
   };
