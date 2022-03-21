@@ -1,6 +1,6 @@
 import userReducer, { INITIAL_STATE } from '../reducer';
 import { loginUser, logoutUser } from '../actions';
-import { userData } from '../../../../test/mocks/user';
+import { createUser } from '../../../../test/mocks/user';
 
 describe('User reducer', () => {
   it('returns INITIAL_STATE', () => {
@@ -11,10 +11,10 @@ describe('User reducer', () => {
     expect(
       userReducer(
         undefined,
-        loginUser({ ...userData, userToken: 'random-token' })
+        loginUser({ ...createUser('customer'), userToken: 'random-token' })
       )
     ).toStrictEqual({
-      ...userData,
+      ...createUser('customer'),
       logged: true,
       userToken: 'random-token',
     });

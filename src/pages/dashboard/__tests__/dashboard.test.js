@@ -1,7 +1,7 @@
 import Dashboard from '../dashboard.component';
 import wrapper from '../../../test/test-utils';
 import { fireEvent } from '@testing-library/react';
-import { userData } from '../../../test/mocks/user';
+import { createUser } from '../../../test/mocks/user';
 import { useSelector } from 'react-redux';
 
 jest.mock('react-redux', () => ({
@@ -23,29 +23,33 @@ const setup = () => {
 describe('Dashboard Sidebar', () => {
   describe('when admin', () => {
     beforeEach(() => {
-      useSelector.mockImplementation(() => ({ ...userData, admin: true }));
+      useSelector.mockImplementation(() => ({ ...createUser('admin')}));
     });
 
-    it('show the sidebar with all links', () => {
+    it('shows the sidebar with all links', () => {
       const { queryByText } = setup();
 
+      expect(queryByText('Início')).toBeInTheDocument();
       expect(queryByText('Usuários')).toBeInTheDocument();
       expect(queryByText('Empresas')).toBeInTheDocument();
       expect(queryByText('Faturas')).toBeInTheDocument();
+      expect(queryByText('Obter QR CODE')).toBeInTheDocument();
     });
   });
 
-  describe('when normal user', () => {
+  describe('when customer user', () => {
     beforeEach(() => {
-      useSelector.mockImplementation(() => userData);
+      useSelector.mockImplementation(() => ({ ...createUser('customer') }));
     });
 
-    it('show only not admin links', () => {
+    it('shows only customer links', () => {
       const { queryByText } = setup();
-      const userMenu = queryByText('Usuários');
 
+      expect(queryByText('Início')).toBeInTheDocument();
       expect(queryByText('Faturas')).toBeInTheDocument();
-      expect(userMenu).toBeNull();
+      expect(queryByText('Usuários')).toBeNull();
+      expect(queryByText('Empresas')).toBeNull();
+      expect(queryByText('Obter QR CODE')).toBeNull();
     });
   });
 });

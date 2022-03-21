@@ -85,7 +85,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 name='name'
                 label='Razão Social'
                 autoFocus
-                dataTestId='company-name-input'
                 control={control}
               />
             </Grid>
@@ -93,7 +92,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               <RHFInput
                 name='cnpj'
                 label='CNPJ'
-                dataTestId='company-cnpj-input'
                 control={control}
                 mask='99.999.999/9999-99'
               />
@@ -103,14 +101,17 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
                 <RHFInput
                   name='code'
                   label='Código'
-                  dataTestId='company-code-input'
                   control={control}
                   disabled
                 />
               </Grid>
             )}
             <Grid item xs={12} md={6}>
-              <RHFInput name='address' label='Endereço' control={control} />
+              <RHFInput 
+                name='address' 
+                label='Endereço' 
+                control={control} 
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <RHFInput

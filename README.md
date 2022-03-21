@@ -70,6 +70,15 @@ and you can sign in using one of the credentials below:
 
 ```
 
+### E2E Tests
+
+Make sure you have your frontend running.
+
+Set the value of `baseUrl` on `cypress.json` pointing to your frontend address and then run:
+
+```
+yarn test:e2e
+```
 
 ## Application Concepts
 
