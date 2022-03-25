@@ -1,28 +1,26 @@
 import React from 'react';
 import CompaniesListing from '../../components/companies-list/companies-list';
 import Template from '../../components/template/template.component';
-import { newGetCompanies } from '../../service/company';
+import { getCompanies } from '../../service/company';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import RoleFilter from '../../components/role-filter/role-filter.component';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 
 const CompaniesList = () => {
   const history = useHistory();
 
-  const { data, isLoading, isError, isIdle } = useQuery(
-    '/companies',
-    newGetCompanies,
-    {
-      retry: false,
-    }
-  );
-  console.log(data);
-  const render = () => {
-    if (isError) return <p>Erro ao carregar empresas!</p>;
+  const { data, isLoading, isError } = useQuery('companies', getCompanies);
 
-    console.log(isLoading, isError, data, isIdle);
-    if (isLoading) {
+  const companies = data?.data || [];
+
+  const render = () => {
+    if (isError) {
+      toast.error('Erro ao carregar empresas!');
+    }
+
+    if (isLoading)
       return (
         // <Template>
         <Box display='flex' justifyContent='center'>
@@ -32,7 +30,7 @@ const CompaniesList = () => {
         </Box>
         // </Template>
       );
-    }
+
     return (
       <Template
         title='Empresas'

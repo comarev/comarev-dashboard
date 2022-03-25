@@ -9,17 +9,34 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import userReducer from '../store/modules/user/reducer';
 import theme from '../styles/theme';
+import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { setLogger } from 'react-query';
+
+setLogger({
+  log: console.log,
+  warn: console.warn,
+  error: () => {},
+});
 
 const ReduxProvider = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
 const client = new QueryClient();
 
-const QueryProvider = ({ children }) => (
-  <QueryClientProvider client={new QueryClient()}>
-    {children}
-  </QueryClientProvider>
-);
+const QueryProvider = ({ children }) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
 
 const wrapper = (
   children,
@@ -32,7 +49,7 @@ const wrapper = (
 
   return render(
     <ReduxProvider store={store}>
-      <QueryProvider children={children}>
+      <QueryProvider>
         <StyledThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
             <ToastContainer />

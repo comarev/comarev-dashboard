@@ -6,7 +6,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import { newGetCompanies } from '../../service/company';
+import { getCompanies } from '../../service/company';
 import { Box, CircularProgress, MenuItem, TextField } from '@material-ui/core';
 import QRCode from 'react-qr-code';
 
@@ -15,7 +15,7 @@ function QRCodeModal({ closeModal }) {
   const location = useLocation();
   const [selectedCompany, setSelectedCompany] = useState('');
 
-  const { data, status } = useQuery('companies', newGetCompanies);
+  const { data, status } = useQuery('companies', getCompanies);
 
   useEffect(() => {
     const companies = data?.data || [];
