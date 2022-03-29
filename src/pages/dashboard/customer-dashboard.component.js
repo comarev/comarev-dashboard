@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { getShowcase } from '../../service/company';
+import { getShowcase } from 'service/company';
 import { CircularProgress, TextField, Typography } from '@material-ui/core';
 import {
   ShowCase,
@@ -11,7 +11,7 @@ import {
   Discount,
   CompanyInfoWrapper,
 } from './dashboard.styles';
-import NoImage from '../../assets/images/no-image.jpg';
+import NoImage from 'assets/images/no-image.jpg';
 
 function CustomerDashboard() {
   const { data, isLoading } = useQuery('companies', getShowcase);

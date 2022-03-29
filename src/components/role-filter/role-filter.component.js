@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { USER_ROLES } from '../../utils/constants';
+import { USER_ROLES } from 'utils/constants';
 
 function RoleFilter({ roles = [], children }) {
   const user = useSelector((state) => state.user);

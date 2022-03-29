@@ -1,10 +1,10 @@
 import React from 'react';
-import Template from '../../components/template/template.component';
-import { getInvoice } from '../../service/invoice';
+import Template from 'components/template/template.component';
+import { getInvoice } from 'service/invoice';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { CircularProgress } from '@material-ui/core';
-import Invoice from '../../components/invoice/invoice.component';
+import Invoice from 'components/invoice/invoice.component';
 
 const InvoiceView = () => {
   const params = useParams();

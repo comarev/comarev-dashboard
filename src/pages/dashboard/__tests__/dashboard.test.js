@@ -1,7 +1,7 @@
-import Dashboard from '../dashboard.component';
-import wrapper from '../../../test/test-utils';
+import Dashboard from 'pages/dashboard/dashboard.component';
+import wrapper from 'test/test-utils';
 import { fireEvent } from '@testing-library/react';
-import { createUser } from '../../../test/mocks/user';
+import { createUser } from 'test/mocks/user';
 import { useSelector } from 'react-redux';
 
 jest.mock('react-redux', () => ({

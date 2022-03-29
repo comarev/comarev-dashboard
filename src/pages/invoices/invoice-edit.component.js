@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Template from '../../components/template/template.component';
-import InvoiceForm from './form/invoice-form.component';
-import FormErrors from '../../components/form-error/form-errors.component';
-import { getInvoice, updateInvoice } from '../../service/invoice';
+import Template from 'components/template/template.component';
+import InvoiceForm from 'pages/invoices/form/invoice-form.component';
+import FormErrors from 'components/form-error/form-errors.component';
+import { getInvoice, updateInvoice } from 'service/invoice';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from 'react-query';

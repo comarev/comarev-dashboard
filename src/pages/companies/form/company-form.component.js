@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import RHFInput from '../../../components/rhf-input/rhf-input.component';
+import RHFInput from 'components/rhf-input/rhf-input.component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { CircularProgress, Box, TextField } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { useForm } from 'react-hook-form';
 import { useQuery } from 'react-query';
-import { getUsers } from '../../../service/user';
+import { getUsers } from 'service/user';
 import { useSelector } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import { UploadContainer } from './company-form.styles';
@@ -107,10 +107,10 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
               </Grid>
             )}
             <Grid item xs={12} md={6}>
-              <RHFInput 
-                name='address' 
-                label='Endereço' 
-                control={control} 
+              <RHFInput
+                name='address'
+                label='Endereço'
+                control={control}
               />
             </Grid>
             <Grid item xs={12} md={6}>

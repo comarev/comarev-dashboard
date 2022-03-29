@@ -19,12 +19,12 @@ import { useHeader } from './use-header';
 import { menu } from './menu';
 import { useHistory } from 'react-router-dom';
 import { Divider, Box, Paper } from '@material-ui/core';
-import { USER_ROLES } from '../../utils/constants';
+import { USER_ROLES } from 'utils/constants';
 import { Fab } from '@material-ui/core';
-import RoleFilter from '../role-filter/role-filter.component';
+import RoleFilter from 'components/role-filter/role-filter.component';
 import { useMediaQuery } from 'react-responsive';
-import AppProvider from '../../providers/app-provider';
-import ModalProvider from '../../providers/custom-modal-provider';
+import AppProvider from 'providers/app-provider';
+import ModalProvider from 'providers/custom-modal-provider';
 
 const Template = ({ children, title = '', rightActions = null }) => {
   const matches = useMediaQuery({ query: '(max-width: 600px)' });

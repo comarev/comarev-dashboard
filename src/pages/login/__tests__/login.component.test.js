@@ -1,9 +1,9 @@
-import SignIn from '../login.component';
+import SignIn from 'pages/login/login.component';
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../../../service/api';
+import axios from 'service/api';
 import { fireEvent, act } from '@testing-library/react';
-import wrapper from '../../../test/test-utils';
-import { createUser } from '../../../test/mocks/user';
+import wrapper from 'test/test-utils';
+import { createUser } from 'test/mocks/user';
 
 const mockHistoryPush = jest.fn();
 

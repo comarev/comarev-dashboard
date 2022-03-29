@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from '../../components/template/template.component';
+import Template from 'components/template/template.component';
 import { useHistory } from 'react-router-dom';
 import {
   Button,
@@ -14,12 +14,12 @@ import {
   Box,
 } from '@material-ui/core';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getInvoices, updateInvoice } from '../../service/invoice';
+import { getInvoices, updateInvoice } from 'service/invoice';
 import EditIcon from '@material-ui/icons/Edit';
 import ViewIcon from '@material-ui/icons/Visibility';
 import CheckIcon from '@material-ui/icons/Check';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
-import RoleFilter from '../../components/role-filter/role-filter.component';
+import RoleFilter from 'components/role-filter/role-filter.component';
 import { format } from 'date-fns';
 
 const InvoiceList = () => {

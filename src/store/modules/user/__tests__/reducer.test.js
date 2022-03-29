@@ -1,6 +1,6 @@
-import userReducer, { INITIAL_STATE } from '../reducer';
-import { loginUser, logoutUser } from '../actions';
-import { createUser } from '../../../../test/mocks/user';
+import userReducer, { INITIAL_STATE } from 'store/modules/user/reducer';
+import { loginUser, logoutUser } from 'store/modules/user/actions';
+import { createUser } from 'test/mocks/user';
 
 describe('User reducer', () => {
   it('returns INITIAL_STATE', () => {

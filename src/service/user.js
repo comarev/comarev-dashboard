@@ -1,5 +1,5 @@
-import service from '../service/api';
-import { onlyNumbers } from '../utils/parsers/general';
+import service from 'service/api';
+import { onlyNumbers } from 'utils/parsers/general';
 
 const parseUser = (user) => ({
   ...user,

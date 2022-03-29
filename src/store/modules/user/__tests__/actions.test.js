@@ -1,5 +1,5 @@
-import { loginUser, logoutUser } from '../actions';
-import { createUser } from '../../../../test/mocks/user';
+import { loginUser, logoutUser } from 'store/modules/user/actions';
+import { createUser } from 'test/mocks/user';
 
 describe('User actions', () => {
   it('#loginUser', () => {
