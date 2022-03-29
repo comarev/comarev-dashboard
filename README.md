@@ -1,6 +1,6 @@
 # Comarev - Front End
 
-![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg)
+![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg?branch=main)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
