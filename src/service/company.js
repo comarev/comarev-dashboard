@@ -1,5 +1,6 @@
-import service from 'service/api';
-import { buildFormData } from 'utils/parsers/jsonToFormData';
+import service from '../service/api';
+import { buildFormData } from '../utils/parsers/jsonToFormData';
+import { onlyNumbers } from '../utils/parsers/general';
 
 const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   try {
@@ -35,7 +36,7 @@ const parseCompany = (payload) => {
     email,
     phone,
     address,
-    cnpj,
+    cnpj: onlyNumbers(cnpj),
     discount: parseFloat(discount),
     active: active ? JSON.parse(active) : false,
     manager_ids: managers?.map((manager) => manager.id) || [],

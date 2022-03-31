@@ -58,7 +58,7 @@ const UserForm = ({ onSubmit, loading, user }) => {
           <RHFInput
             name='cellphone'
             label='Celular'
-            mask='(99) 999999999'
+            mask='+55 (999) 99999-9999'
             control={control}
           />
         </Grid>
