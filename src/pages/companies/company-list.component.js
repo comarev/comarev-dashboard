@@ -12,9 +12,7 @@ const CompaniesList = () => {
   const history = useHistory();
 
   const { data, isLoading, isError } = useQuery('companies', getCompanies);
-  console.log('');
   const companies = data?.data || [];
-  console.log(useQuery('companies', getCompanies));
 
   const render = () => {
     if (isError) {
