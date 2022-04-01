@@ -4,19 +4,16 @@ import MockAdapter from 'axios-mock-adapter';
 import axios from '../../../service/api';
 import mockedCompanies from '../../../test/fixtures/companies';
 import wrapper from '../../../test/test-utils';
-import { rest } from 'msw';
 
-const API_URL = process.env.REACT_APP_BASE_URL;
+const mock = new MockAdapter(axios);
 
 describe('Companies List page', () => {
-  describe.only('when successfully', () => {
+  describe('when successfully', () => {
     beforeEach(() => {
-      rest.get('/companies', (_, res, ctx) => {
-        return res(ctx.json(mockedCompanies));
-      });
+      mock.onGet('/companies').reply(200, mockedCompanies);
+    });
 
-      it('render companies in the table', async () => {});
-
+    it('render companies in the table', async () => {
       wrapper(CompaniesList);
 
       await waitForElementToBeRemoved(screen.getByTestId('companies-loading'));
@@ -29,9 +26,7 @@ describe('Companies List page', () => {
 
   describe('when failure', () => {
     beforeEach(() => {
-      rest.get('/companies', (_, res, ctx) => {
-        return res(ctx.status(400));
-      });
+      mock.onGet('/companies').reply(400);
     });
 
     it('shows error', async () => {

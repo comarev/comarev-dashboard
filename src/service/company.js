@@ -1,7 +1,7 @@
 import service from '../service/api';
 import { buildFormData } from '../utils/parsers/jsonToFormData';
 
-const getCompanies = async () => await service.get('/companies');
+export const getCompanies = async () => await service.get('/companies');
 
 const parseCompany = (payload) => {
   const {

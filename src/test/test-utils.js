@@ -6,11 +6,8 @@ import { render } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-
 import userReducer from '../store/modules/user/reducer';
 import theme from '../styles/theme';
-import { ToastContainer } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from 'react-query';
 import { setLogger } from 'react-query';
 
 setLogger({
@@ -22,7 +19,6 @@ setLogger({
 const ReduxProvider = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
-const client = new QueryClient();
 
 const QueryProvider = ({ children }) => {
   const queryClient = new QueryClient({
