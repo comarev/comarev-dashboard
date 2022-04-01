@@ -1,6 +1,6 @@
 # Comarev - Front End
 
-![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg)
+![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg?branch=main)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
@@ -70,6 +70,15 @@ and you can sign in using one of the credentials below:
 
 ```
 
+### E2E Tests
+
+Make sure you have your frontend running.
+
+Set the value of `baseUrl` on `cypress.json` pointing to your frontend address and then run:
+
+```
+yarn test:e2e
+```
 
 ## Application Concepts
 

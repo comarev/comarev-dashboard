@@ -1,11 +1,11 @@
 import { loginUser, logoutUser } from '../actions';
-import { userData } from '../../../../test/mocks/user';
+import { createUser } from '../../../../test/mocks/user';
 
 describe('User actions', () => {
   it('#loginUser', () => {
-    expect(loginUser({ ...userData, userToken: 'random-token' })).toStrictEqual(
+    expect(loginUser({ ...createUser(), userToken: 'random-token' })).toStrictEqual(
       {
-        payload: { ...userData, userToken: 'random-token' },
+        payload: { ...createUser(), userToken: 'random-token' },
         type: '@user/SIGN_IN',
       }
     );

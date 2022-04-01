@@ -21,5 +21,5 @@ Some of the most famous libraries that we're using:
 
 ### Pre-requisites
 
-- Node `v12.19.0` or higher
+- Node `v16.14.0` or higher
 - Yarn `v1.22.10` or higher
