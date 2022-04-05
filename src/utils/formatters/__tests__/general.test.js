@@ -1,4 +1,4 @@
-import { formatCellphone, formatCpfCnpj } from '../general';
+import { formatCellphone, formatCpfCnpj } from 'utils/formatters/general';
 
 describe('Formatters', () => {
   describe('formatCellphone', () => {

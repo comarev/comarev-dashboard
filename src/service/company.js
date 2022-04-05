@@ -1,6 +1,6 @@
-import service from '../service/api';
-import { buildFormData } from '../utils/parsers/jsonToFormData';
-import { onlyNumbers } from '../utils/parsers/general';
+import service from 'service/api';
+import { buildFormData } from 'utils/parsers/jsonToFormData';
+import { onlyNumbers } from 'utils/parsers/general';
 
 const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
   try {

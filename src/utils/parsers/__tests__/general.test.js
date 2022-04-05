@@ -1,4 +1,4 @@
-import { onlyNumbers, parseCurrency, parseCellphone } from '../general';
+import { onlyNumbers, parseCurrency, parseCellphone } from 'utils/parsers/general';
 
 describe('Parsers', () => {
   describe('onlyNumbers', () => {
