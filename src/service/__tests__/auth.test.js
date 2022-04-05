@@ -1,6 +1,6 @@
-import signIn from '../auth';
+import signIn from 'service/auth';
 import MockAdapter from 'axios-mock-adapter';
-import axios from '../api';
+import axios from 'service/api';
 
 const mock = new MockAdapter(axios);
 

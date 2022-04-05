@@ -9,11 +9,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import signIn from '../../service/auth';
+import signIn from 'service/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../../store/modules/user/actions';
+import { loginUser } from 'store/modules/user/actions';
 
 const FORM_ERROR_INITIAL_STATE = {
   email: false,

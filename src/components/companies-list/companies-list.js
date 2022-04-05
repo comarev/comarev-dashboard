@@ -8,7 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import { useHistory } from 'react-router-dom';
-import { formatCpfCnpj } from '../../utils/formatters/general';
+import { formatCpfCnpj } from 'utils/formatters/general';
 
 export default function CompaniesListing({ data }) {
   const history = useHistory();

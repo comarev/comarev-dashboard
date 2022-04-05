@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Template from '../../components/template/template.component';
-import UserForm from './form/user-form.component';
-import FormErrors from '../../components/form-error/form-errors.component';
-import { registerUser } from '../../service/user';
+import Template from 'components/template/template.component';
+import UserForm from 'pages/users/form/user-form.component';
+import FormErrors from 'components/form-error/form-errors.component';
+import { registerUser } from 'service/user';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useMutation } from 'react-query';

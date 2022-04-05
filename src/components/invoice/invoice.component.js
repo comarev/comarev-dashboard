@@ -9,7 +9,7 @@ import {
   Total,
   Paid,
 } from './invoice-styles';
-import LogoComarev from '../../assets/images/logo-comarev.png';
+import LogoComarev from 'assets/images/logo-comarev.png';
 import { Typography } from '@material-ui/core';
 import { format } from 'date-fns';
 

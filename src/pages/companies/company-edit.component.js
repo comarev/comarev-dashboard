@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Template from '../../components/template/template.component';
+import Template from 'components/template/template.component';
 import CompanyForm from './form/company-form.component';
-import FormErrors from '../../components/form-error/form-errors.component';
-import { getCompany, updateCompany } from '../../service/company';
+import FormErrors from 'components/form-error/form-errors.component';
+import { getCompany, updateCompany } from 'service/company';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from 'react-query';

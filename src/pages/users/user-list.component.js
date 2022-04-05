@@ -1,5 +1,5 @@
 import React from 'react';
-import Template from '../../components/template/template.component';
+import Template from 'components/template/template.component';
 import { useHistory } from 'react-router-dom';
 import {
   Button,
@@ -15,9 +15,9 @@ import {
   Chip,
 } from '@material-ui/core';
 import { useQuery } from 'react-query';
-import { getUsers } from '../../service/user';
+import { getUsers } from 'service/user';
 import EditIcon from '@material-ui/icons/Edit';
-import { formatCellphone, formatCpfCnpj } from '../../utils/formatters/general';
+import { formatCellphone, formatCpfCnpj } from 'utils/formatters/general';
 
 const getLabel = (user) => {
   if (user.admin) return 'Admin';

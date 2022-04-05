@@ -1,4 +1,4 @@
-import useQRCodeModal from '../components/qrcode-modal/use-qrcode-modal';
+import useQRCodeModal from 'components/qrcode-modal/use-qrcode-modal';
 
 function AppProvider({ children }) {
   useQRCodeModal();

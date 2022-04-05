@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import FormErrors from '../form-errors.component';
+import FormErrors from 'components/form-error/form-errors.component';
 
 describe('FormErros Component', () => {
   describe('when just one error', () => {

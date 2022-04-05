@@ -1,5 +1,5 @@
-import service from '../service/api';
-import { parseCurrency } from '../utils/parsers/general';
+import service from 'service/api';
+import { parseCurrency } from 'utils/parsers/general';
 
 const parseInvoice = (invoice) => ({
   ...invoice,

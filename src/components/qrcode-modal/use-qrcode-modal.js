@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import useModal from '../../hooks/use-modal';
+import useModal from 'hooks/use-modal';
 
 const useQRCodeModal = () => {
   const location = useLocation();

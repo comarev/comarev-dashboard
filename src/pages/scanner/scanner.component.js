@@ -12,10 +12,10 @@ import {
 } from './scanner-styles';
 import { Button, CircularProgress, Typography } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { checkInvoices } from '../../service/invoice';
+import { checkInvoices } from 'service/invoice';
 import { useMutation } from 'react-query';
-import SuccessCheck from '../../components/success-check/success-check';
-import ErrorCheck from '../../components/error-check/error-check';
+import SuccessCheck from 'components/success-check/success-check';
+import ErrorCheck from 'components/error-check/error-check';
 
 const config = {
   fps: 10,

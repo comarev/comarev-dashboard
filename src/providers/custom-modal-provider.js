@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import QRCodeModal from '../components/qrcode-modal/qrcode-modal.component';
+import QRCodeModal from 'components/qrcode-modal/qrcode-modal.component';
 
 export const ModalContext = createContext(undefined);
 

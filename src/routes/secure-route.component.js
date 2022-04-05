@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { USER_ROLES } from '../utils/constants';
+import { USER_ROLES } from 'utils/constants';
 
 const SecureRoute = ({ component: Component, roles = [], ...rest }) => {
   const user = useSelector((state) => state.user);

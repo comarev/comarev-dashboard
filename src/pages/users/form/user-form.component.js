@@ -2,7 +2,7 @@ import React from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import RHFInput from '../../../components/rhf-input/rhf-input.component';
+import RHFInput from 'components/rhf-input/rhf-input.component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { CircularProgress, Box } from '@material-ui/core';

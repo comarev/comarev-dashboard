@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../store/modules/user/actions';
+import { logoutUser } from 'store/modules/user/actions';
 
 // use testing library hooks
 
