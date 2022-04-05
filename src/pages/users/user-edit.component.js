@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Template from 'components/template/template.component';
-import UserForm from 'pages/user/form/user-form.component';
+import UserForm from 'pages/users/form/user-form.component';
 import FormErrors from 'components/form-error/form-errors.component';
 import { getUser, updateUser } from 'service/user';
 import { useHistory, useParams } from 'react-router-dom';
