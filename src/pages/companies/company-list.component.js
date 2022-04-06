@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useQuery } from 'react-query';
 import CompaniesListing from 'components/companies-list/companies-list';
 import Template from 'components/template/template.component';
 import { getCompanies } from 'service/company';
@@ -8,32 +9,17 @@ import { useHistory } from 'react-router-dom';
 import RoleFilter from 'components/role-filter/role-filter.component';
 
 const CompaniesList = () => {
-  const [companies, setCompanies] = useState([]);
-  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const onStart = () => {
-    setLoading(true);
-  };
-
-  const onSuccess = (data) => {
-    setCompanies(data);
-  };
-
-  const onFailure = () => {
-    toast.error('Erro ao carregar empresas!');
-  };
-
-  const onCompleted = () => {
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getCompanies({ onSuccess, onStart, onFailure, onCompleted });
-  }, []);
+  const { data, isLoading, isError } = useQuery('companies', getCompanies);
+  const companies = data?.data || [];
 
   const render = () => {
-    if (loading)
+    if (isError) {
+      toast.error('Erro ao carregar empresas!');
+    }
+
+    if (isLoading)
       return (
         <Template>
           <Box display='flex' justifyContent='center'>
