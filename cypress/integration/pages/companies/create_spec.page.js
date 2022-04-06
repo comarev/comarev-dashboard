@@ -52,13 +52,11 @@ describe('Companies', () => {
     cy.intercept('POST', '/companies', (req) => {
       req.reply({
         statusCode: 422,
-        body: ['CNPJ não possui o tamanho esperado (14 caracteres)',
-          'Telefone não possui o tamanho esperado (14 caracteres)']
+        body: ['Telefone não possui o tamanho esperado (14 caracteres)']
       })
     })
     cy.get('button').contains('Cadastrar Empresa').click()
 
-    cy.findAllByText('CNPJ não possui o tamanho esperado (14 caracteres)').should('exist')
     cy.findAllByText('Telefone não possui o tamanho esperado (14 caracteres)').should('exist')
   })
 })

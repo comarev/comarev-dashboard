@@ -12,5 +12,5 @@ export const formatCpfCnpj = (value) => {
 };
 
 export const formatCellphone = (value) => {
-  return value.replace(/^(\d{2})\D*(\d{5}|\d{4})\D*(\d{4})$/g, '($1) $2-$3');
+  return value.replace(/^(\+\d{2})\D*(\d{3})\D*(\d{5}|\d{4})\D*(\d{4})$/g, '($2) $3-$4');
 };
