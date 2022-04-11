@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import CompaniesListing from 'components/companies-list/companies-list';
 import Template from 'components/template/template.component';
 import { getCompanies } from 'service/company';
-import { toast } from 'react-toastify';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import RoleFilter from 'components/role-filter/role-filter.component';
@@ -16,7 +15,11 @@ const CompaniesList = () => {
 
   const render = () => {
     if (isError) {
-      toast.error('Erro ao carregar empresas!');
+      return (
+      <Template>
+        <span>Erro ao carregar empresas!</span>
+      </Template>
+      )
     }
 
     if (isLoading)
