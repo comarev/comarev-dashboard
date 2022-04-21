@@ -2,20 +2,7 @@ import service from 'service/api';
 import { buildFormData } from 'utils/parsers/jsonToFormData';
 import { onlyNumbers } from 'utils/parsers/general';
 
-const getCompanies = async ({ onStart, onFailure, onCompleted, onSuccess }) => {
-  try {
-    onStart();
-    const { data } = await service.get('/companies');
-
-    onSuccess(data);
-  } catch (error) {
-    onFailure();
-  } finally {
-    onCompleted();
-  }
-};
-
-export const newGetCompanies = async () => await service.get('/companies');
+const getCompanies = async () => await service.get('/companies');
 
 const parseCompany = (payload) => {
   const {

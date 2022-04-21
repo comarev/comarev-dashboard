@@ -14,11 +14,19 @@ const ReduxProvider = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
 
-const QueryProvider = ({children}) => (
-  <QueryClientProvider client={new QueryClient()}>
-    {children}
-  </QueryClientProvider>
-)
+const QueryProvider = ({ children }) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
+
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
 
 const wrapper = (
   children,
@@ -31,7 +39,7 @@ const wrapper = (
 
   return render(
     <ReduxProvider store={store}>
-      <QueryProvider children={children}>
+      <QueryProvider>
         <StyledThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
             <ToastContainer />
