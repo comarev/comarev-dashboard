@@ -1,44 +1,38 @@
-import { useSelector } from 'react-redux';
-import { userData } from '../../../test/mocks/user';
+import wrapper from 'test/test-utils';
+import { createUser } from 'test/mocks/user';
 import RoleFilter from '../role-filter.component';
 
-jest.mock('react-redux', () => ({
-  ...jest.requireActual('react-redux'),
-  useSelector: jest.fn(),
-}));
-
-const mockElement = () => <div>some_content_for_element</div>;
+const setup = (roles = []) => {
+  return () => (
+    <RoleFilter roles={roles}>
+      <div>Hello world</div>;
+    </RoleFilter>
+  )
+}
 
 describe('RoleComponent', () => {
   describe('when user doesn\'t have proper roles', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation(() => userData);
-    });
+    it('should not be present', () => {
 
-    it('should return null instead of given children element', () => {
-      
-      const componentUnderTest = RoleFilter({
-        roles: ['admin'],
-        children: mockElement,
-      });
+      const RoleFilterWrapper = setup(['admin']);
 
-      expect(componentUnderTest).toBe(null);
+      const { queryByText } = wrapper(RoleFilterWrapper);
+
+      expect(queryByText('Hello world')).not.toBeInTheDocument();
     });
   });
 
   describe('when user has appropriate roles', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation(() => ({ ...userData, admin: true }));
-    });
-
     it('should return the given element as children', () => {
 
-      const componentUnderTest = RoleFilter({
-        roles: ['admin'],
-        children: mockElement,
-      });
+      const RoleFilterWrapper = setup(['admin']);
 
-      expect(componentUnderTest).toEqual(mockElement);
+      const { queryByText } = wrapper(
+        RoleFilterWrapper,
+        { preloadedState: { user: createUser() } }
+      );
+
+      expect(queryByText('Hello world')).toBeInTheDocument();
     });
   });
 });
