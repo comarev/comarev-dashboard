@@ -1,32 +1,24 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
-import { createUser } from 'test/mocks/user';
-import userReducer from 'store/modules/user/reducer';
+import { createUser as mockCreateUser } from 'test/mocks/user';
 import useRoleFilter from '../use-role-filter'
 
-const store = configureStore({ reducer: { user: userReducer }, preloadedState: { user: createUser('customer') } });
-
-const wrapper = ({ children }) => (
-  <Provider store={store}>{children}</Provider>
-)
+jest.mock('react-redux', () => ({
+  ...jest.requireActual('react-redux'),
+  useSelector: () =>  mockCreateUser(),
+}));
 
 describe('useRoleFilter', () => {
   describe('when user does\'t have proper roles', () => {
     it('should return false', () => {
-
-      const { result } = renderHook(() => useRoleFilter(['admin']), { wrapper });
-      
+      const { result } = renderHook(() => useRoleFilter([]));
       expect(result.current).toBe(false);
     })
   })
 
   describe('when user have proper roles', () => {
     it('should return true', () => {
-
-      const { result } = renderHook(() => useRoleFilter([]), { wrapper });
-      
-      expect(result.current).toBe(false);
+      const { result } = renderHook(() => useRoleFilter(['admin']));
+      expect(result.current).toBe(true);
     })
   })
 })
