@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,15 +10,16 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import signIn from 'service/auth';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory, Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from 'store/modules/user/actions';
+import { newPassword } from 'service/password';
+
 
 const FORM_ERROR_INITIAL_STATE = {
-  email: false,
   password: false,
+  confirmPassword: false
 };
 
 const useStyles = makeStyles((theme) => ({
@@ -40,26 +42,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignIn = () => {
+const ResetPassword = () => {
+  const { token } = useParams();
+
   const classes = useStyles();
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [formError, setError] = useState(FORM_ERROR_INITIAL_STATE);
   const [loginError, setLoginError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  /* const dispatch = useDispatch(); */
+  /* const user = useSelector((state) => state.user); */
 
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
   const onSuccess = (data) => {
-    dispatch(loginUser(data));
+    /* dispatch(loginUser(data)); */
 
-    localStorage.setItem('user', JSON.stringify(data));
+    /* localStorage.setItem('user', JSON.stringify(data)); */
+    console.log(data);
 
-    history.push('/dashboard');
+    history.push('/');
   };
 
   const onError = (message) => {
@@ -68,25 +73,25 @@ const SignIn = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!email || !password) {
-      setError({ email: !email, password: !password });
+    // TODO: Regex to validate the email
+    if (!password || !confirmPassword) { 
+      setError(true);
       return;
     }
+    
+    const payload = { password, confirmPassword };
 
-    const payload = { email, password };
-
-    await signIn(payload, onSuccess, onError, onEnd, onStart);
+    await newPassword(payload, onSuccess, onError, onEnd, onStart, token);
   };
 
   useEffect(() => {
-    if (email) setError((currentState) => ({ ...currentState, email: !email }));
-    if (password)
-      setError((currentState) => ({ ...currentState, password: !password }));
+    if (password) setError((currentState) => ({ ...currentState, password: !password }));
+    if (confirmPassword)
+      setError((currentState) => ({ ...currentState, confirmPassword: !confirmPassword }));
 
     setLoginError('');
-  }, [email, password]);
+  }, [password, confirmPassword]);
 
-  if (user.logged) return <Redirect to='/dashboard' />;
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -96,23 +101,9 @@ const SignIn = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component='h1' variant='h5'>
-          Comarev Parceiros
+          Redefinir senha
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            id='email'
-            label='Endereço de Email'
-            name='email'
-            autoComplete='email'
-            autoFocus
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            error={formError.email}
-          />
           <TextField
             variant='outlined'
             margin='normal'
@@ -127,6 +118,20 @@ const SignIn = () => {
             onChange={(event) => setPassword(event.target.value)}
             error={formError.password}
           />
+          <TextField
+            variant='outlined'
+            margin='normal'
+            required
+            fullWidth
+            name='confirm-password'
+            label='Confirmar senha'
+            type='password'
+            id='confirm-password'
+            autoComplete='current-password'
+            value={confirmPassword}
+            onChange={(event) => setConfirmPassword(event.target.value)}
+            error={formError.confirmPassword}
+          />
           {Boolean(loginError) && (
             <Typography color='error'>{loginError}</Typography>
           )}
@@ -138,25 +143,18 @@ const SignIn = () => {
             className={classes.submit}
             onClick={handleSubmit}
             disabled={loading}
-            aria-label='Logar'
+            aria-label='redefinir senha'
           >
             {loading ? (
               <CircularProgress data-testid='login-spinner' size={25} />
             ) : (
-              'Logar'
+              'Redefinir'
             )}
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href='/recover-password' variant='body2'>
-                Esqueceu sua senha?
-              </Link>
-            </Grid>
-          </Grid>
         </form>
       </div>
     </Container>
   );
 };
 
-export default SignIn;
+export default ResetPassword;
