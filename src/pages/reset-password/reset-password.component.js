@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
+/* import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid'; */
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from 'store/modules/user/actions';
+/* import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from 'store/modules/user/actions'; */
+
 import { newPassword } from 'service/password';
+import * as yup from 'yup';
 
-
-const FORM_ERROR_INITIAL_STATE = {
+/* const FORM_ERROR_INITIAL_STATE = {
   password: false,
-  confirmPassword: false
-};
+  confirmPassword: false,
+}; */
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -48,8 +50,8 @@ const ResetPassword = () => {
   const classes = useStyles();
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [formError, setError] = useState(FORM_ERROR_INITIAL_STATE);
-  const [loginError, setLoginError] = useState('');
+  const [formError, setError] = useState(false);
+  const [resetPasswordError, setResetPasswordError] = useState('');
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
@@ -68,30 +70,42 @@ const ResetPassword = () => {
   };
 
   const onError = (message) => {
-    setLoginError(message);
+    setResetPasswordError(message);
   };
+
+  const schema = yup.object().shape({
+    password: yup.string().required(),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'As senhas não coincidem'),
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     // TODO: Regex to validate the email
-    if (!password || !confirmPassword) { 
+    if (!password || !confirmPassword) {
       setError(true);
       return;
     }
-    
+
     const payload = { password, confirmPassword };
 
     await newPassword(payload, onSuccess, onError, onEnd, onStart, token);
   };
 
   useEffect(() => {
-    if (password) setError((currentState) => ({ ...currentState, password: !password }));
-    if (confirmPassword)
-      setError((currentState) => ({ ...currentState, confirmPassword: !confirmPassword }));
-
-    setLoginError('');
+    if (password.trim() && confirmPassword.trim()) {
+      schema.isValid({ password, confirmPassword }).then((valid) => {
+        if (valid) {
+          setError(false);
+          setResetPasswordError('');
+        } else {
+          setError(true);
+          setResetPasswordError('Senhas não coincidem');
+        }
+      });
+    }
   }, [password, confirmPassword]);
-
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -116,7 +130,7 @@ const ResetPassword = () => {
             autoComplete='current-password'
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            error={formError.password}
+            error={formError}
           />
           <TextField
             variant='outlined'
@@ -130,10 +144,10 @@ const ResetPassword = () => {
             autoComplete='current-password'
             value={confirmPassword}
             onChange={(event) => setConfirmPassword(event.target.value)}
-            error={formError.confirmPassword}
+            error={formError}
           />
-          {Boolean(loginError) && (
-            <Typography color='error'>{loginError}</Typography>
+          {Boolean(resetPasswordError) && (
+            <Typography color='error'>{resetPasswordError}</Typography>
           )}
           <Button
             type='submit'
@@ -142,7 +156,7 @@ const ResetPassword = () => {
             color='primary'
             className={classes.submit}
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={loading || formError}
             aria-label='redefinir senha'
           >
             {loading ? (

@@ -31,8 +31,8 @@ export const newPassword = async (
   try {
     onStart();
     const { password, confirmPassword } = payload;
-    // It looks like there isn't still a endpoint to reset a user password
-    const result = await client.post('/users/password', {
+    // It seems like there isn't still a endpoint to reset a user password
+    const result = await client.post('/users/set-password', {
       user: { password, confirmPassword },
     });
 

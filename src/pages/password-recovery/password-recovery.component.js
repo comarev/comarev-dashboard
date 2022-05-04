@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { makeStyles } from '@material-ui/core/styles';
-import Tooltip from '@mui/material/Tooltip';
 import { useHistory } from 'react-router-dom';
 /* import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from 'store/modules/user/actions'; */
@@ -70,11 +69,17 @@ const RecoverPassword = () => {
   });
 
   const onError = (message) => {
-    toast.error('Erro, tente novamente mais tarde!');
+    toast.error(
+      'Não foi possível enviar o e-mail de recuperação, por favor tente novamente mais tarde!'
+    );
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (formError) {
+      return;
+    }
 
     const payload = { email };
 
@@ -96,14 +101,12 @@ const RecoverPassword = () => {
   }, [email, schema]);
 
   return (
-    <Container component='main' maxWidth='lg'>
+    <Container component='main' maxWidth={false}>
       <CssBaseline />
-      <Tooltip title='Voltar para página de login' arrow>
-        <ArrowBackIcon
-          className={classes.getBackIcon}
-          onClick={() => history.goBack()}
-        />
-      </Tooltip>
+      <ArrowBackIcon
+        className={classes.getBackIcon}
+        onClick={() => history.goBack()}
+      />
       <Container component='main' maxWidth='xs'>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -138,7 +141,7 @@ const RecoverPassword = () => {
               color='primary'
               className={classes.submit}
               onClick={handleSubmit}
-              disabled={loading || formError}
+              disabled={loading}
               aria-label='Recuperar senha'
             >
               {loading ? (
