@@ -10,10 +10,9 @@ import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-/* import { useDispatch, useSelector } from 'react-redux';*/
+import * as yup from 'yup';
 
 import { newPassword } from 'service/password';
-import * as yup from 'yup';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,14 +45,9 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  /* const dispatch = useDispatch(); */
-  /* const user = useSelector((state) => state.user); */
-
   const onStart = () => setLoading(true);
   const onEnd = () => setLoading(false);
   const onSuccess = (data) => {
-    /* dispatch(loginUser(data)); */
-
     history.push('/');
   };
 
