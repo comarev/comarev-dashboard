@@ -61,7 +61,7 @@ const RecoverPassword = () => {
 
     /* localStorage.setItem('user', JSON.stringify(data)); */
     toast.success('E-mail de recuperação enviado com sucesso!');
-    console.log(data);
+    /* console.log(data); */
   };
 
   const schema = yup.object().shape({
