@@ -77,7 +77,8 @@ const RecoverPassword = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (formError) {
+    if (!email) {
+      setError(true);
       return;
     }
 

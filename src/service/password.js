@@ -38,7 +38,7 @@ export const newPassword = async (
 
     onSuccess({ ...result.data });
   } catch (error) {
-    onError(error.response.data);
+    onError(error.response.data.message);
   } finally {
     onEnd();
   }

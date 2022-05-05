@@ -1,28 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-/* import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid'; */
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
-/* import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from 'store/modules/user/actions'; */
+/* import { useDispatch, useSelector } from 'react-redux';*/
 
 import { newPassword } from 'service/password';
 import * as yup from 'yup';
-
-/* const FORM_ERROR_INITIAL_STATE = {
-  password: false,
-  confirmPassword: false,
-}; */
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -63,9 +54,6 @@ const ResetPassword = () => {
   const onSuccess = (data) => {
     /* dispatch(loginUser(data)); */
 
-    /* localStorage.setItem('user', JSON.stringify(data)); */
-    console.log(data);
-
     history.push('/');
   };
 
@@ -82,7 +70,7 @@ const ResetPassword = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // TODO: Regex to validate the email
+
     if (!password || !confirmPassword) {
       setError(true);
       return;
@@ -105,7 +93,7 @@ const ResetPassword = () => {
         }
       });
     }
-  }, [password, confirmPassword]);
+  }, [password, confirmPassword, schema]);
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -156,7 +144,7 @@ const ResetPassword = () => {
             color='primary'
             className={classes.submit}
             onClick={handleSubmit}
-            disabled={loading || formError}
+            disabled={loading}
             aria-label='redefinir senha'
           >
             {loading ? (
