@@ -12,6 +12,7 @@ import { getUsers } from 'service/user';
 import { useSelector } from 'react-redux';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import { DatePicker } from '@material-ui/pickers';
+import { realToCents } from 'utils/parsers/currency';
 
 const paidOptions = [
   { value: true, label: 'Sim' },
@@ -43,7 +44,11 @@ const InvoiceForm = ({ onSubmit, loading, invoice }) => {
   const dueDateValue = watch('due_date');
 
   return (
-    <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+    <form
+      onSubmit={handleSubmit((data) => {
+        onSubmit({ ...data, amount_cents: realToCents(data.amount) });
+      })}
+    >
       <Grid
         container
         spacing={1}

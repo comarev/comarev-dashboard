@@ -12,6 +12,7 @@ import {
 import LogoComarev from 'assets/images/logo-comarev.png';
 import { Typography } from '@material-ui/core';
 import { format } from 'date-fns';
+import { centsToReal } from 'utils/parsers/currency';
 
 function Invoice({ invoice }) {
   return (
@@ -60,22 +61,11 @@ function Invoice({ invoice }) {
         <tbody>
           <tr>
             <td>Contribuição COMAREV</td>
-            <td align='right'>
-              {invoice.amount.toLocaleString('pt-br', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </td>
+            <td align='right'>{centsToReal(invoice.amount_cents)}</td>
           </tr>
           <tr>
             <td></td>
-            <Total>
-              Total:{' '}
-              {invoice.amount.toLocaleString('pt-br', {
-                style: 'currency',
-                currency: 'BRL',
-              })}
-            </Total>
+            <Total>Total: {centsToReal(invoice.amount_cents)}</Total>
           </tr>
         </tbody>
       </table>
