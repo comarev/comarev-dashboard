@@ -38,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  forgetPasswordLink: {
+    color: theme.palette.link,
+    cursor: 'pointer',
+  },
 }));
 
 const SignIn = () => {
@@ -146,12 +150,12 @@ const SignIn = () => {
               'Logar'
             )}
           </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href='/recover-password' variant='body2'>
-                Esqueceu sua senha?
-              </Link>
-            </Grid>
+          <Grid
+            container
+            onClick={() => history.push('/recover-password')}
+            className={classes.forgetPasswordLink}
+          >
+            Esqueceu sua senha?
           </Grid>
         </form>
       </div>
