@@ -34,15 +34,6 @@ describe('<RecoverPassword />', () => {
     expect(emailInput).toHaveValue('email@email.com');
   });
 
-  it('should highlight the input when the user tries to submit with empty a field', () => {
-    const emailLabel = screen.getByText('Endereço de Email');
-    const submitButton = screen.getByRole('button', { name: /recuperar/i });
-
-    fireEvent.click(submitButton);
-
-    expect(emailLabel).toHaveStyle({ color: '#f44336' });
-  });
-
   it('should highlight the input when the e-mail typed is not valid', async () => {
     const emailInput = screen.getByLabelText(/endereço de email/i);
     const emailLabel = screen.getByText('Endereço de Email');
