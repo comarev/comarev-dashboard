@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -11,30 +10,19 @@ import { useHistory } from 'react-router-dom';
 import * as S from './password-recovery.styles';
 import * as yup from 'yup';
 
-import { passwordRecovery } from 'service/password';
+import { useMutationPasswordRecovery } from 'service/password';
 
 const RecoverPassword = () => {
   const [email, setEmail] = useState('');
   const [formError, setError] = useState(false);
   const [recoverPasswordError, setRecoverPasswordError] = useState('');
-  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  const onStart = () => setLoading(true);
-  const onEnd = () => setLoading(false);
-  const onSuccess = (data) => {
-    toast.success('E-mail de recuperação enviado com sucesso!');
-  };
+  const { isLoading, mutate } = useMutationPasswordRecovery();
 
   const schema = yup.object().shape({
     email: yup.string().email('e-mail inválido').required(),
   });
-
-  const onError = (message) => {
-    toast.error(
-      'Não foi possível enviar o e-mail de recuperação, por favor tente novamente mais tarde!'
-    );
-  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,9 +32,7 @@ const RecoverPassword = () => {
       return;
     }
 
-    const payload = { email };
-
-    await passwordRecovery(payload, onSuccess, onError, onEnd, onStart);
+    mutate(email);
   };
 
   useEffect(() => {
@@ -101,10 +87,10 @@ const RecoverPassword = () => {
               fullWidth
               variant='contained'
               color='primary'
-              disabled={loading}
+              disabled={isLoading}
               aria-label='Recuperar senha'
             >
-              {loading ? (
+              {isLoading ? (
                 <CircularProgress data-testid='login-spinner' size={25} />
               ) : (
                 'Recuperar'

@@ -1,23 +1,26 @@
+import { toast } from 'react-toastify';
+
 import client from './api';
+import { useMutation } from 'react-query';
 
-export const passwordRecovery = async (
-  payload,
-  onSuccess,
-  onError,
-  onEnd,
-  onStart
-) => {
-  try {
-    onStart();
-    const { email } = payload;
-    const result = await client.post('/users/password', { user: { email } });
+export const useMutationPasswordRecovery = () => {
+  return useMutation(passwordRecovery, {
+    onSuccess: (data) => {
+      toast.success('E-mail de recuperação enviado com sucesso!');
+    },
+    onError: () => {
+      toast.error(
+        'Não foi possível enviar o e-mail de recuperação, por favor tente novamente mais tarde!'
+      );
+    },
+  });
+};
 
-    onSuccess({ ...result.data });
-  } catch (error) {
-    onError(error.response.data.message);
-  } finally {
-    onEnd();
-  }
+const passwordRecovery = async (email) => {
+  const { data } = await client.post('/users/password', {
+    user: { email },
+  });
+  return data;
 };
 
 export const newPassword = async (
