@@ -6,7 +6,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-/* import { useHistory } from 'react-router-dom'; */
 import * as yup from 'yup';
 import * as S from './reset-password.styles';
 

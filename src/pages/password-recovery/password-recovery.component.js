@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -11,43 +10,24 @@ import * as S from './password-recovery.styles';
 import * as yup from 'yup';
 
 import { useMutationPasswordRecovery } from 'service/password';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import RHFInput from 'components/rhf-input/rhf-input.component';
+
+const schema = yup.object().shape({
+  email: yup.string().email('E-mail inválido').required('Campo obrigatório'),
+});
 
 const RecoverPassword = () => {
-  const [email, setEmail] = useState('');
-  const [formError, setError] = useState(false);
-  const [recoverPasswordError, setRecoverPasswordError] = useState('');
+  const { handleSubmit, control } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { email: '' },
+    mode: 'onBlur',
+  });
+
   const history = useHistory();
 
   const { isLoading, mutate } = useMutationPasswordRecovery();
-
-  const schema = yup.object().shape({
-    email: yup.string().email('e-mail inválido').required(),
-  });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!email) {
-      setError(true);
-      return;
-    }
-
-    mutate(email);
-  };
-
-  useEffect(() => {
-    if (email.trim()) {
-      schema.isValid({ email }).then((valid) => {
-        if (valid) {
-          setError(false);
-          setRecoverPasswordError('');
-        } else {
-          setError(true);
-          setRecoverPasswordError('E-mail inválido');
-        }
-      });
-    }
-  }, [email, schema]);
 
   return (
     <Container component='main' maxWidth={false}>
@@ -64,24 +44,17 @@ const RecoverPassword = () => {
           <Typography component='h1' variant='h5'>
             Recuperar senha
           </Typography>
-          <S.Form noValidate onSubmit={handleSubmit}>
-            <TextField
-              variant='outlined'
-              margin='normal'
-              required
-              fullWidth
-              id='email'
+          <S.Form
+            onSubmit={handleSubmit(async (data) => {
+              mutate(data.email);
+            })}
+          >
+            <RHFInput
+              control={control}
               label='Endereço de Email'
               name='email'
-              autoComplete='email'
-              autoFocus
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              error={formError}
+              id='email'
             />
-            {Boolean(recoverPasswordError) && (
-              <Typography color='error'>{recoverPasswordError}</Typography>
-            )}
             <S.SubmitButton
               type='submit'
               fullWidth

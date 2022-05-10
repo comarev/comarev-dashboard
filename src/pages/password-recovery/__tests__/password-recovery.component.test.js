@@ -1,4 +1,4 @@
-import { screen, waitFor, fireEvent } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/react';
 import wrapper from 'test/test-utils';
 
 import RecoverPassword from '../password-recovery.component';
@@ -18,7 +18,7 @@ describe('<RecoverPassword />', () => {
     wrapper(RecoverPassword);
   });
 
-  it('should render the page with its e-mail address inputs and the submit button', () => {
+  it('should render the page with its e-mail address input and the submit button', () => {
     expect(screen.getByText(/recuperar senha/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/endereço de email/i)).toBeInTheDocument();
     expect(
@@ -32,13 +32,5 @@ describe('<RecoverPassword />', () => {
     fireEvent.change(emailInput, { target: { value: 'email@email.com' } });
 
     expect(emailInput).toHaveValue('email@email.com');
-  });
-
-  it('should highlight the input when the e-mail typed is not valid', async () => {
-    const emailInput = screen.getByLabelText(/endereço de email/i);
-    const emailLabel = screen.getByText('Endereço de Email');
-
-    fireEvent.change(emailInput, { target: { value: 'email' } });
-    await waitFor(() => expect(emailLabel).toHaveStyle({ color: '#f44336' }));
   });
 });
