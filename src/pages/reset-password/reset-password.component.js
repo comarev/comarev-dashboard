@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
@@ -10,50 +9,37 @@ import * as yup from 'yup';
 import * as S from './reset-password.styles';
 
 import { useMutationNewPassword } from 'service/password';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import RHFInput from 'components/rhf-input/rhf-input.component';
+
+const schema = yup.object().shape({
+  password: yup.string().required('Campo obrigatório'),
+  confirmPassword: yup
+    .string()
+    .oneOf(
+      [yup.ref('password'), null],
+      'As senhas não são iguais. Tente novamente.'
+    )
+    .required('Campo obrigatório'),
+});
 
 const ResetPassword = () => {
-  const { token } = useParams();
+  const { handleSubmit, control } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: { password: '', confirmPassword: '' },
+    mode: 'onBlur',
+  });
 
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [formError, setError] = useState(false);
-  const [resetPasswordError, setResetPasswordError] = useState('');
+  const { token } = useParams();
 
   const { isLoading, mutate } = useMutationNewPassword();
 
-  const schema = yup.object().shape({
-    password: yup.string().required(),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref('password'), null], 'As senhas não coincidem'),
-  });
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!password || !confirmPassword) {
-      setError(true);
-      return;
-    }
-
-    const payload = { password, confirmPassword, token };
+  const handleOnSubmit = async (data) => {
+    const payload = { ...data, token };
 
     mutate(payload);
   };
-
-  useEffect(() => {
-    if (password.trim() && confirmPassword.trim()) {
-      schema.isValid({ password, confirmPassword }).then((valid) => {
-        if (valid) {
-          setError(false);
-          setResetPasswordError('');
-        } else {
-          setError(true);
-          setResetPasswordError('Senhas não coincidem');
-        }
-      });
-    }
-  }, [password, confirmPassword, schema]);
 
   return (
     <Container component='main' maxWidth='xs'>
@@ -65,38 +51,21 @@ const ResetPassword = () => {
         <Typography component='h1' variant='h5'>
           Redefinir senha
         </Typography>
-        <S.Form noValidate onSubmit={handleSubmit}>
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
+        <S.Form onSubmit={handleSubmit((data) => handleOnSubmit(data))}>
+          <RHFInput
+            control={control}
             name='password'
             label='Senha'
             type='password'
             id='password'
-            autoComplete='current-password'
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            error={formError}
           />
-          <TextField
-            variant='outlined'
-            margin='normal'
-            required
-            fullWidth
-            name='confirm-password'
+          <RHFInput
+            control={control}
+            name='confirmPassword'
             label='Confirmar senha'
             type='password'
-            id='confirm-password'
-            autoComplete='current-password'
-            value={confirmPassword}
-            onChange={(event) => setConfirmPassword(event.target.value)}
-            error={formError}
+            id='confirmPassword'
           />
-          {Boolean(resetPasswordError) && (
-            <Typography color='error'>{resetPasswordError}</Typography>
-          )}
           <S.SubmitButton
             type='submit'
             fullWidth
