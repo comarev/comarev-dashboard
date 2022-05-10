@@ -1,4 +1,5 @@
 import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 import client from './api';
 import { useMutation } from 'react-query';
@@ -23,26 +24,25 @@ const passwordRecovery = async (email) => {
   return data;
 };
 
-export const newPassword = async (
-  payload,
-  onSuccess,
-  onError,
-  onEnd,
-  onStart,
-  token
-) => {
-  try {
-    onStart();
-    const { password, confirmPassword } = payload;
-    // It seems like there isn't still a endpoint to reset a user password
-    const result = await client.post('/users/set-password', {
-      user: { password, confirmPassword },
-    });
+export const useMutationNewPassword = () => {
+  const history = useHistory();
+  return useMutation(newPassword, {
+    onSuccess: (data) => {
+      toast.success('Senha criada com sucesso!');
+      history.push('/');
+    },
+    onError: () => {
+      toast.error(
+        'Não foi possível criar uma nova, por favor tente novamente mais tarde!'
+      );
+    },
+  });
+};
 
-    onSuccess({ ...result.data });
-  } catch (error) {
-    onError(error.response.data.message);
-  } finally {
-    onEnd();
-  }
+const newPassword = async ({ password, confirmPassword, token }) => {
+  const { data } = await client.post('/users/reset-password', {
+    user: { password, confirmPassword, token },
+  });
+
+  return data;
 };

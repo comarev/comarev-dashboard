@@ -6,11 +6,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useHistory } from 'react-router-dom';
+/* import { useHistory } from 'react-router-dom'; */
 import * as yup from 'yup';
 import * as S from './reset-password.styles';
 
-import { newPassword } from 'service/password';
+import { useMutationNewPassword } from 'service/password';
 
 const ResetPassword = () => {
   const { token } = useParams();
@@ -19,18 +19,8 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [formError, setError] = useState(false);
   const [resetPasswordError, setResetPasswordError] = useState('');
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
-  const onStart = () => setLoading(true);
-  const onEnd = () => setLoading(false);
-  const onSuccess = (data) => {
-    history.push('/');
-  };
-
-  const onError = (message) => {
-    setResetPasswordError(message);
-  };
+  const { isLoading, mutate } = useMutationNewPassword();
 
   const schema = yup.object().shape({
     password: yup.string().required(),
@@ -47,9 +37,9 @@ const ResetPassword = () => {
       return;
     }
 
-    const payload = { password, confirmPassword };
+    const payload = { password, confirmPassword, token };
 
-    await newPassword(payload, onSuccess, onError, onEnd, onStart, token);
+    mutate(payload);
   };
 
   useEffect(() => {
@@ -114,10 +104,10 @@ const ResetPassword = () => {
             variant='contained'
             color='primary'
             onClick={handleSubmit}
-            disabled={loading}
+            disabled={isLoading}
             aria-label='redefinir senha'
           >
-            {loading ? (
+            {isLoading ? (
               <CircularProgress data-testid='login-spinner' size={25} />
             ) : (
               'Redefinir'
