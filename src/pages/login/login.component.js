@@ -143,7 +143,7 @@ const SignIn = () => {
             {loading ? (
               <CircularProgress data-testid='login-spinner' size={25} />
             ) : (
-              'Logar'
+              'Logare'
             )}
           </Button>
           <Grid container>
