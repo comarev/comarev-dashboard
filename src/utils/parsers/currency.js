@@ -12,8 +12,8 @@ export const centsToReal = (cents) => {
 };
 
 export const realToCents = (real) => {
-  if (typeof real !== 'string') {
-    throw new TypeError('real must be an string');
+  if (typeof real === 'number') {
+    return real * REAL_TO_CENTS_FACTOR;
   }
 
   const parsedReal = real
