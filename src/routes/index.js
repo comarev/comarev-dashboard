@@ -9,6 +9,7 @@ import CompanyRegister from 'pages/companies/company-register.component';
 import CompanyEdit from 'pages/companies/company-edit.component';
 import UserRegister from 'pages/users/user-register.component';
 import UserEdit from 'pages/users/user-edit.component';
+import DiscountRequests from 'pages/users/user-invoices.component';
 import InvoiceList from 'pages/invoices/invoice-list.component';
 import InvoiceRegister from 'pages/invoices/invoice-register.component';
 import InvoiceView from 'pages/invoices/invoices-view.component';
@@ -56,6 +57,12 @@ const Routes = () => {
           exact
           component={UserEdit}
           roles={['admin']}
+        />
+        <SecureRoute
+          path='/discount_requests/:id'
+          exact
+          component={DiscountRequests}
+          roles={['admin', 'manager']}
         />
         <SecureRoute
           path='/invoices'
