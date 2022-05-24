@@ -20,6 +20,6 @@ export const formatCellphone = (value) => {
   );
 };
 
-export const formatHour = (hour) => format(new Date(hour), 'k:mm');
+export const getHourFormated = (date) => format(new Date(date), 'k:mm');
 
-export const formatDate = (day) => format(new Date(day), 'dd/MM/yy');
+export const getDateFormated = (date) => format(new Date(date), 'dd/MM/yy');
