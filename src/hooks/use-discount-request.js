@@ -7,6 +7,7 @@ const useDiscountRequest = (companyId) => {
     () => getDiscountRequest(companyId),
     {
       refetchInterval: 5000,
+      enabled: !!companyId,
     }
   );
 
