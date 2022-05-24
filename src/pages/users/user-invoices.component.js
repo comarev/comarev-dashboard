@@ -1,6 +1,4 @@
 import Template from 'components/template/template.component';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import useDiscountRequest from 'hooks/use-discount-request';
 import useCompanies from 'hooks/use-companies';
 import useCompaniesSelectionMenuItem from 'hooks/use-companies-selection-menu-item';
@@ -16,15 +14,11 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
-import { format } from 'date-fns';
+import { getHourFormated, getDateFormated } from 'utils/formatters/general';
 
 const getAllowedCellLabelColor = (allowed) => (allowed ? 'primary' : 'default');
 
 const getAllowedCellLabel = (allowed) => (allowed ? 'Sim' : 'Não');
-
-const formatHour = (hour) => format(new Date(hour), 'k:mm');
-
-const formatDate = (day) => format(new Date(day), 'dd/MM/yy');
 
 const DiscountRequests = () => {
   const { companies, isLoading: isLoadingCompanies } = useCompanies();
@@ -52,7 +46,7 @@ const DiscountRequests = () => {
               <TableCell align='left'>Hora</TableCell>
               <TableCell align='left'>Nome</TableCell>
               <TableCell align='left'>Email</TableCell>
-              <TableCell align='right'>Liberação</TableCell>
+              <TableCell align='right'>Aprovação</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,10 +54,10 @@ const DiscountRequests = () => {
               return (
                 <TableRow key={invoice.id}>
                   <TableCell component='th' scope='row' align='left'>
-                    {formatDate(invoice.created_at)}
+                    {getDateFormated(invoice.created_at)}
                   </TableCell>
                   <TableCell component='th' scope='row' align='left'>
-                    {formatHour(invoice.created_at)}
+                    {getHourFormated(invoice.created_at)}
                   </TableCell>
                   <TableCell component='th' scope='row' align='left'>
                     {invoice.user.full_name}
