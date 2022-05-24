@@ -59,7 +59,7 @@ const Routes = () => {
           roles={['admin']}
         />
         <SecureRoute
-          path='/discount_requests/:id'
+          path='/discount_requests/'
           exact
           component={DiscountRequests}
           roles={['admin', 'manager']}
