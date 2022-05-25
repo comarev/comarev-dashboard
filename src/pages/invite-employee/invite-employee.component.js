@@ -50,7 +50,7 @@ const InviteEmployee = () => {
               variant='contained'
               color='primary'
               disabled={isLoading}
-              aria-label='Recuperar senha'
+              aria-label='Enviar e-mail'
             >
               {isLoading ? (
                 <CircularProgress data-testid='login-spinner' size={25} />
