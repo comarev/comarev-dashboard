@@ -3,6 +3,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import QrCode2 from '@mui/icons-material/QrCode2';
 import SupervisorAccountOutlinedIcon from '@material-ui/icons/SupervisorAccountOutlined';
 import HomeIcon from '@material-ui/icons/Home';
+import DiscountRequestsIcon from '@mui/icons-material/QrCodeScanner';
 
 export const menu = [
   { path: '/', label: 'Início', icon: HomeIcon, roles: [] },
@@ -23,6 +24,12 @@ export const menu = [
     path: '/invoices',
     icon: ReceiptIcon,
     roles: ['admin', 'customer'],
+  },
+  {
+    path: '/discount_requests',
+    label: 'Requisições de disconto',
+    icon: DiscountRequestsIcon,
+    roles: ['manager'],
   },
   {
     label: 'Obter QR CODE',
