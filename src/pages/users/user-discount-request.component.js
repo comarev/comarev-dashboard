@@ -23,15 +23,11 @@ const getAllowedCellLabel = (allowed) => (allowed ? 'Sim' : 'Não');
 const DiscountRequests = () => {
   const { companies, isLoading: isLoadingCompanies } = useCompanies();
 
-  const { selectedCompany, setSelectedCompany } =
+  const { selectedCompany, handleChangeCompany } =
     useCompaniesSelectionMenuItem(companies);
 
   const { invoicesList, isLoading: isLoadingDiscountRequest } =
     useDiscountRequest(selectedCompany);
-
-  const handleChangeCompany = (event) => {
-    setSelectedCompany(event.target.value);
-  };
 
   const renderTable = () => {
     if (isLoadingDiscountRequest)
