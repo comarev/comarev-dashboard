@@ -3,17 +3,7 @@ import useDiscountRequest from 'hooks/use-discount-request';
 import useCompanies from 'hooks/use-companies';
 import DiscountRequestTable from './components/discont-request-table.component';
 import useCompaniesSelectionMenuItem from 'hooks/use-companies-selection-menu-item';
-import {
-  TableBody,
-  TableCell,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Chip,
-  TextField,
-  MenuItem,
-} from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
 
 const DiscountRequests = () => {
