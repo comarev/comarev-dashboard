@@ -4,11 +4,16 @@ const useCompaniesSelectionMenuItem = (companies) => {
   const [selectedCompany, setSelectedCompany] = useState('');
 
   useEffect(() => {
-    if (companies?.length >= 1) {
-      setSelectedCompany(companies?.[0].id);
+    if (companies?.length) {
+      setSelectedCompany(companies[0].id);
     }
   }, [companies]);
-  return { selectedCompany, setSelectedCompany };
+
+  const handleChangeCompany = (event) => {
+    setSelectedCompany(event.target.value);
+  };
+
+  return { selectedCompany, handleChangeCompany };
 };
 
 export default useCompaniesSelectionMenuItem;
