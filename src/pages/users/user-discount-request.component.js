@@ -16,12 +16,13 @@ const DiscountRequests = () => {
     useDiscountRequest(selectedCompanyId);
 
   const render = () => {
-    if (isLoadingCompanies)
+    if (isLoadingCompanies) {
       return (
         <Template>
           <CircularProgress testid='company-edit-spinner' size={25} />
         </Template>
       );
+    }
 
     return (
       <Template title='Pedidos de desconto'>
