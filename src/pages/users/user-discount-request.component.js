@@ -38,10 +38,9 @@ const DiscountRequests = () => {
             </MenuItem>
           ))}
         </TextField>
-        {isLoadingDiscountRequest && (
+        {isLoadingDiscountRequest ? (
           <CircularProgress testid='company-edit-spinner' size={25} />
-        )}
-        {!isLoadingDiscountRequest && (
+        ) : (
           <DiscountRequestTable invoicesList={invoicesList} />
         )}
       </Template>
