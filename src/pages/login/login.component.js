@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from 'store/modules/user/actions';
+import { Box } from '@material-ui/core';
 
 const FORM_ERROR_INITIAL_STATE = {
   email: false,
@@ -149,12 +150,16 @@ const SignIn = () => {
               'Logar'
             )}
           </Button>
-          <Grid
-            container
-            onClick={() => history.push('/recover-password')}
-            className={classes.forgetPasswordLink}
-          >
-            Esqueceu sua senha?
+          <Grid container>
+            <Grid item xs>
+              <Box
+                variant='body2'
+                onClick={() => history.push('/recover-password')}
+                className={classes.forgetPasswordLink}
+              >
+                Esqueceu sua senha?
+              </Box>
+            </Grid>
           </Grid>
         </form>
       </div>
