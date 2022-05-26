@@ -14,12 +14,14 @@ import InvoiceRegister from 'pages/invoices/invoice-register.component';
 import InvoiceView from 'pages/invoices/invoices-view.component';
 import InvoiceEdit from 'pages/invoices/invoice-edit.component';
 import Scanner from 'pages/scanner/scanner.component';
+import SignUp from 'pages/signup/signup.component';
 
 const Routes = () => {
   return (
     <Router>
       <Switch>
         <Route path='/' exact component={LoginPage} />
+        <Route path='/signup' exact component={SignUp} />
         <SecureRoute path='/dashboard' component={Dashboard} />
         <SecureRoute
           path='/companies'
