@@ -9,11 +9,11 @@ import { CircularProgress } from '@material-ui/core';
 const DiscountRequests = () => {
   const { companies, isLoading: isLoadingCompanies } = useCompanies();
 
-  const { selectedCompany, handleChangeCompany } =
+  const { selectedCompanyId, handleChangeCompany } =
     useCompaniesSelectionMenuItem(companies);
 
   const { invoicesList, isLoading: isLoadingDiscountRequest } =
-    useDiscountRequest(selectedCompany);
+    useDiscountRequest(selectedCompanyId);
 
   const render = () => {
     if (isLoadingCompanies)
@@ -29,7 +29,7 @@ const DiscountRequests = () => {
           label='Empresa'
           select
           onChange={handleChangeCompany}
-          value={selectedCompany}
+          value={selectedCompanyId}
         >
           {companies.map((company) => (
             <MenuItem key={company.id} value={company.id}>
