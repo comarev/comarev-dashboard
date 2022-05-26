@@ -27,7 +27,7 @@ export const menu = [
   },
   {
     path: '/discount_requests',
-    label: 'Requisições de disconto',
+    label: 'Requisições de desconto',
     icon: DiscountRequestsIcon,
     roles: ['manager'],
   },
