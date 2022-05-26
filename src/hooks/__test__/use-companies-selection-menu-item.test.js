@@ -13,7 +13,7 @@ describe('useCompaniesSelectionMenuItem hook', () => {
     expect(hook.result.current.selectedCompanyId).toBe(mockedCompanies[0]);
   });
 
-  /*it('selectedCompany should be the third element', async () => {
+  it('selectedCompany should be the third element', async () => {
     const hook = renderUseCompaniesSelectionMenuItem();
     expect(hook.result.current.selectedCompanyId).toBe(undefined);
     hook.result.current.handleChangeCompany({
@@ -21,5 +21,5 @@ describe('useCompaniesSelectionMenuItem hook', () => {
     });
     await hook.waitForNextUpdate();
     expect(hook.result.current.selectedCompanyId).toBe(mockedCompanies[0]);
-  });*/
+  });
 });
