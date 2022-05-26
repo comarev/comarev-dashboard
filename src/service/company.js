@@ -70,8 +70,8 @@ const updateCompany = async (company) => {
 
 const getShowcase = async () => await service.get('/showcase');
 
-const getDiscountRequest = async (id) => {
-  return service.get(`/companies/${id}/discount_requests`);
+const getDiscountRequest = async (companyId) => {
+  return service.get(`/companies/${companyId}/discount_requests`);
 };
 
 export {
