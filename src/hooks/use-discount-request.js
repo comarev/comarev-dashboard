@@ -11,7 +11,7 @@ const useDiscountRequest = (companyId) => {
     }
   );
 
-  const invoicesList = data?.data;
+  const invoicesList = data?.data || [];
 
   const isLoading = ['idle', 'loading'].includes(status);
 
