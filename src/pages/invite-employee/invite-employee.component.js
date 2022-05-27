@@ -53,7 +53,11 @@ const InviteEmployee = () => {
               aria-label={isLoading ? 'Enviando e-mail' : 'Enviar e-mail'}
             >
               {isLoading ? (
-                <CircularProgress data-testid='login-spinner' size={25} />
+                <CircularProgress
+                  role='img'
+                  aria-label='Loading spinner'
+                  size={25}
+                />
               ) : (
                 'Enviar'
               )}
