@@ -1,25 +1,27 @@
 import useCompaniesSelectionMenuItem from 'hooks/use-companies-selection-menu-item';
 import { renderReactQueryHook } from 'hooks/__test__/hook-test-utils.js';
 import mockedCompanies from 'test/fixtures/companies';
-
+import { act } from 'react-test-renderer';
 const renderUseCompaniesSelectionMenuItem = () =>
   renderReactQueryHook(useCompaniesSelectionMenuItem, mockedCompanies);
 
 describe('useCompaniesSelectionMenuItem hook', () => {
-  it('selectedCompany should be the fist element', async () => {
-    const hook = renderUseCompaniesSelectionMenuItem();
-    expect(hook.result.current.selectedCompanyId).toBe(undefined);
-    await hook.waitForNextUpdate();
-    expect(hook.result.current.selectedCompanyId).toBe(mockedCompanies[0]);
+  it('selectedCompany should be the fist elements id', async () => {
+    const { result } = renderUseCompaniesSelectionMenuItem();
+
+    expect(result.current.selectedCompanyId).toBe(mockedCompanies[0].id);
   });
 
-  it('selectedCompany should be the third element', async () => {
-    const hook = renderUseCompaniesSelectionMenuItem();
-    expect(hook.result.current.selectedCompanyId).toBe(undefined);
-    hook.result.current.handleChangeCompany({
-      target: { value: mockedCompanies[0].id },
+  it('updates selectedCompany by handleChange', () => {
+    const companyToSelect = mockedCompanies[2];
+    const { result } = renderUseCompaniesSelectionMenuItem();
+
+    act(() => {
+      result.current.handleChangeCompany({
+        target: { value: companyToSelect.id },
+      });
     });
-    await hook.waitForNextUpdate();
-    expect(hook.result.current.selectedCompanyId).toBe(mockedCompanies[0]);
+
+    expect(result.current.selectedCompanyId).toBe(companyToSelect.id);
   });
 });
