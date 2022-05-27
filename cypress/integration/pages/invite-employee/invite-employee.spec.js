@@ -11,13 +11,8 @@ describe('Invite new employee', () => {
       cy.contains('Convidar novo empregado').click();
     });
 
-    it('Invite new employee option must be visible when user is a manager', () => {
+    it('Invite new employee option must be visible', () => {
       cy.contains('Convidar novo empregado').should('be.visible');
-    });
-
-    it('should display an e-mail form when visiting invite new employee link', () => {
-      cy.get('#email').should('be.visible');
-      cy.get('button[aria-label="Enviar e-mail"]').should('be.visible');
     });
 
     it('should display error message when trying to submit with empty input', () => {
