@@ -1,4 +1,4 @@
-import * as RTH from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 const ReactQueryProvider = ({ children }) => (
@@ -7,6 +7,6 @@ const ReactQueryProvider = ({ children }) => (
   </QueryClientProvider>
 );
 
-export function renderReactQueryHook(hook, params) {
-  return RTH.renderHook(() => hook(params), { wrapper: ReactQueryProvider });
+export function renderReactQueryHook(hook, options = {}) {
+  return renderHook(hook, { ...options, wrapper: ReactQueryProvider });
 }
