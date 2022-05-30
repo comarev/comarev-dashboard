@@ -7,16 +7,15 @@ const setup = (roles = []) => {
     <RoleFilter roles={roles}>
       <div>Hello world</div>;
     </RoleFilter>
-  )
-}
+  );
+};
 
 describe('RoleComponent', () => {
-  describe('when user doesn\'t have proper roles', () => {
+  describe("when user doesn't have proper roles", () => {
     it('should not be present', () => {
-
       const RoleFilterWrapper = setup(['admin']);
 
-      const { queryByText } = wrapper(RoleFilterWrapper);
+      const { queryByText } = wrapper(<RoleFilterWrapper />);
 
       expect(queryByText('Hello world')).not.toBeInTheDocument();
     });
@@ -24,13 +23,11 @@ describe('RoleComponent', () => {
 
   describe('when user has appropriate roles', () => {
     it('should return the given element as children', () => {
-
       const RoleFilterWrapper = setup(['admin']);
 
-      const { queryByText } = wrapper(
-        RoleFilterWrapper,
-        { preloadedState: { user: createUser() } }
-      );
+      const { queryByText } = wrapper(<RoleFilterWrapper />, {
+        preloadedState: { user: createUser() },
+      });
 
       expect(queryByText('Hello world')).toBeInTheDocument();
     });
