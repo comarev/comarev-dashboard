@@ -9,7 +9,7 @@ const mock = new MockAdapter(axios);
 const genericCompanyId = 1;
 
 const renderUseDiscountRequestHook = () =>
-  renderReactQueryHook(useDiscountRequest, genericCompanyId);
+  renderReactQueryHook(() => useDiscountRequest(genericCompanyId));
 
 describe('useDiscountRequest hook', () => {
   beforeEach(() => {
