@@ -1,11 +1,7 @@
-import { useSelector } from 'react-redux';
-import { USER_ROLES } from 'utils/constants';
+import useRoleFilter from 'hooks/use-role-filter';
 
 function RoleFilter({ roles = [], children }) {
-  const user = useSelector((state) => state.user);
-  const userRoles = USER_ROLES.filter((role) => user[role]);
-
-  const hasPermission = roles.some((role) => userRoles.includes(role));
+  const hasPermission = useRoleFilter(roles);
 
   if (!hasPermission) return null;
 

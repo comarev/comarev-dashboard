@@ -14,6 +14,12 @@ const ReduxProvider = ({ children, store }) => (
   <Provider store={store}>{children}</Provider>
 );
 
+export const HooksWrapper = ({ children, reduxStore }) => {
+  const store = configureStore({ reducer: { user: userReducer }, reduxStore });
+
+  return <ReduxProvider store={store}>{children}</ReduxProvider>;
+};
+
 const QueryProvider = ({ children }) => {
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -28,28 +34,30 @@ const QueryProvider = ({ children }) => {
   );
 };
 
-const wrapper = (
-  children,
-  {
+export const pureWrapper = (children, preloadedState = {}) => {
+  const store = configureStore({
+    reducer: { user: userReducer },
     preloadedState,
-    store = configureStore({ reducer: { user: userReducer }, preloadedState }),
-  } = {}
-) => {
-  const Children = children;
+  });
 
-  return render(
+  return (
     <ReduxProvider store={store}>
       <QueryProvider>
         <StyledThemeProvider theme={theme}>
           <ThemeProvider theme={theme}>
             <ToastContainer />
-            <Children />
+            {children}
           </ThemeProvider>
         </StyledThemeProvider>
       </QueryProvider>
-    </ReduxProvider>,
-    { wrapper: BrowserRouter }
+    </ReduxProvider>
   );
+};
+
+const wrapper = (children, { preloadedState = {} } = {}) => {
+  return render(pureWrapper(children, preloadedState), {
+    wrapper: BrowserRouter,
+  });
 };
 
 export default wrapper;
