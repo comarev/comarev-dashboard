@@ -6,13 +6,13 @@ const renderUseCompaniesSelectionMenuItem = () =>
   renderReactQueryHook(() => useCompaniesSelectionMenuItem(mockedCompanies));
 
 describe('useCompaniesSelectionMenuItem hook', () => {
-  it('selectedCompany should be the fist elements id', async () => {
+  it('selectedCompanyId should be the fist elements id', async () => {
     const { result } = renderUseCompaniesSelectionMenuItem();
 
     expect(result.current.selectedCompanyId).toBe(mockedCompanies[0].id);
   });
 
-  it('updates selectedCompany by handleChange', () => {
+  it('updates selectedCompanyId by handleChange', () => {
     const companyToSelect = mockedCompanies[2];
     const { result } = renderUseCompaniesSelectionMenuItem();
 
