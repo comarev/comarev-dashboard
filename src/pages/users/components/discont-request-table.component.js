@@ -15,7 +15,7 @@ const getAllowedCellLabel = (allowed) => (allowed ? 'Sim' : 'Não');
 
 const DiscountRequestTable = ({ invoicesList }) => {
   return (
-    <TableContainer>
+    <TableContainer data-testid='discount-request-table'>
       <Table aria-label='List da pedidos de disconto'>
         <TableHead>
           <TableRow>
