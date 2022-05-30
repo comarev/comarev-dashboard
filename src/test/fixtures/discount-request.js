@@ -1,6 +1,6 @@
 const mockDiscountCompanies = [
   {
-    id: 21,
+    id: 0,
     company_id: 1,
     user: {
       id: 6,
@@ -24,7 +24,7 @@ const mockDiscountCompanies = [
     allowed: false,
   },
   {
-    id: 21,
+    id: 1,
     company_id: 1,
     user: {
       id: 6,
@@ -48,7 +48,7 @@ const mockDiscountCompanies = [
     allowed: true,
   },
   {
-    id: 21,
+    id: 2,
     company_id: 1,
     user: {
       id: 6,
