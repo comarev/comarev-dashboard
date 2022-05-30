@@ -6,7 +6,7 @@ import mockedCompanies from 'test/fixtures/companies';
 
 const mock = new MockAdapter(axios);
 
-const renderUseCompaniesHook = () => renderReactQueryHook(useCompanies);
+const renderUseCompaniesHook = () => renderReactQueryHook(() => useCompanies());
 
 describe('useCompanies hook', () => {
   beforeEach(() => {
@@ -14,15 +14,15 @@ describe('useCompanies hook', () => {
   });
 
   it('isLoading during the fetch', async () => {
-    const hook = renderUseCompaniesHook();
-    expect(hook.result.current.isLoading).toBe(true);
-    await hook.waitForNextUpdate();
-    expect(hook.result.current.isLoading).toBe(false);
+    const { result, waitForNextUpdate } = renderUseCompaniesHook();
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
   });
 
   it('return companies list', async () => {
-    const hook = renderUseCompaniesHook();
-    await hook.waitForNextUpdate();
-    expect(hook.result.current.companies).toStrictEqual(mockedCompanies);
+    const { result, waitForNextUpdate } = renderUseCompaniesHook();
+    await waitForNextUpdate();
+    expect(result.current.companies).toStrictEqual(mockedCompanies);
   });
 });
