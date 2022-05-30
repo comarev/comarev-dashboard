@@ -29,7 +29,10 @@ const DiscountRequestTable = ({ invoicesList }) => {
         <TableBody>
           {invoicesList?.map((invoice) => {
             return (
-              <TableRow key={invoice.id}>
+              <TableRow
+                key={invoice.id}
+                data-testid={'table-row/' + invoice.id}
+              >
                 <TableCell component='th' scope='row' align='left'>
                   {getDateFormated(invoice.created_at)}
                 </TableCell>
