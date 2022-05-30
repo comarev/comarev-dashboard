@@ -9,9 +9,10 @@ import {
   Chip,
 } from '@material-ui/core';
 
-const getAllowedCellLabelColor = (allowed) => (allowed ? 'primary' : 'default');
+export const getAllowedCellLabelColor = (allowed) =>
+  allowed ? 'primary' : 'default';
 
-const getAllowedCellLabel = (allowed) => (allowed ? 'Sim' : 'Não');
+export const getAllowedCellLabel = (allowed) => (allowed ? 'Sim' : 'Não');
 
 const DiscountRequestTable = ({ invoicesList }) => {
   return (
@@ -47,6 +48,7 @@ const DiscountRequestTable = ({ invoicesList }) => {
                 </TableCell>
                 <TableCell component='th' scope='row' align='right'>
                   <Chip
+                    data-testid={'table-row/chip/' + invoice.id}
                     label={getAllowedCellLabel(invoice.allowed)}
                     color={getAllowedCellLabelColor(invoice.allowed)}
                     size='small'
