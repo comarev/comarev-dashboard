@@ -3,7 +3,7 @@ import { renderReactQueryHook } from 'hooks/__test__/hook-test-utils.js';
 import mockedCompanies from 'test/fixtures/companies';
 import { act } from 'react-test-renderer';
 const renderUseCompaniesSelectionMenuItem = () =>
-  renderReactQueryHook(useCompaniesSelectionMenuItem, mockedCompanies);
+  renderReactQueryHook(() => useCompaniesSelectionMenuItem(mockedCompanies));
 
 describe('useCompaniesSelectionMenuItem hook', () => {
   it('selectedCompany should be the fist elements id', async () => {
