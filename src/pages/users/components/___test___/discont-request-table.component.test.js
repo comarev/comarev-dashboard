@@ -1,6 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import DiscountRequestTable, {
-  getAllowedCellLabelColor,
   getAllowedCellLabel,
 } from 'pages/users/components/discont-request-table.component';
 import mockedDiscountRequest from 'test/fixtures/discount-request';
