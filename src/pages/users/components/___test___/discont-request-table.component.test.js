@@ -15,9 +15,6 @@ const getDiscountRequestTable = () =>
 const getDiscountRequestTableRow = (discountRequest) =>
   screen.getByTestId('table-row/' + discountRequest.id);
 
-const getDiscountRequestTableRowChip = (discountRequest) =>
-  screen.getByTestId('table-row/chip/' + discountRequest.id);
-
 describe('Discount request table component', () => {
   it('should render', () => {
     renderTable();
@@ -39,7 +36,6 @@ describe('Discount request table component', () => {
     await waitFor(() => {
       mockedDiscountRequest.forEach((discountRequest) => {
         const row = getDiscountRequestTableRow(discountRequest);
-        const chip = getDiscountRequestTableRowChip(discountRequest);
         expect(row).toBeInTheDocument();
 
         expect(row).toHaveTextContent(discountRequest.user.full_name);
