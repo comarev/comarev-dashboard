@@ -1,7 +1,7 @@
 const mockCompanies = [
-  { name: 'Nori', phone: '', discount: '', cnpj: '', active: '' },
-  { name: 'Jumil', phone: '', discount: '', cnpj: '', active: '' },
-  { name: 'Bar do zé', phone: '', discount: '', cnpj: '', active: '' },
+  { id: '1', name: 'Nori', phone: '', discount: '', cnpj: '', active: '' },
+  { id: '2', name: 'Jumil', phone: '', discount: '', cnpj: '', active: '' },
+  { id: '3', name: 'Bar do zé', phone: '', discount: '', cnpj: '', active: '' },
 ];
 
 export default mockCompanies;
