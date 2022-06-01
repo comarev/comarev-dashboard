@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { CircularProgress } from '@material-ui/core';
+import { centsToReal } from 'utils/parsers/currency';
 
 const InvoiceEdit = () => {
   const [formErrors, setFormErrors] = useState([]);
@@ -50,10 +51,7 @@ const InvoiceEdit = () => {
           loading={isLoading}
           invoice={{
             ...data?.data,
-            amount: data?.data.amount.toLocaleString('pt-br', {
-              style: 'currency',
-              currency: 'BRL',
-            }),
+            amount: centsToReal(data?.data.amount_cents),
           }}
         />
       </Template>

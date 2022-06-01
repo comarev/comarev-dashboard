@@ -21,6 +21,7 @@ import CheckIcon from '@material-ui/icons/Check';
 import MoneyOffIcon from '@material-ui/icons/MoneyOff';
 import RoleFilter from 'components/role-filter/role-filter.component';
 import { format } from 'date-fns';
+import { centsToReal } from 'utils/parsers/currency';
 
 const InvoiceList = () => {
   const history = useHistory();
@@ -84,10 +85,7 @@ const InvoiceList = () => {
                   {invoice?.user?.full_name}
                 </TableCell>
                 <TableCell align='left'>
-                  {invoice.amount.toLocaleString('pt-br', {
-                    style: 'currency',
-                    currency: 'BRL',
-                  })}
+                  {centsToReal(invoice.amount_cents)}
                 </TableCell>
                 <TableCell align='left'>
                   {invoice.paid ? 'Sim' : 'Não'}
