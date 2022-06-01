@@ -21,7 +21,7 @@ jest.mock('react-router-dom', () => ({
 const mock = new MockAdapter(axios);
 
 const setup = () => {
-  const rendered = wrapper(SignIn);
+  const rendered = wrapper(<SignIn />);
 
   const { getByText, getByLabelText } = rendered;
 
@@ -101,7 +101,7 @@ describe('Login Component', () => {
 
   describe('when user does not fill out the fields', () => {
     it('highlight border fields', () => {
-      const { getByText } = wrapper(SignIn);
+      const { getByText } = wrapper(<SignIn />);
 
       const emailLabel = getByText('Endereço de Email');
       const submitButton = getByText('Logar');

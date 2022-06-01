@@ -10,7 +10,7 @@ jest.mock('react-redux', () => ({
 }));
 
 const setup = () => {
-  const rendered = wrapper(Dashboard);
+  const rendered = wrapper(<Dashboard />);
   const { getByLabelText } = rendered;
 
   const menuButton = getByLabelText('menu');
@@ -23,7 +23,7 @@ const setup = () => {
 describe('Dashboard Sidebar', () => {
   describe('when admin', () => {
     beforeEach(() => {
-      useSelector.mockImplementation(() => ({ ...createUser('admin')}));
+      useSelector.mockImplementation(() => ({ ...createUser('admin') }));
     });
 
     it('shows the sidebar with all links', () => {
