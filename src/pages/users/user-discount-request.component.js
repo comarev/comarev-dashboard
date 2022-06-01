@@ -19,7 +19,7 @@ const DiscountRequests = () => {
     if (isLoadingCompanies) {
       return (
         <Template>
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress data-testid='company-edit-spinner' size={25} />
         </Template>
       );
     }
@@ -31,6 +31,7 @@ const DiscountRequests = () => {
           select
           onChange={handleChangeCompany}
           value={selectedCompanyId}
+          data-testid='company-selector'
         >
           {companies.map((company) => (
             <MenuItem key={company.id} value={company.id}>
@@ -39,7 +40,10 @@ const DiscountRequests = () => {
           ))}
         </TextField>
         {isLoadingDiscountRequest ? (
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress
+            data-testid='discount-request-edit-spinner'
+            size={25}
+          />
         ) : (
           <DiscountRequestTable invoicesList={invoicesList} />
         )}
