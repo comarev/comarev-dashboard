@@ -12,7 +12,6 @@ import axios from 'service/api';
 import mockedCompanies from 'test/fixtures/companies';
 import mockedDiscountRequest from 'test/fixtures/discount-request';
 import wrapper from 'test/test-utils';
-import userEvent from '@testing-library/user-event';
 
 const mock = new MockAdapter(axios);
 
@@ -81,9 +80,9 @@ describe('User discount request page', () => {
   it('company menu item with the first company fetched', async () => {
     renderPage();
     await waitFor(async () => {
-      const companiesMenutem = getCompaniesMenuItemTextField();
-      expect(companiesMenutem).toBeInTheDocument();
-      expect(companiesMenutem).toHaveTextContent(mockedCompanies[0].name);
+      const companiesMenuItem = getCompaniesMenuItemTextField();
+      expect(companiesMenuItem).toBeInTheDocument();
+      expect(companiesMenuItem).toHaveTextContent(mockedCompanies[0].name);
     });
   });
 
@@ -105,6 +104,8 @@ describe('User discount request page', () => {
       expect(loadingDiscountRequestTable).toBeInTheDocument();
       await waitForElementToBeRemoved(loadingDiscountRequestTable);
       expect(getDiscountRequestTable()).toBeInTheDocument();
+      const selectedOption = getCompaniesMenuSelectedOption();
+      expect(selectedOption.textContent).toBe(mockedCompanies[1].name);
     });
   });
 });
