@@ -14,6 +14,7 @@ import InvoiceRegister from 'pages/invoices/invoice-register.component';
 import InvoiceView from 'pages/invoices/invoices-view.component';
 import InvoiceEdit from 'pages/invoices/invoice-edit.component';
 import Scanner from 'pages/scanner/scanner.component';
+import InviteEmployee from 'pages/invite-employee/invite-employee.component';
 
 const Routes = () => {
   return (
@@ -86,6 +87,12 @@ const Routes = () => {
           exact
           component={Scanner}
           roles={['customer']}
+        />
+        <SecureRoute
+          path='/invite-employee'
+          exact
+          component={InviteEmployee}
+          roles={['manager']}
         />
       </Switch>
     </Router>
