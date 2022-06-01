@@ -1,17 +1,19 @@
+const REAL_TO_CENTS_FACTOR = 100;
+
 export const centsToReal = (cents) => {
   if (typeof cents !== 'number' || !Number.isInteger(cents)) {
-    throw new TypeError('cents must be an Integer number');
+    return 'Not valid amount';
   }
 
-  return (cents / 100).toLocaleString('pt-br', {
+  return (cents / REAL_TO_CENTS_FACTOR).toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL',
   });
 };
 
 export const realToCents = (real) => {
-  if (typeof real !== 'string') {
-    throw new TypeError('real must be an string');
+  if (typeof real === 'number') {
+    return real * REAL_TO_CENTS_FACTOR;
   }
 
   const parsedReal = real
@@ -21,7 +23,7 @@ export const realToCents = (real) => {
     .replace('R$', '')
     .trim();
 
-  const cents = parseFloat(parsedReal) * 100;
+  const cents = parseFloat(parsedReal) * REAL_TO_CENTS_FACTOR;
 
   return cents;
 };

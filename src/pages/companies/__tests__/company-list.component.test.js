@@ -14,7 +14,7 @@ describe('Companies List page', () => {
     });
 
     it('render companies in the table', async () => {
-      wrapper(CompaniesList);
+      wrapper(<CompaniesList />);
 
       await waitForElementToBeRemoved(screen.getByTestId('companies-loading'));
 
@@ -30,7 +30,7 @@ describe('Companies List page', () => {
     });
 
     it('shows error', async () => {
-      wrapper(CompaniesList);
+      wrapper(<CompaniesList />);
 
       await waitForElementToBeRemoved(screen.getByTestId('companies-loading'));
 
