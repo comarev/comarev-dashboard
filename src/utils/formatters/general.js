@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 export const formatCpfCnpj = (value) => {
   const cnpjCpf = value.replace(/\D/g, '');
 
@@ -12,5 +14,12 @@ export const formatCpfCnpj = (value) => {
 };
 
 export const formatCellphone = (value) => {
-  return value.replace(/^(\+\d{2})\D*(\d{3})\D*(\d{5}|\d{4})\D*(\d{4})$/g, '($2) $3-$4');
+  return value.replace(
+    /^(\+\d{2})\D*(\d{3})\D*(\d{5}|\d{4})\D*(\d{4})$/g,
+    '($2) $3-$4'
+  );
 };
+
+export const getHourFormated = (date) => format(new Date(date), 'k:mm');
+
+export const getDateFormated = (date) => format(new Date(date), 'dd/MM/yy');
