@@ -2,6 +2,7 @@ import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -14,6 +15,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import RHFInput from 'components/rhf-input/rhf-input.component';
 import * as S from './signup.styles';
+import { useMutationSignup } from 'service/signup';
 
 const schema = yup.object().shape({
   full_name: yup.string().required('Campo obrigatório'),
@@ -50,17 +52,20 @@ const SignUp = () => {
     mode: 'onChange',
   });
 
-  async function onSubmit(data) {
+  const { isLoading, mutate } = useMutationSignup();
+
+  function onSubmit(data) {
+    const newCPF = data.cpf.split('.').join('').split('-').join('');
     const datatoSend = {
       full_name: data.full_name,
       email: data.email,
       password: data.password,
       address: data.address,
-      cpf: data.cpf,
+      cpf: newCPF,
       cellphone: data.cellphone,
     };
 
-    console.log('datatoSend', datatoSend);
+    mutate(datatoSend);
   }
 
   return (
@@ -81,7 +86,7 @@ const SignUp = () => {
           Cadastre-se
         </Typography>
 
-        <form onSubmit={handleSubmit(async (data) => await onSubmit(data))}>
+        <form onSubmit={handleSubmit(async (data) => onSubmit(data))}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <RHFInput
@@ -142,10 +147,18 @@ const SignUp = () => {
             fullWidth
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
-            aria-label='Cadastre-se'
-            disabled={!formState.isValid}
+            aria-label={isLoading ? 'Carregando...' : 'Cadastre-se'}
+            disabled={!formState.isValid || isLoading}
           >
-            Cadastrar
+            {isLoading ? (
+              <CircularProgress
+                role='img'
+                aria-label='Loading spinner'
+                size={25}
+              />
+            ) : (
+              'Cadastrar'
+            )}
           </Button>
         </form>
         <Grid container justifyContent='flex-end'>
