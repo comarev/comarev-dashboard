@@ -1,7 +1,5 @@
 import React from 'react';
 import { TextField } from '@material-ui/core';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import { useController } from 'react-hook-form';
 import InputMask from 'react-input-mask';
 import MaskedInput from 'react-text-mask';
@@ -108,15 +106,6 @@ const RHFInput = ({
           </TextField>
         )}
       </InputMask>
-    );
-  }
-
-  if (checkbox) {
-    return (
-      <FormControlLabel
-        control={<Checkbox {...inputProps} inputRef={ref} name={name} />}
-        label={label}
-      />
     );
   }
 

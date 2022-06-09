@@ -16,6 +16,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import RHFInput from 'components/rhf-input/rhf-input.component';
 import * as S from './signup.styles';
 import { useMutationSignup } from 'service/signup';
+import { onlyNumbers, parseCellphone } from 'utils/parsers/general';
 
 const schema = yup.object().shape({
   full_name: yup.string().required('Campo obrigatório'),
@@ -31,7 +32,6 @@ const schema = yup.object().shape({
   address: yup.string().required('Campo obrigatório'),
   cpf: yup.string().required('Campo obrigatório'),
   cellphone: yup.string().required('Campo obrigatório'),
-  hasAcceptedTerms: yup.bool().oneOf([true], 'Campo obrigatório'),
 });
 
 const SignUp = () => {
@@ -47,22 +47,20 @@ const SignUp = () => {
       address: '',
       cpf: '',
       cellphone: '',
-      hasAcceptedTerms: false,
     },
     mode: 'onChange',
   });
 
   const { isLoading, mutate } = useMutationSignup();
 
-  function onSubmit(data) {
-    const newCPF = data.cpf.split('.').join('').split('-').join('');
+  function handleFormData(data) {
     const datatoSend = {
       full_name: data.full_name,
       email: data.email,
       password: data.password,
       address: data.address,
-      cpf: newCPF,
-      cellphone: data.cellphone,
+      cpf: onlyNumbers(data.cpf),
+      cellphone: parseCellphone(data.cellphone),
     };
 
     mutate(datatoSend);
@@ -86,17 +84,23 @@ const SignUp = () => {
           Cadastre-se
         </Typography>
 
-        <form onSubmit={handleSubmit(async (data) => onSubmit(data))}>
+        <form onSubmit={handleSubmit((data) => handleFormData(data))}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <RHFInput
                 control={control}
                 label='Nome completo'
                 name='full_name'
+                id='full_name'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <RHFInput control={control} label='E-mail' name='email' />
+              <RHFInput
+                control={control}
+                label='E-mail'
+                name='email'
+                id='email'
+              />
             </Grid>
             <Grid item xs={12} sm={6}>
               <RHFInput
@@ -104,18 +108,25 @@ const SignUp = () => {
                 label='CPF'
                 mask='999.999.999-99'
                 name='cpf'
+                id='cpf'
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <RHFInput
                 control={control}
                 label='Telefone'
-                mask='(99) 99999-9999'
+                mask='+55 (999) 99999-9999'
                 name='cellphone'
+                id='cellphone'
               />
             </Grid>
             <Grid item xs={12}>
-              <RHFInput control={control} label='Endereço' name='address' />
+              <RHFInput
+                control={control}
+                label='Endereço'
+                name='address'
+                id='address'
+              />
             </Grid>
             <Grid item xs={12}>
               <RHFInput
@@ -123,6 +134,7 @@ const SignUp = () => {
                 label='Senha'
                 name='password'
                 type='password'
+                id='password'
               />
             </Grid>
             <Grid item xs={12}>
@@ -130,15 +142,8 @@ const SignUp = () => {
                 control={control}
                 label='Confirmar senha'
                 name='confirmPassword'
+                id='confirmPassword'
                 type='password'
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <RHFInput
-                checkbox
-                control={control}
-                label='Concordo com os termos, políticas de dados e de cookies.'
-                name='hasAcceptedTerms'
               />
             </Grid>
           </Grid>
@@ -147,7 +152,7 @@ const SignUp = () => {
             fullWidth
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
-            aria-label={isLoading ? 'Carregando...' : 'Cadastre-se'}
+            aria-label={isLoading ? 'Carregando...' : 'Cadastrar'}
             disabled={!formState.isValid || isLoading}
           >
             {isLoading ? (
