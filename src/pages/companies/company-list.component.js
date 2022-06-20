@@ -1,17 +1,15 @@
 import React from 'react';
-import { useQuery } from 'react-query';
 import CompaniesListing from 'components/companies-list/companies-list';
 import Template from 'components/template/template.component';
-import { getCompanies } from 'service/company';
 import { CircularProgress, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
+import useCompanies from 'hooks/use-companies';
 import RoleFilter from 'components/role-filter/role-filter.component';
 
 const CompaniesList = () => {
   const history = useHistory();
 
-  const { data, isLoading, isError } = useQuery('companies', getCompanies);
-  const companies = data?.data || [];
+  const {companies, isLoading, isError} = useCompanies()
 
   const render = () => {
     if (isError) {
