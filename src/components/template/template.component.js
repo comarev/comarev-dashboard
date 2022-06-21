@@ -22,7 +22,7 @@ import { Divider, Box, Paper } from '@material-ui/core';
 import { USER_ROLES } from 'utils/constants';
 import { Fab } from '@material-ui/core';
 import RoleFilter from 'components/role-filter/role-filter.component';
-import {CompanyPicker} from 'components/company-picker/comapany-picker.component';
+import { CompanyPicker } from 'components/company-picker/comapany-picker.component';
 import { useMediaQuery } from 'react-responsive';
 import AppProvider from 'providers/app-provider';
 import ModalProvider from 'providers/custom-modal-provider';
@@ -37,7 +37,8 @@ const Template = ({ children, title = '', rightActions = null }) => {
   const history = useHistory();
 
   const user = useSelector((state) => state.user);
-  const userRoles = USER_ROLES.filter((role) => user[role]);  
+  const userRoles = USER_ROLES.filter((role) => user[role]);
+
   const classes = useStyles();
 
   const { handleMenu, anchorEl, open, handleClose, handleSignOut } =
@@ -99,9 +100,9 @@ const Template = ({ children, title = '', rightActions = null }) => {
                 <StyledMenuIcon />
               </IconButton>
               <Typography variant='h6' className={classes.title}>
-                Olá, {user.full_name} 
+                Olá, {user.full_name}
               </Typography>
-              {user.manager && <CompanyPicker/>}
+              {user.manager && <CompanyPicker />}
               <div>
                 <IconButton
                   aria-label='account of current user'
