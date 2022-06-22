@@ -22,7 +22,7 @@ import { Divider, Box, Paper } from '@material-ui/core';
 import { USER_ROLES } from 'utils/constants';
 import { Fab } from '@material-ui/core';
 import RoleFilter from 'components/role-filter/role-filter.component';
-import { CompanyPicker } from 'components/company-picker/comapany-picker.component';
+import { CompanyPicker } from 'components/company-picker/company-picker.component';
 import { useMediaQuery } from 'react-responsive';
 import AppProvider from 'providers/app-provider';
 import ModalProvider from 'providers/custom-modal-provider';
