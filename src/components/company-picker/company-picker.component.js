@@ -5,36 +5,32 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import useCompanies from 'hooks/use-companies';
 import { updateCompany } from 'store/modules/current-company/actions';
 import { fetchCurrentCompany } from 'store/modules/current-company/reducer';
 
 export const CompanyPicker = () => {
-  const { companies, isLoading } = useCompanies();
   const currentCompany = useSelector((state) => state.currentCompany);
   const currentUser = useSelector((state) => state.user);
+  const currentUserCompanies = currentUser.companies.map(c => c.company);
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
-    const company = fetchCurrentCompany(companies, event);
-    dispatch(updateCompany({ id: company.id}));
+    const company = fetchCurrentCompany(currentUserCompanies, event);
+    dispatch(updateCompany({ id: company.id }));
   };
 
   const render = () => {
-    if(isLoading) return <Box>Carregando empresas</Box>
+    if (currentUserCompanies.length === 0) return <Box color='black'>Carregando empresas</Box>;
 
     return (
-      <Box sx={{ minWidth: 100 }}>
+      <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-          <InputLabel id='demo-simple-select-label'>Company</InputLabel>
-          <Select
-            value={currentCompany.id || currentUser.companies[0].id}
-            onChange={(e) => handleChange(e)}
-          >
-            {currentUser.companies.map((c) => {
+          <InputLabel id='edit-company-selector'>Editar empresa</InputLabel>
+          <Select value={currentCompany.id} onChange={(e) => handleChange(e)}>
+            {currentUserCompanies.map((company) => {
               return (
-                <MenuItem key={c.company.id} value={c.company.id}>
-                  {c.company.name}
+                <MenuItem key={company.id} value={company.id}>
+                  {company.name}
                 </MenuItem>
               );
             })}
@@ -42,6 +38,6 @@ export const CompanyPicker = () => {
         </FormControl>
       </Box>
     );
-  }
+  };
   return render();
 };

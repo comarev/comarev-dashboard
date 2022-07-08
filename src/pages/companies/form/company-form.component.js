@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
@@ -39,6 +39,7 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
     getValues,
     setValue,
     watch,
+    reset,
     formState: { isValid },
   } = useForm({
     resolver: yupResolver(schema),
@@ -50,7 +51,13 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
     },
     mode: 'onBlur',
   });
+
+  useEffect(()=> {
+    reset(company);
+  }, [company, reset])
+
   const user = useSelector((state) => state.user);
+
   const [currentStep, setCurrentStep] = useState(Steps.Form);
 
   const editing = !!company;
@@ -69,7 +76,6 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
   };
   const buttonValue = getButtonValue();
   const values = getValues();
-
   const renderStep = () => {
     if (currentStep === Steps.Form)
       return (
@@ -232,8 +238,9 @@ const CompanyForm = ({ onSubmit, loading, company }) => {
             variant='contained'
             color='primary'
             disabled={loading}
-            onClick={() => {
-              onSubmit(values);
+            onClick={async () => {
+              await onSubmit(values);
+              setCurrentStep(Steps.Form);
             }}
           >
             {loading ? (
