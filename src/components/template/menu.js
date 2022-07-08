@@ -19,6 +19,12 @@ export const menu = [
     roles: ['admin'],
   },
   {
+    path: '/company',
+    label: 'Empresa',
+    icon: SupervisorAccountOutlinedIcon,
+    roles: ['manager'],
+  },
+  {
     label: 'Faturas',
     path: '/invoices',
     icon: ReceiptIcon,
