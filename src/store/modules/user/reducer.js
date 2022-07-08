@@ -1,5 +1,4 @@
-import { USER_SIGN_IN, USER_SIGN_OUT } from './types';
-
+import { USER_SIGN_IN, USER_SIGN_OUT, USER_UPDATE_COMPANY } from './types';
 export const INITIAL_STATE = {
   id: 0,
   full_name: '',
@@ -45,6 +44,22 @@ const userReducer = (state = INITIAL_STATE, action) => {
         userToken: action.payload.userToken,
       };
     }
+    case USER_UPDATE_COMPANY:{
+      console.log(action.payload)
+      const role = state.companies.find(company => company.company.id === action.payload.id).role;
+      const companies = state.companies.filter(company => { 
+        return company.company.id !== action.payload.id;
+      })
+
+      return { 
+        ...state,
+        companies : [ ...companies, { role, company: action.payload } ]
+      
+
+        
+      }
+    }
+    
     default:
       return state;
   }
