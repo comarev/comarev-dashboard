@@ -25,7 +25,7 @@ export const CompanyPicker = () => {
     return (
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
-          <InputLabel id='edit-company-selector'>Editar empresa</InputLabel>
+          <InputLabel id='edit-company-selector'>Company</InputLabel>
           <Select value={currentCompany.id} onChange={(e) => handleChange(e)}>
             {currentUserCompanies.map((company) => {
               return (
