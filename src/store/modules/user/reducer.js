@@ -45,7 +45,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case USER_UPDATE_COMPANY:{
-      console.log(action.payload)
       const role = state.companies.find(company => company.company.id === action.payload.id).role;
       const companies = state.companies.filter(company => { 
         return company.company.id !== action.payload.id;
