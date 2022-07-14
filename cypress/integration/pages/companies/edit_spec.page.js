@@ -35,6 +35,16 @@ describe('Companies_Edition', () => {
     }).as('getCompany2');
   };
 
+  const componentSelector = {
+    addressInput: 'input[name="address"]',
+    nameInput: 'input[name="name"]',
+    phoneInput: 'input[name="phone"]',
+    companyPicker: '.MuiSelect-select',
+    formButton: 'button[aria-label="Continuar"]',
+    codeInput: 'input[name="code"]',
+    lastPickerItem: '#menu- > .MuiPaper-root > .MuiList-root > [tabindex="-1"]',
+  };
+
   describe('when the changes are valid', () => {
     beforeEach(() => {
       mockFirstCompany();
@@ -44,72 +54,82 @@ describe('Companies_Edition', () => {
     it('modifies a company', () => {
       setup();
 
-      cy.get('.MuiSelect-select').contains('Company test');
+      cy.get(componentSelector.companyPicker).contains('Company test');
 
-      cy.get('input[name="name"]').type('{selectAll}{backspace}');
-      cy.get('input[name="name"]').type('Successfully patched company');
+      cy.get(componentSelector.nameInput).clear().type('Modified name');
 
-      cy.get('input[name="address"]').type('{selectAll}{backspace}');
-      cy.get('input[name="address"]').type('Modified Address');
+      cy.get(componentSelector.addressInput).clear().type('Modified Address');
 
-      cy.findByText('Continuar').click();
+      cy.get(componentSelector.formButton).click();
 
       cy.findByText('Atualizar Empresa').click();
 
       cy.findByText('Empresa atualizada com sucesso!').should('be.visible');
 
-      cy.get('input[name="name"]').should(
+      cy.get(componentSelector.nameInput).should('have.value', 'Modified name');
+      cy.get(componentSelector.addressInput).should(
         'have.value',
-        'Successfully patched company'
+        'Modified Address'
       );
-      cy.get('input[name="address"]').should('have.value', 'Modified Address');
 
-      cy.get('.MuiSelect-select').contains('Successfully patched company');
+      cy.get(componentSelector.companyPicker).contains('Modified name');
 
-      cy.findByText('Continuar').should('be.visible');
-  });
-
-  describe('when the changes are not valid', () => {
-    beforeEach(() => {
-      mockFirstCompany();
-      mockInvalidUpdate();
+      cy.get(componentSelector.formButton).contains('Continuar');
     });
 
-    it('throws an error', () => {
-      setup();
+    describe('when the changes are not valid', () => {
+      beforeEach(() => {
+        mockFirstCompany();
+        mockInvalidUpdate();
+      });
 
-      cy.get('input[name="phone"]').type('{backspace}');
+      it('throws an error', () => {
+        setup();
 
-      cy.get('button[aria-label="Continuar"]').click();
+        cy.get(componentSelector.phoneInput).type('{backspace}');
 
-      cy.findByText('Atualizar Empresa').click();
-      cy.findAllByText('Alguns erros impediram o(a) modificação.');
-      cy.findAllByText(
-        'Telefone não possui o tamanho esperado (14 caracteres)'
-      ).should('be.visible');
+        cy.get(componentSelector.formButton).click();
+
+        cy.findByText('Atualizar Empresa').click();
+        cy.findAllByText('Alguns erros impediram o(a) modificação.');
+        cy.findAllByText(
+          'Telefone não possui o tamanho esperado (14 caracteres)'
+        ).should('be.visible');
+      });
     });
-  });
 
-  describe('when the user switches between the companies', () => {
-    beforeEach(() => {
-      mockFirstCompany();
-      mockSecondCompany();
-    });
+    describe('when the user switches between the companies', () => {
+      beforeEach(() => {
+        mockFirstCompany();
+        mockSecondCompany();
+      });
 
-    it('updates the form data dynamically', () => {
-      setup();
+      it('updates the form data dynamically', () => {
+        setup();
 
-      cy.get('input[name="name"]').should('have.value', 'Company test');
-      cy.get('input[name="code"]').should('have.value', '8255260d320720752fef');
+        cy.get(componentSelector.nameInput).should(
+          'have.value',
+          'Company test'
+        );
+        cy.get(componentSelector.codeInput).should(
+          'have.value',
+          '8255260d320720752fef'
+        );
 
-      cy.get('.MuiSelect-select').contains('Company test').click();
-      cy.get(
-        '#menu- > .MuiPaper-root > .MuiList-root > [tabindex="-1"]'
-      ).click();
+        cy.get('.MuiSelect-select').contains('Company test').click();
+        cy.get(
+          componentSelector.lastPickerItem
+        ).click();
 
-      cy.get('input[name="name"]').should('have.value', 'Second Company');
-      cy.get('input[name="code"]').should('have.value', '9366371e211611543ddd');
+        cy.get(componentSelector.nameInput).should(
+          'have.value',
+          'Second Company'
+        );
+        cy.get(componentSelector.codeInput).should(
+          'have.value',
+          '9366371e211611543ddd'
+        );
+      });
     });
   });
 });
-})

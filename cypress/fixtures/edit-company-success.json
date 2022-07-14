@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "name": "Successfully patched company",
+    "name": "Modified name",
     "address": "Modified Address",
     "cnpj": "05634046385541",
     "phone": "(85) 0485-5223",
@@ -47,7 +47,7 @@
                     "role": "manager",
                     "company": {
                         "id": 2,
-                        "name": "teste de alteração",
+                        "name": "Modified name",
                         "cnpj": "12345674123457",
                         "address": "Rua 1",
                         "phone": "(14) 1231-9043",
@@ -101,7 +101,7 @@
                     "role": "regular",
                     "company": {
                         "id": 2,
-                        "name": "teste de alteração",
+                        "name": "Modified name",
                         "cnpj": "12345674123457",
                         "address": "Rua 1",
                         "phone": "(14) 1231-9043",
