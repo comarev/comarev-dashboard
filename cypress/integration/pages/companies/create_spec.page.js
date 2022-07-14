@@ -4,7 +4,7 @@ describe('Companies', () => {
   companyAddress = 'Avenue test, 13'
 
   beforeEach(() => {
-    cy.login(admin, password)
+    cy.login_admin(admin, password)
     cy.intercept('GET', '/companies', { fixture: 'companies.json' })
 
     cy.findAllByText('Empresas').click()

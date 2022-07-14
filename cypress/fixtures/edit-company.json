@@ -1,121 +1,121 @@
 {
-  "id": 1,
-  "name": "Company test",
-  "address": "test address",
-  "cnpj": "05634046385541",
-  "phone": "(85) 0485-5223",
-  "picture_url": null,
-  "code": "8255260d320720752fef",
-  "discount": 0,
-  "active": true,
-  "created_at": "2022-06-17T13:30:48.059Z",
-  "updated_at": "2022-07-08T16:27:31.681Z",
-  "managers": [
-      {
-          "id": 2,
-          "full_name": "Manager test",
-          "email": "manager@example.com",
-          "cpf": "83590712503",
-          "address": "55920 Gladys Meadows",
-          "cellphone": "484000349661199",
-          "picture_url": null,
-          "admin": false,
-          "active": true,
-          "self_registered": false,
-          "created_at": "2022-06-17T13:30:47.788Z",
-          "updated_at": "2022-06-17T13:30:47.788Z",
-          "companies": [
-              {
-                  "role": "manager",
-                  "company": {
-                      "id": 1,
-                      "name": "Company test",
-                      "cnpj": "05634046385541",
-                      "address": "test address",
-                      "phone": "(85) 0485-5223",
-                      "active": true,
-                      "code": "8255260d320720752fef",
-                      "discount": 0,
-                      "created_at": "2022-06-17T13:30:48.059Z",
-                      "updated_at": "2022-07-08T16:27:31.681Z",
-                      "avatar": {
-                          "url": null
-                      }
-                  }
-              },
-              {
-                  "role": "manager",
-                  "company": {
-                      "id": 2,
-                      "name": "teste de alteração",
-                      "cnpj": "12345674123457",
-                      "address": "Rua 1",
-                      "phone": "(14) 1231-9043",
-                      "active": true,
-                      "code": "4bcb62f53f7434bda156",
-                      "discount": 0,
-                      "created_at": "2022-06-17T14:22:10.300Z",
-                      "updated_at": "2022-07-08T14:47:09.141Z",
-                      "avatar": {
-                          "url": null
-                      }
-                  }
-              }
-          ]
-      }
-  ],
-  "regulars": [
-      {
-          "id": 3,
-          "full_name": "Regular test",
-          "email": "regular@example.com",
-          "cpf": "85383718354",
-          "address": "92319 Omar Island",
-          "cellphone": "099697772290217",
-          "picture_url": null,
-          "admin": false,
-          "active": true,
-          "self_registered": false,
-          "created_at": "2022-06-17T13:30:48.005Z",
-          "updated_at": "2022-06-17T13:30:48.005Z",
-          "companies": [
-              {
-                  "role": "regular",
-                  "company": {
-                      "id": 1,
-                      "name": "Company test",
-                      "cnpj": "05634046385541",
-                      "address": "test address",
-                      "phone": "(85) 0485-5223",
-                      "active": true,
-                      "code": "8255260d320720752fef",
-                      "discount": 0,
-                      "created_at": "2022-06-17T13:30:48.059Z",
-                      "updated_at": "2022-07-08T16:27:31.681Z",
-                      "avatar": {
-                          "url": null
-                      }
-                  }
-              },
-              {
-                  "role": "regular",
-                  "company": {
-                      "id": 2,
-                      "name": "teste de alteração",
-                      "cnpj": "12345674123457",
-                      "address": "Rua 1",
-                      "phone": "(14) 1231-9043",
-                      "active": true,
-                      "code": "4bcb62f53f7434bda156",
-                      "discount": 0,
-                      "created_at": "2022-06-17T14:22:10.300Z",
-                      "updated_at": "2022-07-08T14:47:09.141Z",
-                      "avatar": {
-                          "url": null
-                      }
-                  }
-              }
-          ]
-      }
-  ]
+    "id": 1,
+    "name": "Company test",
+    "address": "test address",
+    "cnpj": "05634046385541",
+    "phone": "(85) 0485-5223",
+    "picture_url": null,
+    "code": "8255260d320720752fef",
+    "discount": 0,
+    "active": true,
+    "created_at": "2022-06-17T13:30:48.059Z",
+    "updated_at": "2022-07-08T16:27:31.681Z",
+    "managers": [
+        {
+            "id": 2,
+            "full_name": "Manager test",
+            "email": "manager@example.com",
+            "cpf": "83590712503",
+            "address": "55920 Gladys Meadows",
+            "cellphone": "484000349661199",
+            "picture_url": null,
+            "admin": false,
+            "active": true,
+            "self_registered": false,
+            "created_at": "2022-06-17T13:30:47.788Z",
+            "updated_at": "2022-06-17T13:30:47.788Z",
+            "companies": [
+                {
+                    "role": "manager",
+                    "company": {
+                        "id": 1,
+                        "name": "Company test",
+                        "cnpj": "05634046385541",
+                        "address": "test address",
+                        "phone": "(85) 0485-5223",
+                        "active": true,
+                        "code": "8255260d320720752fef",
+                        "discount": 0,
+                        "created_at": "2022-06-17T13:30:48.059Z",
+                        "updated_at": "2022-07-08T16:27:31.681Z",
+                        "avatar": {
+                            "url": null
+                        }
+                    }
+                },
+                {
+                    "role": "manager",
+                    "company": {
+                        "id": 2,
+                        "name": "teste de alteração",
+                        "cnpj": "12345674123457",
+                        "address": "Rua 1",
+                        "phone": "(14) 1231-9043",
+                        "active": true,
+                        "code": "4bcb62f53f7434bda156",
+                        "discount": 0,
+                        "created_at": "2022-06-17T14:22:10.300Z",
+                        "updated_at": "2022-07-08T14:47:09.141Z",
+                        "avatar": {
+                            "url": null
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "regulars": [
+        {
+            "id": 3,
+            "full_name": "Regular test",
+            "email": "regular@example.com",
+            "cpf": "85383718354",
+            "address": "92319 Omar Island",
+            "cellphone": "099697772290217",
+            "picture_url": null,
+            "admin": false,
+            "active": true,
+            "self_registered": false,
+            "created_at": "2022-06-17T13:30:48.005Z",
+            "updated_at": "2022-06-17T13:30:48.005Z",
+            "companies": [
+                {
+                    "role": "regular",
+                    "company": {
+                        "id": 1,
+                        "name": "Company test",
+                        "cnpj": "05634046385541",
+                        "address": "test address",
+                        "phone": "(85) 0485-5223",
+                        "active": true,
+                        "code": "8255260d320720752fef",
+                        "discount": 0,
+                        "created_at": "2022-06-17T13:30:48.059Z",
+                        "updated_at": "2022-07-08T16:27:31.681Z",
+                        "avatar": {
+                            "url": null
+                        }
+                    }
+                },
+                {
+                    "role": "regular",
+                    "company": {
+                        "id": 2,
+                        "name": "teste de alteração",
+                        "cnpj": "12345674123457",
+                        "address": "Rua 1",
+                        "phone": "(14) 1231-9043",
+                        "active": true,
+                        "code": "4bcb62f53f7434bda156",
+                        "discount": 0,
+                        "created_at": "2022-06-17T14:22:10.300Z",
+                        "updated_at": "2022-07-08T14:47:09.141Z",
+                        "avatar": {
+                            "url": null
+                        }
+                    }
+                }
+            ]
+        }
+    ]
 }
