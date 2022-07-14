@@ -1,17 +1,19 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import Template from 'components/template/template.component';
 import CompanyForm from './form/company-form.component';
 import FormErrors from 'components/form-error/form-errors.component';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core'; 
+import { useSelector } from 'react-redux';
 import { useCompanyForm } from 'hooks/use-company-form';
 
-const CompanyEdit = () => {
-  const params = useParams();
+export const CompanyEditManager = () => {
   const history = useHistory();
-
-  const {company, companyQueryError, hasErrors, updateCompany, isLoading, isSuccess } = useCompanyForm({companyId: params.id})
+  const pickedCompany = useSelector((state) => state.currentCompany);
+  const { company, updateError, updateCompany, isLoading, isSuccess, hasMutationErrors } = useCompanyForm({
+    companyId: pickedCompany.id
+  })
 
   useEffect(() => {
     if(isSuccess){
@@ -21,22 +23,21 @@ const CompanyEdit = () => {
   }, [isSuccess, history])
 
   const render = () => {
-    if (isLoading)
+    if (isLoading) {
       return (
         <Template>
-          <CircularProgress testid='company-edit-spinner' size={25} />;
+          <CircularProgress testid='company-manager-edit-spinner' size={25} />
         </Template>
       );
+    }
 
     return (
       <Template title='Editar empresa'>
-        {hasErrors && !isLoading && (
-          <FormErrors action='alteração' errors={companyQueryError} />
-        )}
+        {hasMutationErrors  && !isLoading && (<FormErrors action='modificação' errors={ updateError } />)}
         <CompanyForm
-          onSubmit={updateCompany}
-          loading={isLoading}
           company={company}
+          loading={isLoading}
+          onSubmit={updateCompany}
         />
       </Template>
     );
@@ -45,4 +46,3 @@ const CompanyEdit = () => {
   return render();
 };
 
-export default CompanyEdit;

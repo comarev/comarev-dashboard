@@ -22,6 +22,7 @@ import { Divider, Box, Paper } from '@material-ui/core';
 import { USER_ROLES } from 'utils/constants';
 import { Fab } from '@material-ui/core';
 import RoleFilter from 'components/role-filter/role-filter.component';
+import { CompanyPicker } from 'components/company-picker/company-picker.component';
 import { useMediaQuery } from 'react-responsive';
 import AppProvider from 'providers/app-provider';
 import ModalProvider from 'providers/custom-modal-provider';
@@ -46,7 +47,6 @@ const Template = ({ children, title = '', rightActions = null }) => {
   const toggleDrawer = () => {
     setState({ ...state, open: !state.open });
   };
-
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -83,7 +83,6 @@ const Template = ({ children, title = '', rightActions = null }) => {
       </List>
     </div>
   );
-
   return (
     <ModalProvider>
       <AppProvider>
@@ -103,6 +102,7 @@ const Template = ({ children, title = '', rightActions = null }) => {
               <Typography variant='h6' className={classes.title}>
                 Olá, {user.full_name}
               </Typography>
+              {user.manager && <CompanyPicker />}
               <div>
                 <IconButton
                   aria-label='account of current user'

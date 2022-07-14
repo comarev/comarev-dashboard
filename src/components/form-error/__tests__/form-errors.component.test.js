@@ -2,37 +2,34 @@ import { render } from '@testing-library/react';
 import FormErrors from 'components/form-error/form-errors.component';
 
 describe('FormErros Component', () => {
-  describe('when just one error', () => {
-    it('renders the error', () => {
-      const errors = ['SomeField cannot be blank'];
+  describe('when it receives an error', () => {
+    describe('when useQuery throws an error ', () => {
+      it('renders the error', () => {
+        const errorObj = { message: 'SomeField cannot be blank' };
 
-      const { getByText } = render(
-        <FormErrors errors={errors} action='Create' />
-      );
+        const { getByText } = render(
+          <FormErrors errors={errorObj} action='Create' />
+        );
 
-      expect(
-        getByText('Houve um erro que impediu o(a) Create:')
-      ).toBeInTheDocument();
-      expect(getByText('SomeField cannot be blank')).toBeInTheDocument();
+        expect(
+          getByText('Alguns erros impediram o(a) Create.')
+        ).toBeInTheDocument();
+        expect(getByText('SomeField cannot be blank')).toBeInTheDocument();
+      });
     });
-  });
+    describe('when the server throws an error', () => {
+      it('renders the error array', () => {
+        const errorArray = ['This field is not valid'];
 
-  describe('when more than one error', () => {
-    it('renders the errors', () => {
-      const errors = [
-        'SomeField cannot be blank',
-        'OtherField has already been used',
-      ];
+        const { getByText } = render(
+          <FormErrors errors={errorArray} action='Modify' />
+        );
 
-      const { getByText } = render(
-        <FormErrors errors={errors} action='Create' />
-      );
-
-      expect(
-        getByText('Alguns erros impediram o(a) Create:')
-      ).toBeInTheDocument();
-      expect(getByText('SomeField cannot be blank')).toBeInTheDocument();
-      expect(getByText('OtherField has already been used')).toBeInTheDocument();
+        expect(
+          getByText('Alguns erros impediram o(a) Modify.')
+        ).toBeInTheDocument();
+        expect(getByText('This field is not valid')).toBeInTheDocument();
+      });
     });
   });
 });

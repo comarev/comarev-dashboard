@@ -14,6 +14,7 @@ import InvoiceRegister from 'pages/invoices/invoice-register.component';
 import InvoiceView from 'pages/invoices/invoices-view.component';
 import InvoiceEdit from 'pages/invoices/invoice-edit.component';
 import Scanner from 'pages/scanner/scanner.component';
+import {CompanyEditManager} from '../pages/companies/company-edit-manager.component';
 
 const Routes = () => {
   return (
@@ -26,6 +27,12 @@ const Routes = () => {
           exact
           component={CompaniesList}
           roles={['admin', 'manager']}
+        />
+        <SecureRoute
+          path='/company'
+          exact
+          component={CompanyEditManager}
+          roles={['manager']}
         />
         <SecureRoute
           path='/companies/new'

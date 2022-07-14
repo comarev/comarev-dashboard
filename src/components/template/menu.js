@@ -16,7 +16,13 @@ export const menu = [
     path: '/companies',
     label: 'Empresas',
     icon: SupervisorAccountOutlinedIcon,
-    roles: ['admin', 'manager'],
+    roles: ['admin'],
+  },
+  {
+    path: '/company',
+    label: 'Empresa',
+    icon: SupervisorAccountOutlinedIcon,
+    roles: ['manager'],
   },
   {
     label: 'Faturas',
