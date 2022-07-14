@@ -6,7 +6,8 @@ export const useInvalidateQueries = () => {
   const invalidateQueries = (queryKey, queryParams) => {
     queryClient.invalidateQueries(queryKey, queryParams);
   }
+
   return({ invalidateQueries });
-  
+
 }
 

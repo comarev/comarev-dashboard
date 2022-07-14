@@ -44,21 +44,17 @@ const userReducer = (state = INITIAL_STATE, action) => {
         userToken: action.payload.userToken,
       };
     }
-    case USER_UPDATE_COMPANY:{
+    case USER_UPDATE_COMPANY: {
       const role = state.companies.find(company => company.company.id === action.payload.id).role;
       const companies = state.companies.filter(company => { 
         return company.company.id !== action.payload.id;
       })
-
-      return { 
+      return {
         ...state,
         companies : [ ...companies, { role, company: action.payload } ]
-      
-
-        
       }
     }
-    
+
     default:
       return state;
   }

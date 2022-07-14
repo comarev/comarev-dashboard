@@ -15,17 +15,19 @@ const hasCompanies = (companies) => {
 const currentCompanyReducer = (state = INITIAL_STATE , action) => {
   const { SET_CURRENT_COMPANY } = actionTypes;
   switch (action.type) {
-    case SET_CURRENT_COMPANY:{
+    case SET_CURRENT_COMPANY: {
       const {id} = action.payload
       return { ...state, id};
-}
-    case 'persist/REHYDRATE' : {
+    }
+
+    case 'persist/REHYDRATE': {
       if ( hasCompanies(action.payload.user.companies) ){
         const { id } = action.payload.user.companies[0].company;
         return { ...state, id};
       }
     }
-    case USER_SIGN_IN :{
+
+    case USER_SIGN_IN: {
       if ( hasCompanies(action.payload.companies) ){
         const { id } = action.payload.companies[0].company;
         return { ...state, id};

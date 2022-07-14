@@ -26,7 +26,7 @@ export const CompanyPicker = () => {
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel id='edit-company-selector'>Company</InputLabel>
-          <Select value={currentCompany.id} onChange={(e) => handleChange(e)}>
+          <Select value={currentCompany.id} onChange={handleChange}>
             {currentUserCompanies.map((company) => {
               return (
                 <MenuItem key={company.id} value={company.id}>
