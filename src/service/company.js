@@ -70,10 +70,15 @@ const updateCompany = async (company) => {
 
 const getShowcase = async () => await service.get('/showcase');
 
+const getDiscountRequest = async (companyId) => {
+  return service.get(`/companies/${companyId}/discount_requests`);
+};
+
 export {
   getCompanies,
   registerCompany,
   getCompany,
   updateCompany,
   getShowcase,
+  getDiscountRequest,
 };
