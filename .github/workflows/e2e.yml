@@ -1,0 +1,20 @@
+name: End to End
+
+on: 
+  pull_request:
+  push:
+    branches:
+      - main
+    
+jobs:
+  end-to-end:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install modules
+        run: yarn
+      - name: Run e2e tests
+        run: yarn test:e2e
