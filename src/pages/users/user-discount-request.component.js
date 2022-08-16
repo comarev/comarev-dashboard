@@ -19,7 +19,7 @@ const DiscountRequests = () => {
     if (isLoadingCompanies) {
       return (
         <Template>
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress testid='discount-requests-spinner' size={25} />
         </Template>
       );
     }
@@ -39,7 +39,7 @@ const DiscountRequests = () => {
           ))}
         </TextField>
         {isLoadingDiscountRequest ? (
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress testid='discount-requests-spinner' size={25} />
         ) : (
           <DiscountRequestTable invoicesList={invoicesList} />
         )}
