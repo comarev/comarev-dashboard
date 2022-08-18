@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import theme from './styles/theme';
 import Routes from './routes';
-import  {store,persistor}  from './store'
+import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { CircularLoading } from 'components/loading-progress';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -17,8 +17,7 @@ export const queryClient = new QueryClient();
 function App() {
   return (
     <Provider store={store}>
-      <PersistGate 
-        loading={<CircularLoading />} persistor={persistor}>
+      <PersistGate loading={<CircularLoading />} persistor={persistor}>
         <QueryClientProvider client={queryClient}>
           <StyledThemeProvider theme={theme}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
