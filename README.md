@@ -3,7 +3,7 @@
 ![tests](https://github.com/comarev/comarev-dashboard/actions/workflows/test.yml/badge.svg?branch=main)
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This application is a partner management system. Basically, the Comarev admins register the interested companies that want to give a discount on their products/services to the Comarev contributors who are also registered in the system. Then, when the contributor buys something at the company (Comarev partner), they just have to scan a QR Code emitted in our dashboard and the system will return if they are ok with the payment (contribution), or not. If so, the contributor can get a discount.
@@ -105,12 +105,15 @@ A invoice is created for a user. When all invoices are paid, the user is able to
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="https://github.com/m-pereira"><img src="https://avatars.githubusercontent.com/u/47258878?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mauricio Lima</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Code">💻</a> <a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Documentation">📖</a></td>
-    <td align="center"><a href="https://github.com/belgamo"><img src="https://avatars.githubusercontent.com/u/19699724?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gabriel Belgamo</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=belgamo" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/RenanRSilva"><img src="https://avatars.githubusercontent.com/u/77541655?v=4?s=100" width="100px;" alt=""/><br /><sub><b>RenanRambul</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=RenanRSilva" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/joseaugustoaquino"><img src="https://avatars.githubusercontent.com/u/60511182?v=4?s=100" width="100px;" alt=""/><br /><sub><b>JOSE AUGUSTO DE AQUINO</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=joseaugustoaquino" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/m-pereira"><img src="https://avatars.githubusercontent.com/u/47258878?v=4?s=100" width="100px;" alt="Mauricio Lima"/><br /><sub><b>Mauricio Lima</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Code">💻</a> <a href="https://github.com/comarev/comarev-dashboard/commits?author=m-pereira" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://github.com/belgamo"><img src="https://avatars.githubusercontent.com/u/19699724?v=4?s=100" width="100px;" alt="Gabriel Belgamo"/><br /><sub><b>Gabriel Belgamo</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=belgamo" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/RenanRSilva"><img src="https://avatars.githubusercontent.com/u/77541655?v=4?s=100" width="100px;" alt="RenanRambul"/><br /><sub><b>RenanRambul</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=RenanRSilva" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/joseaugustoaquino"><img src="https://avatars.githubusercontent.com/u/60511182?v=4?s=100" width="100px;" alt="JOSE AUGUSTO DE AQUINO"/><br /><sub><b>JOSE AUGUSTO DE AQUINO</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/commits?author=joseaugustoaquino" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.linkedin.com/in/vieira-lucas/"><img src="https://avatars.githubusercontent.com/u/54550926?v=4?s=100" width="100px;" alt="Lucas Vieira"/><br /><sub><b>Lucas Vieira</b></sub></a><br /><a href="https://github.com/comarev/comarev-dashboard/pulls?q=is%3Apr+reviewed-by%3ALukazovic" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
