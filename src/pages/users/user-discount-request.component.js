@@ -1,7 +1,7 @@
 import Template from 'components/template/template.component';
 import useDiscountRequest from 'hooks/use-discount-request';
 import useCompanies from 'hooks/use-companies';
-import DiscountRequestTable from './components/discont-request-table.component';
+import DiscountRequestTable from './components/discount-request-table.component';
 import useCompaniesSelectionMenuItem from 'hooks/use-companies-selection-menu-item';
 import { TextField, MenuItem } from '@material-ui/core';
 import { CircularProgress } from '@material-ui/core';
@@ -19,7 +19,7 @@ const DiscountRequests = () => {
     if (isLoadingCompanies) {
       return (
         <Template>
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress testid='discount-requests-spinner' size={25} />
         </Template>
       );
     }
@@ -39,7 +39,7 @@ const DiscountRequests = () => {
           ))}
         </TextField>
         {isLoadingDiscountRequest ? (
-          <CircularProgress testid='company-edit-spinner' size={25} />
+          <CircularProgress testid='discount-requests-spinner' size={25} />
         ) : (
           <DiscountRequestTable invoicesList={invoicesList} />
         )}
