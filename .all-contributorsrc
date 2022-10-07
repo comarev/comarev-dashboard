@@ -48,6 +48,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mse-moises",
+      "name": "Moises",
+      "avatar_url": "https://avatars.githubusercontent.com/u/50844424?v=4",
+      "profile": "https://www.linkedin.com/in/moises-a-prestes-09030412b/",
+      "contributions": [
+        "code",
+        "review"
+      ]
     }
   ]
 }
