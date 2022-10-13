@@ -36,15 +36,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
     }
     case USER_SIGN_OUT:
       return { ...INITIAL_STATE, logged: false };
-    case 'persist/REHYDRATE': {
-      return {
-        ...action.payload.user,
-        manager: isManager(action.payload.user),
-        customer: isCustomer(action.payload.user),
-        logged: true,
-        userToken: action.payload.userToken,
-      };
-    }
     default:
       return state;
   }
