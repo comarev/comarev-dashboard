@@ -45,7 +45,9 @@
     "test": "react-scripts test",
     "test:coverage": "react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject",
-    "test:e2e": "cypress open"
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:e2e": "start-server-and-test start 3000 cy:run"
   },
   "eslintConfig": {
     "extends": [
@@ -80,7 +82,8 @@
     "cypress": "^9.5.1",
     "prettier": "^2.4.1",
     "react-error-overlay": "6.0.9",
-    "react-test-renderer": "^17.0.2"
+    "react-test-renderer": "^17.0.2",
+    "start-server-and-test": "^1.14.0"
   },
   "engines": {
     "node": "16.14.0"
