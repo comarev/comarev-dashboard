@@ -1,0 +1,26 @@
+name: Cypress Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn run build
+          start: yarn start
+          config: pageLoadTimeout=100000,baseUrl=http://localhost:3000
+      - name: Run tests
+        run: yarn run test:e2e
