@@ -1,8 +1,8 @@
 import {
   formatCellphone,
   formatCpfCnpj,
-  getHourFormated,
-  getDateFormated,
+  getHourFormatted,
+  getDateFormatted,
 } from 'utils/formatters/general';
 
 describe('Formatters', () => {
@@ -24,13 +24,13 @@ describe('Formatters', () => {
   });
 
   const dateTest = '2022-05-23T18:35:43.680Z';
-  describe('getHourFormated', () => {
+  describe('getHourFormatted', () => {
     it('should format date string into the dd/MM/yy date format', () => {
-      expect(getDateFormated(dateTest)).toBe('23/05/22');
+      expect(getDateFormatted(dateTest)).toBe('23/05/22');
     });
 
     it('should format date string to 24-hour-clock format', () => {
-      expect(getHourFormated(dateTest)).toBe('15:35');
+      expect(getHourFormatted(dateTest)).toBe('15:35');
     });
   });
 });

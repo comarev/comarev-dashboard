@@ -1,4 +1,4 @@
-import { getHourFormated, getDateFormated } from 'utils/formatters/general';
+import { getHourFormatted, getDateFormatted } from 'utils/formatters/general';
 import {
   TableBody,
   TableCell,
@@ -31,10 +31,10 @@ const DiscountRequestTable = ({ invoicesList }) => {
             return (
               <TableRow key={invoice.id}>
                 <TableCell component='th' scope='row' align='left'>
-                  {getDateFormated(invoice.created_at)}
+                  {getDateFormatted(invoice.created_at)}
                 </TableCell>
                 <TableCell component='th' scope='row' align='left'>
-                  {getHourFormated(invoice.created_at)}
+                  {getHourFormatted(invoice.created_at)}
                 </TableCell>
                 <TableCell component='th' scope='row' align='left'>
                   {invoice.user.full_name}
